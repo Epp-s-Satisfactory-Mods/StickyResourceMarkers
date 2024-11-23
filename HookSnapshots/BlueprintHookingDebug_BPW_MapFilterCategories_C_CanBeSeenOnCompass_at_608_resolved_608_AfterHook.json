@@ -1,0 +1,1226 @@
+[
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 0,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 9,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "Temp_byte_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 18,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "Index",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 27,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 27,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 28,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 37,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 27
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 38,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 39,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 48,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 38
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 49,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 50,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_2",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 59,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 49
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 60,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 61,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_3",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 40,
+			"OpcodeIndex": 70,
+			"Inst": "False",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 60
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 71,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 72,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_4",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 81,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 71
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 82,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 83,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_5",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 92,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 82
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 93,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 94,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_6",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 103,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 93
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 104,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 105,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_7",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 114,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 104
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 115,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 116,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_8",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 125,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 115
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 126,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 127,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_9",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 136,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 126
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 137,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 138,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_10",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 147,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 137
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 148,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 149,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_11",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 158,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 148
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 159,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 160,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_12",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 169,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 159
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 170,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 171,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_13",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 40,
+			"OpcodeIndex": 180,
+			"Inst": "False",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 170
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 181,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 182,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_14",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 191,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 181
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 192,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 193,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_15",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 202,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 192
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 203,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 204,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_16",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 213,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 203
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 214,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 215,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_17",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 224,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 214
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 225,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 226,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_18",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 235,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 225
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 236,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 237,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_19",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 246,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 236
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 247,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 248,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable_20",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 257,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 247
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 258,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 259,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 105,
+			"OpcodeIndex": 268,
+			"Inst": "SwitchValue",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 275,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "byte",
+					"PinSubCategory": "byte",
+					"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+				},
+				"VariableName": "Temp_byte_Variable",
+				"OpSizeInBytes": 9
+			},
+			"OffsetToSwitchEnd": 608,
+			"Cases": [
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 284,
+						"Inst": "ByteConst",
+						"Value": 0,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 299,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 290,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_20",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 299,
+						"Inst": "ByteConst",
+						"Value": 1,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 314,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 305,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_19",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 314,
+						"Inst": "ByteConst",
+						"Value": 2,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 329,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 320,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_18",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 329,
+						"Inst": "ByteConst",
+						"Value": 3,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 344,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 335,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_17",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 344,
+						"Inst": "ByteConst",
+						"Value": 4,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 359,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 350,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_16",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 359,
+						"Inst": "ByteConst",
+						"Value": 5,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 374,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 365,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_15",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 374,
+						"Inst": "ByteConst",
+						"Value": 6,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 389,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 380,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_14",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 389,
+						"Inst": "ByteConst",
+						"Value": 7,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 404,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 395,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_13",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 404,
+						"Inst": "ByteConst",
+						"Value": 8,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 419,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 410,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_12",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 419,
+						"Inst": "ByteConst",
+						"Value": 9,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 434,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 425,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_11",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 434,
+						"Inst": "ByteConst",
+						"Value": 10,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 449,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 440,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_10",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 449,
+						"Inst": "ByteConst",
+						"Value": 11,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 464,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 455,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_9",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 464,
+						"Inst": "ByteConst",
+						"Value": 12,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 479,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 470,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_8",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 479,
+						"Inst": "ByteConst",
+						"Value": 13,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 494,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 485,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_7",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 494,
+						"Inst": "ByteConst",
+						"Value": 14,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 509,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 500,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_6",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 509,
+						"Inst": "ByteConst",
+						"Value": 15,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 524,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 515,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_5",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 524,
+						"Inst": "ByteConst",
+						"Value": 16,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 539,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 530,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_4",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 539,
+						"Inst": "ByteConst",
+						"Value": 17,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 554,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 545,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_3",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 554,
+						"Inst": "ByteConst",
+						"Value": 18,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 569,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 560,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_2",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 569,
+						"Inst": "ByteConst",
+						"Value": 19,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 584,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 575,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable_1",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 584,
+						"Inst": "ByteConst",
+						"Value": 20,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 599,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 590,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "Temp_bool_Variable",
+						"OpSizeInBytes": 9
+					}
+				}
+			],
+			"DefaultResult":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 599,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "bool",
+					"PinSubCategory": "bool"
+				},
+				"VariableName": "K2Node_Select_Default",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 340
+		},
+		"OpSizeInBytes": 350,
+		"StatementIndex": 258
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 608,
+		"Inst": "Jump",
+		"Offset": 624,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 608
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 613,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 614,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 613
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 623,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 623
+	},
+	{
+		"Opcode": 104,
+		"OpcodeIndex": 624,
+		"Inst": "CallMath",
+		"Function": "ExecuteBPHook",
+		"ContextClass": "/Script/SML.BlueprintHookManager",
+		"Parameters": [
+			{
+				"Opcode": 29,
+				"OpcodeIndex": 633,
+				"Inst": "IntConst",
+				"Value": 608,
+				"OpSizeInBytes": 5
+			}
+		],
+		"OpSizeInBytes": 15,
+		"StatementIndex": 624
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 639,
+		"Inst": "Jump",
+		"Offset": 613,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 639
+	}
+]

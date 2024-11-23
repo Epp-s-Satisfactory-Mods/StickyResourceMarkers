@@ -1,0 +1,7 @@
+# What are these?
+
+These are snapshots of the blueprint functions hooked by the current version of the mod as well as the specific locations hooked.  They serve as reference points in case the functions change and the mod needs to be updated for new code offsets or logic because there is no convenient source history/snapshot to reference otherwise.  To generate the latest versions of these, set DEBUG_BLUEPRINT_HOOKING to 1 in \SatisfactoryModLoader\Mods\SML\Source\SML\Private\Patching\BlueprintHookManager.cpp and re-run alpakit on SML to rebuild and re-install a dev version of it.  Assuming this mod is also installed, when you start Satisfactory, the latest version of the blueprint hook debugging dumps will be created in the root directory of your Satisfactory install.
+
+Be sure to update these in source if any changes are made to the game's underlying blueprint code or the mod's blueprint hooking so that the further changes will be easier to understand.
+
+Note that if you have also enabled debugging for the mod, it will hook (and therefore dump) many additional blueprint functions that were used to better-understand the inner workings of the game during mod development.  You should NOT include these in the updated hook snapshots - to get the correct set, disable the mod's debugging, enable the blueprint hook debugging, delete any/all .json files in your root Satisfactory directory, then run the game once.  That will dump the correct, minimal set of blueprint functions/hooks used by the mod into your root Satisfactory directory.

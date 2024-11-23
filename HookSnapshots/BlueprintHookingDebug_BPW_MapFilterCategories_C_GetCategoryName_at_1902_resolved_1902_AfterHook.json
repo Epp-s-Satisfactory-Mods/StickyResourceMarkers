@@ -1,0 +1,1290 @@
+[
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 0,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 9,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "Temp_byte_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 18,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "Index",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 27,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 27,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 36,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 45,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Crates/Dismantle",
+			"OpSizeInBytes": 62
+		},
+		"OpSizeInBytes": 80,
+		"StatementIndex": 27
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 107,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 116,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 125,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Crates/Death",
+			"OpSizeInBytes": 58
+		},
+		"OpSizeInBytes": 76,
+		"StatementIndex": 107
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 183,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 192,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_2",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 201,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Portals",
+			"OpSizeInBytes": 53
+		},
+		"OpSizeInBytes": 71,
+		"StatementIndex": 183
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 254,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 263,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_3",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 272,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Stamps",
+			"OpSizeInBytes": 52
+		},
+		"OpSizeInBytes": 70,
+		"StatementIndex": 254
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 324,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 333,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_4",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 342,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/MapMarkers",
+			"OpSizeInBytes": 56
+		},
+		"OpSizeInBytes": 74,
+		"StatementIndex": 324
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 398,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 407,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_5",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 416,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Drones",
+			"OpSizeInBytes": 52
+		},
+		"OpSizeInBytes": 70,
+		"StatementIndex": 398
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 468,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 477,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_6",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 486,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/DronePorts",
+			"OpSizeInBytes": 56
+		},
+		"OpSizeInBytes": 74,
+		"StatementIndex": 468
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 542,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 551,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_7",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 560,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/TruckStations",
+			"OpSizeInBytes": 59
+		},
+		"OpSizeInBytes": 77,
+		"StatementIndex": 542
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 619,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 628,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_8",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 637,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Vehicles",
+			"OpSizeInBytes": 54
+		},
+		"OpSizeInBytes": 72,
+		"StatementIndex": 619
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 691,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 700,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_9",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 709,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/TrainStations",
+			"OpSizeInBytes": 59
+		},
+		"OpSizeInBytes": 77,
+		"StatementIndex": 691
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 768,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 777,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_10",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 786,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Trains",
+			"OpSizeInBytes": 52
+		},
+		"OpSizeInBytes": 70,
+		"StatementIndex": 768
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 838,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 847,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_11",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 856,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/StartingPod",
+			"OpSizeInBytes": 57
+		},
+		"OpSizeInBytes": 75,
+		"StatementIndex": 838
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 913,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 922,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_12",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 931,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Elevator",
+			"OpSizeInBytes": 54
+		},
+		"OpSizeInBytes": 72,
+		"StatementIndex": 913
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 985,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 994,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_13",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1003,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Resources",
+			"OpSizeInBytes": 55
+		},
+		"OpSizeInBytes": 73,
+		"StatementIndex": 985
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1058,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1067,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_14",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1076,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/RadarTowers",
+			"OpSizeInBytes": 57
+		},
+		"OpSizeInBytes": 75,
+		"StatementIndex": 1058
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1133,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1142,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_15",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1151,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Players",
+			"OpSizeInBytes": 53
+		},
+		"OpSizeInBytes": 71,
+		"StatementIndex": 1133
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1204,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1213,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_16",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1222,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Pings",
+			"OpSizeInBytes": 51
+		},
+		"OpSizeInBytes": 69,
+		"StatementIndex": 1204
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1273,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1282,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_17",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1291,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/HUB",
+			"OpSizeInBytes": 49
+		},
+		"OpSizeInBytes": 67,
+		"StatementIndex": 1273
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1340,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1349,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_18",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1358,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Crates",
+			"OpSizeInBytes": 52
+		},
+		"OpSizeInBytes": 70,
+		"StatementIndex": 1340
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1410,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1419,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_19",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1428,
+			"Inst": "TextConst",
+			"TextLiteralType": "LocalizedText",
+			"SourceString": "Beacons",
+			"LocalizationKey": "DE6C161A47DC9659693E2999860839A8",
+			"LocalizationNamespace": "",
+			"OpSizeInBytes": 47
+		},
+		"OpSizeInBytes": 65,
+		"StatementIndex": 1410
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1475,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1484,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable_20",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 1493,
+			"Inst": "TextConst",
+			"TextLiteralType": "StringTableEntry",
+			"TableId": "Map_UI",
+			"TableKey": "MapMenu/Filter/Categories/Other",
+			"OpSizeInBytes": 51
+		},
+		"OpSizeInBytes": 69,
+		"StatementIndex": 1475
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1544,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 1553,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 105,
+			"OpcodeIndex": 1562,
+			"Inst": "SwitchValue",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1569,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "byte",
+					"PinSubCategory": "byte",
+					"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+				},
+				"VariableName": "Temp_byte_Variable",
+				"OpSizeInBytes": 9
+			},
+			"OffsetToSwitchEnd": 1902,
+			"Cases": [
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1578,
+						"Inst": "ByteConst",
+						"Value": 0,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1593,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1584,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_20",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1593,
+						"Inst": "ByteConst",
+						"Value": 1,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1608,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1599,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_19",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1608,
+						"Inst": "ByteConst",
+						"Value": 2,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1623,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1614,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_18",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1623,
+						"Inst": "ByteConst",
+						"Value": 3,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1638,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1629,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_17",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1638,
+						"Inst": "ByteConst",
+						"Value": 4,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1653,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1644,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_16",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1653,
+						"Inst": "ByteConst",
+						"Value": 5,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1668,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1659,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_15",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1668,
+						"Inst": "ByteConst",
+						"Value": 6,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1683,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1674,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_14",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1683,
+						"Inst": "ByteConst",
+						"Value": 7,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1698,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1689,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_13",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1698,
+						"Inst": "ByteConst",
+						"Value": 8,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1713,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1704,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_12",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1713,
+						"Inst": "ByteConst",
+						"Value": 9,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1728,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1719,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_11",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1728,
+						"Inst": "ByteConst",
+						"Value": 10,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1743,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1734,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_10",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1743,
+						"Inst": "ByteConst",
+						"Value": 11,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1758,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1749,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_9",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1758,
+						"Inst": "ByteConst",
+						"Value": 12,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1773,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1764,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_8",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1773,
+						"Inst": "ByteConst",
+						"Value": 13,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1788,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1779,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_7",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1788,
+						"Inst": "ByteConst",
+						"Value": 14,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1803,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1794,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_6",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1803,
+						"Inst": "ByteConst",
+						"Value": 15,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1818,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1809,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_5",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1818,
+						"Inst": "ByteConst",
+						"Value": 16,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1833,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1824,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_4",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1833,
+						"Inst": "ByteConst",
+						"Value": 17,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1848,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1839,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_3",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1848,
+						"Inst": "ByteConst",
+						"Value": 18,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1863,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1854,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_2",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1863,
+						"Inst": "ByteConst",
+						"Value": 19,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1878,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1869,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable_1",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 1878,
+						"Inst": "ByteConst",
+						"Value": 20,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 1893,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1884,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Text",
+							"PinSubCategory": "Text"
+						},
+						"VariableName": "Temp_text_Variable",
+						"OpSizeInBytes": 9
+					}
+				}
+			],
+			"DefaultResult":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1893,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Text",
+					"PinSubCategory": "Text"
+				},
+				"VariableName": "K2Node_Select_Default",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 340
+		},
+		"OpSizeInBytes": 358,
+		"StatementIndex": 1544
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 1902,
+		"Inst": "Jump",
+		"Offset": 1918,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1902
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 1907,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 1908,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 1907
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 1917,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1917
+	},
+	{
+		"Opcode": 104,
+		"OpcodeIndex": 1918,
+		"Inst": "CallMath",
+		"Function": "ExecuteBPHook",
+		"ContextClass": "/Script/SML.BlueprintHookManager",
+		"Parameters": [
+			{
+				"Opcode": 29,
+				"OpcodeIndex": 1927,
+				"Inst": "IntConst",
+				"Value": 1902,
+				"OpSizeInBytes": 5
+			}
+		],
+		"OpSizeInBytes": 15,
+		"StatementIndex": 1918
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 1933,
+		"Inst": "Jump",
+		"Offset": 1907,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1933
+	}
+]

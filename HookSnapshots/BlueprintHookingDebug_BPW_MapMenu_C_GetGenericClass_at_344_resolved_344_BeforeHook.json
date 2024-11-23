@@ -1,0 +1,562 @@
+[
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 0,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 9,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeRepresentation"
+			},
+			"VariableName": "K2Node_DynamicCast_AsFGResource_Node_Representation",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 46,
+			"OpcodeIndex": 18,
+			"Inst": "DynamicCast",
+			"Class": "/Script/FactoryGame.FGResourceNodeRepresentation",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 27,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "actorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"OpSizeInBytes": 36,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 36,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 45,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 56,
+			"OpcodeIndex": 54,
+			"Inst": "Cast",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 56,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeRepresentation"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGResource_Node_Representation",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 36
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 65,
+		"Inst": "JumpIfNot",
+		"Offset": 301,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 70,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 65
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 79,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 80,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeBase"
+			},
+			"VariableName": "CallFunc_GetResourceNode_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 89,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 90,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeRepresentation"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGResource_Node_Representation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 10,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeBase"
+			},
+			"RValuePropertyName": "CallFunc_GetResourceNode_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 111,
+				"Inst": "FinalFunction",
+				"Function": "GetResourceNode",
+				"Parameters": [],
+				"OpSizeInBytes": 10
+			},
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 42,
+		"StatementIndex": 79
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 121,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 130,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Interface",
+				"PinSubCategory": "Interface",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGExtractableResourceInterface"
+			},
+			"VariableName": "K2Node_DynamicCast_AsFGExtractable_Resource_Interface",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 82,
+			"OpcodeIndex": 139,
+			"Inst": "ObjToInterfaceCast",
+			"InterfaceClass": "/Script/FactoryGame.FGExtractableResourceInterface",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 148,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeBase"
+				},
+				"VariableName": "CallFunc_GetResourceNode_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"OpSizeInBytes": 36,
+		"StatementIndex": 121
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 157,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 166,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 56,
+			"OpcodeIndex": 175,
+			"Inst": "Cast",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 177,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Interface",
+					"PinSubCategory": "Interface",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGExtractableResourceInterface"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGExtractable_Resource_Interface",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 157
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 186,
+		"Inst": "JumpIfNot",
+		"Offset": 328,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 191,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 186
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 200,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 201,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "CallFunc_GetResourceClass_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 210,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 81,
+				"OpcodeIndex": 211,
+				"Inst": "InterfaceContext",
+				"Expression":
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 212,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Interface",
+						"PinSubCategory": "Interface",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGExtractableResourceInterface"
+					},
+					"VariableName": "K2Node_DynamicCast_AsFGExtractable_Resource_Interface",
+					"OpSizeInBytes": 9
+				},
+				"OpSizeInBytes": 10
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"RValuePropertyName": "CallFunc_GetResourceClass_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 233,
+				"Inst": "VirtualFunction",
+				"Function": "GetResourceClass",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 37
+		},
+		"OpSizeInBytes": 47,
+		"StatementIndex": 200
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 247,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 248,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "Temp_class_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 257,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "CallFunc_GetResourceClass_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 247
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 266,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 267,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/CoreUObject.Object"
+			},
+			"VariableName": "Class",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 276,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "Temp_class_Variable",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 266
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 285,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 286,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "HasGenericClass",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 295,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 285
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 296,
+		"Inst": "Jump",
+		"Offset": 344,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 296
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 301,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 302,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/CoreUObject.Object"
+			},
+			"VariableName": "Class",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 42,
+			"OpcodeIndex": 311,
+			"Inst": "NoObject",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 301
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 312,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 313,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "HasGenericClass",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 40,
+			"OpcodeIndex": 322,
+			"Inst": "False",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 312
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 323,
+		"Inst": "Jump",
+		"Offset": 344,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 323
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 328,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 329,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "Temp_class_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 42,
+			"OpcodeIndex": 338,
+			"Inst": "NoObject",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 328
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 339,
+		"Inst": "Jump",
+		"Offset": 266,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 339
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 344,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 11,
+			"OpcodeIndex": 345,
+			"Inst": "Nothing",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 2,
+		"StatementIndex": 344
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 346,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 346
+	}
+]

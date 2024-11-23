@@ -1,2 +1,2 @@
 # StickyResourceMarkers
-Scanned resource node map markers stick around until you leave the game
+Scanned resource node compass and map markers stick around until you load a save or leave the game.

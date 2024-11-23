@@ -1,0 +1,1644 @@
+[
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 0,
+		"Inst": "PushExecutionFlow",
+		"Offset": 1125,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 5,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 14,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"VariableName": "LocalDefaultColor",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 47,
+			"OpcodeIndex": 23,
+			"Inst": "StructConst",
+			"Struct": "/Script/CoreUObject.LinearColor",
+			"Properties":
+			{
+				"R": [
+					{
+						"Opcode": 30,
+						"OpcodeIndex": 36,
+						"Inst": "FloatConst",
+						"Value": 1,
+						"OpSizeInBytes": 5
+					}
+				],
+				"G": [
+					{
+						"Opcode": 30,
+						"OpcodeIndex": 41,
+						"Inst": "FloatConst",
+						"Value": 1,
+						"OpSizeInBytes": 5
+					}
+				],
+				"B": [
+					{
+						"Opcode": 30,
+						"OpcodeIndex": 46,
+						"Inst": "FloatConst",
+						"Value": 1,
+						"OpSizeInBytes": 5
+					}
+				],
+				"A": [
+					{
+						"Opcode": 30,
+						"OpcodeIndex": 51,
+						"Inst": "FloatConst",
+						"Value": 1,
+						"OpSizeInBytes": 5
+					}
+				]
+			},
+			"OpSizeInBytes": 34
+		},
+		"OpSizeInBytes": 52,
+		"StatementIndex": 5
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 57,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 58,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+			},
+			"VariableName": "mActorRepresentation",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 67,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+			},
+			"VariableName": "mActorRepresentation",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 57
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 76,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 77,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_IsValid_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 86,
+			"Inst": "CallMath",
+			"Function": "IsValid",
+			"ContextClass": "/Script/Engine.KismetSystemLibrary",
+			"Parameters": [
+				{
+					"Opcode": 1,
+					"OpcodeIndex": 95,
+					"Inst": "InstanceVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+					},
+					"VariableName": "mActorRepresentation",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 19
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 76
+	},
+	{
+		"Opcode": 79,
+		"OpcodeIndex": 105,
+		"Inst": "PopExecutionFlowIfNot",
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 106,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_IsValid_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 105
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 115,
+		"Inst": "PushExecutionFlow",
+		"Offset": 151,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 115
+	},
+	{
+		"Opcode": 79,
+		"OpcodeIndex": 120,
+		"Inst": "PopExecutionFlowIfNot",
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 121,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallDelegate",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 120
+	},
+	{
+		"Opcode": 99,
+		"OpcodeIndex": 130,
+		"Inst": "CallMulticastDelegate",
+		"DelegateSignatureFunction":
+		{
+			"IsSelfContext": true,
+			"MemberParent": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C",
+			"MemberName": "OnActorRepresentationUpdated__DelegateSignature"
+		},
+		"Delegate":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 139,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "mcdelegate",
+				"PinSubCategory": "mcdelegate"
+			},
+			"VariableName": "OnActorRepresentationUpdated",
+			"OpSizeInBytes": 9
+		},
+		"Parameters": [
+			{
+				"Opcode": 23,
+				"OpcodeIndex": 148,
+				"Inst": "Self",
+				"OpSizeInBytes": 1
+			}
+		],
+		"OpSizeInBytes": 20,
+		"StatementIndex": 130
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 150,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 150
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 151,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 152,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Texture2D"
+			},
+			"VariableName": "CallFunc_GetRepresentationTexture_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 161,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 162,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Texture2D"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationTexture_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 183,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationTexture",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 46,
+		"StatementIndex": 151
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 197,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 198,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/UMG.Image"
+			},
+			"VariableName": "mActorImage",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 24,
+		"Expression":
+		{
+			"Opcode": 27,
+			"OpcodeIndex": 219,
+			"Inst": "VirtualFunction",
+			"Function": "SetBrushFromTexture",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 232,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/Engine.Texture2D"
+					},
+					"VariableName": "CallFunc_GetRepresentationTexture_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 40,
+					"OpcodeIndex": 241,
+					"Inst": "False",
+					"OpSizeInBytes": 1
+				}
+			],
+			"OpSizeInBytes": 24
+		},
+		"OpSizeInBytes": 46,
+		"StatementIndex": 197
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 243,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 252,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 261,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 262,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationType_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 283,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationType",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 243
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 297,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 306,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"VariableName": "CallFunc_GetRepresentationColor_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 315,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 316,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationColor_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 337,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationColor",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 297
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 351,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 360,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "Temp_byte_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 369,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 27,
+		"StatementIndex": 351
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 378,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 379,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/UMG.Image"
+			},
+			"VariableName": "mActorImage",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 350,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 400,
+			"Inst": "FinalFunction",
+			"Function": "SetColorAndOpacity",
+			"Parameters": [
+				{
+					"Opcode": 105,
+					"OpcodeIndex": 409,
+					"Inst": "SwitchValue",
+					"Expression":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 416,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "byte",
+							"PinSubCategory": "byte",
+							"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+						},
+						"VariableName": "Temp_byte_Variable",
+						"OpSizeInBytes": 9
+					},
+					"OffsetToSwitchEnd": 749,
+					"Cases": [
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 425,
+								"Inst": "ByteConst",
+								"Value": 0,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 440,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 431,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 440,
+								"Inst": "ByteConst",
+								"Value": 1,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 455,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 446,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 455,
+								"Inst": "ByteConst",
+								"Value": 2,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 470,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 461,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 470,
+								"Inst": "ByteConst",
+								"Value": 3,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 485,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 476,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 485,
+								"Inst": "ByteConst",
+								"Value": 4,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 500,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 491,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "CallFunc_GetRepresentationColor_ReturnValue",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 500,
+								"Inst": "ByteConst",
+								"Value": 5,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 515,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 506,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "CallFunc_GetRepresentationColor_ReturnValue",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 515,
+								"Inst": "ByteConst",
+								"Value": 6,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 530,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 521,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 530,
+								"Inst": "ByteConst",
+								"Value": 7,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 545,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 536,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 545,
+								"Inst": "ByteConst",
+								"Value": 8,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 560,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 551,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 560,
+								"Inst": "ByteConst",
+								"Value": 9,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 575,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 566,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 575,
+								"Inst": "ByteConst",
+								"Value": 10,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 590,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 581,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 590,
+								"Inst": "ByteConst",
+								"Value": 11,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 605,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 596,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 605,
+								"Inst": "ByteConst",
+								"Value": 12,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 620,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 611,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 620,
+								"Inst": "ByteConst",
+								"Value": 13,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 635,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 626,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 635,
+								"Inst": "ByteConst",
+								"Value": 14,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 650,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 641,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 650,
+								"Inst": "ByteConst",
+								"Value": 15,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 665,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 656,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 665,
+								"Inst": "ByteConst",
+								"Value": 16,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 680,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 671,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "CallFunc_GetRepresentationColor_ReturnValue",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 680,
+								"Inst": "ByteConst",
+								"Value": 17,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 695,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 686,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 695,
+								"Inst": "ByteConst",
+								"Value": 18,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 710,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 701,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 710,
+								"Inst": "ByteConst",
+								"Value": 19,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 725,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 716,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						},
+						{
+							"CaseValue":
+							{
+								"Opcode": 36,
+								"OpcodeIndex": 725,
+								"Inst": "ByteConst",
+								"Value": 20,
+								"OpSizeInBytes": 2
+							},
+							"OffsetToNextCase": 740,
+							"CaseResult":
+							{
+								"Opcode": 0,
+								"OpcodeIndex": 731,
+								"Inst": "LocalVariable",
+								"VariableType":
+								{
+									"PinCategory": "Struct",
+									"PinSubCategory": "Struct",
+									"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+								},
+								"VariableName": "LocalDefaultColor",
+								"OpSizeInBytes": 9
+							}
+						}
+					],
+					"DefaultResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 740,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Struct",
+							"PinSubCategory": "Struct",
+							"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+						},
+						"VariableName": "K2Node_Select_Default",
+						"OpSizeInBytes": 9
+					},
+					"OpSizeInBytes": 340
+				}
+			],
+			"OpSizeInBytes": 350
+		},
+		"OpSizeInBytes": 372,
+		"StatementIndex": 378
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 750,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 759,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "CallFunc_GetName_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 69,
+			"OpcodeIndex": 768,
+			"Inst": "LocalVirtualFunction",
+			"FunctionName": "GetName",
+			"Parameters": [],
+			"OpSizeInBytes": 14
+		},
+		"OpSizeInBytes": 32,
+		"StatementIndex": 750
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 782,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 783,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/UMG.TextBlock"
+			},
+			"VariableName": "mActorName",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 23,
+		"Expression":
+		{
+			"Opcode": 27,
+			"OpcodeIndex": 804,
+			"Inst": "VirtualFunction",
+			"Function": "SetText",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 817,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Text",
+						"PinSubCategory": "Text"
+					},
+					"VariableName": "CallFunc_GetName_ReturnValue",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 23
+		},
+		"OpSizeInBytes": 45,
+		"StatementIndex": 782
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 827,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 836,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeRepresentation"
+			},
+			"VariableName": "K2Node_DynamicCast_AsFGResource_Node_Representation",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 46,
+			"OpcodeIndex": 845,
+			"Inst": "DynamicCast",
+			"Class": "/Script/FactoryGame.FGResourceNodeRepresentation",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 854,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"OpSizeInBytes": 36,
+		"StatementIndex": 827
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 863,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 872,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 56,
+			"OpcodeIndex": 881,
+			"Inst": "Cast",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 883,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeRepresentation"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGResource_Node_Representation",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 863
+	},
+	{
+		"Opcode": 79,
+		"OpcodeIndex": 892,
+		"Inst": "PopExecutionFlowIfNot",
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 893,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 892
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 902,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 903,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeBase"
+			},
+			"VariableName": "CallFunc_GetResourceNode_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 912,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 913,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeRepresentation"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGResource_Node_Representation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 10,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeBase"
+			},
+			"RValuePropertyName": "CallFunc_GetResourceNode_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 934,
+				"Inst": "FinalFunction",
+				"Function": "GetResourceNode",
+				"Parameters": [],
+				"OpSizeInBytes": 10
+			},
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 42,
+		"StatementIndex": 902
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 944,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 953,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Interface",
+				"PinSubCategory": "Interface",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGExtractableResourceInterface"
+			},
+			"VariableName": "K2Node_DynamicCast_AsFGExtractable_Resource_Interface",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 82,
+			"OpcodeIndex": 962,
+			"Inst": "ObjToInterfaceCast",
+			"InterfaceClass": "/Script/FactoryGame.FGExtractableResourceInterface",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 971,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGResourceNodeBase"
+				},
+				"VariableName": "CallFunc_GetResourceNode_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"OpSizeInBytes": 36,
+		"StatementIndex": 944
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 980,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 989,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 56,
+			"OpcodeIndex": 998,
+			"Inst": "Cast",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1000,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Interface",
+					"PinSubCategory": "Interface",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGExtractableResourceInterface"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGExtractable_Resource_Interface",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 980
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 1009,
+		"Inst": "JumpIfNot",
+		"Offset": 1109,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1014,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 1009
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1023,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1024,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "CallFunc_GetResourceClass_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1033,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 81,
+				"OpcodeIndex": 1034,
+				"Inst": "InterfaceContext",
+				"Expression":
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1035,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Interface",
+						"PinSubCategory": "Interface",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGExtractableResourceInterface"
+					},
+					"VariableName": "K2Node_DynamicCast_AsFGExtractable_Resource_Interface",
+					"OpSizeInBytes": 9
+				},
+				"OpSizeInBytes": 10
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"RValuePropertyName": "CallFunc_GetResourceClass_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 1056,
+				"Inst": "VirtualFunction",
+				"Function": "GetResourceClass",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 37
+		},
+		"OpSizeInBytes": 47,
+		"StatementIndex": 1023
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1070,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1071,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "Temp_class_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1080,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "CallFunc_GetResourceClass_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 1070
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1089,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 1090,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/CoreUObject.Object"
+			},
+			"VariableName": "mGenericClass",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1099,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "Temp_class_Variable",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 1089
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1108,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1108
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1109,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1110,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGResourceDescriptor"
+			},
+			"VariableName": "Temp_class_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 42,
+			"OpcodeIndex": 1119,
+			"Inst": "NoObject",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 1109
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 1120,
+		"Inst": "Jump",
+		"Offset": 1089,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1120
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 1125,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 11,
+			"OpcodeIndex": 1126,
+			"Inst": "Nothing",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 2,
+		"StatementIndex": 1125
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 1127,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1127
+	}
+]

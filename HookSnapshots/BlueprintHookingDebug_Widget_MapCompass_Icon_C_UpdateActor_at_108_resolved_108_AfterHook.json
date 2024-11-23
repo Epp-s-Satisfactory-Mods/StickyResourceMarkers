@@ -1,0 +1,2860 @@
+[
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 0,
+		"Inst": "PushExecutionFlow",
+		"Offset": 2105,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 5,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 6,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+			},
+			"VariableName": "mActorRepresentation",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 15,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+			},
+			"VariableName": "actorRepresentation",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 5
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 24,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 25,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "mIsCompassObject",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 39,
+			"OpcodeIndex": 34,
+			"Inst": "True",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 24
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 35,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "UpdateMaterialType",
+		"Parameters": [],
+		"OpSizeInBytes": 14,
+		"StatementIndex": 35
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 49,
+		"Inst": "PushExecutionFlow",
+		"Offset": 519,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 49
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 54,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 63,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 72,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 73,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationType_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 94,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationType",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 54
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 108,
+		"Inst": "Jump",
+		"Offset": 2108,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 108
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 113,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 114,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 123,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 132,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 141,
+					"Inst": "ByteConst",
+					"Value": 4,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 113
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 144,
+		"Inst": "JumpIfNot",
+		"Offset": 765,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 149,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 144
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 158,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 159,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 168,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 177,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 186,
+					"Inst": "ByteConst",
+					"Value": 5,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 158
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 189,
+		"Inst": "JumpIfNot",
+		"Offset": 874,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 194,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 189
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 203,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 204,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 213,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 222,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 231,
+					"Inst": "ByteConst",
+					"Value": 7,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 203
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 234,
+		"Inst": "JumpIfNot",
+		"Offset": 983,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 239,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 234
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 248,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 249,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 258,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 267,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 276,
+					"Inst": "ByteConst",
+					"Value": 10,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 248
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 279,
+		"Inst": "JumpIfNot",
+		"Offset": 998,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 284,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 279
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 293,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 294,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 303,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 312,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 321,
+					"Inst": "ByteConst",
+					"Value": 12,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 293
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 324,
+		"Inst": "JumpIfNot",
+		"Offset": 1263,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 329,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 324
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 338,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 339,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 348,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 357,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 366,
+					"Inst": "ByteConst",
+					"Value": 16,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 338
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 369,
+		"Inst": "JumpIfNot",
+		"Offset": 1528,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 374,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 369
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 383,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 384,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 393,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 402,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 411,
+					"Inst": "ByteConst",
+					"Value": 17,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 383
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 414,
+		"Inst": "JumpIfNot",
+		"Offset": 1642,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 419,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 414
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 428,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 429,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 438,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 447,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 456,
+					"Inst": "ByteConst",
+					"Value": 19,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 428
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 459,
+		"Inst": "JumpIfNot",
+		"Offset": 2004,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 464,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 459
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 473,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 474,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 483,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 492,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 501,
+					"Inst": "ByteConst",
+					"Value": 20,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 473
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 504,
+		"Inst": "JumpIfNot",
+		"Offset": 2004,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 509,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 504
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 518,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 518
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 519,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 528,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "Temp_text_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 41,
+			"OpcodeIndex": 537,
+			"Inst": "TextConst",
+			"TextLiteralType": "Empty",
+			"OpSizeInBytes": 2
+		},
+		"OpSizeInBytes": 20,
+		"StatementIndex": 519
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 539,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 548,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "CallFunc_GetRepresentationType_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 557,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 558,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationType_ReturnValue_1",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 579,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationType",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 539
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 593,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 594,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_NotEqual_ByteByte_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 603,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 612,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "CallFunc_GetRepresentationType_ReturnValue_1",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 621,
+					"Inst": "ByteConst",
+					"Value": 17,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 593
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 624,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 633,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"VariableName": "CallFunc_GetRepresentationText_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 642,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 643,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationText_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 664,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationText",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 624
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 678,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 679,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "Temp_bool_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 688,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_NotEqual_ByteByte_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 678
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 697,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "SetDescription",
+		"Parameters": [
+			{
+				"Opcode": 105,
+				"OpcodeIndex": 710,
+				"Inst": "SwitchValue",
+				"Expression":
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 717,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "bool",
+						"PinSubCategory": "bool"
+					},
+					"VariableName": "Temp_bool_Variable",
+					"OpSizeInBytes": 9
+				},
+				"OffsetToSwitchEnd": 763,
+				"Cases": [
+					{
+						"CaseValue":
+						{
+							"Opcode": 40,
+							"OpcodeIndex": 726,
+							"Inst": "False",
+							"OpSizeInBytes": 1
+						},
+						"OffsetToNextCase": 740,
+						"CaseResult":
+						{
+							"Opcode": 0,
+							"OpcodeIndex": 731,
+							"Inst": "LocalVariable",
+							"VariableType":
+							{
+								"PinCategory": "Text",
+								"PinSubCategory": "Text"
+							},
+							"VariableName": "Temp_text_Variable",
+							"OpSizeInBytes": 9
+						}
+					},
+					{
+						"CaseValue":
+						{
+							"Opcode": 39,
+							"OpcodeIndex": 740,
+							"Inst": "True",
+							"OpSizeInBytes": 1
+						},
+						"OffsetToNextCase": 754,
+						"CaseResult":
+						{
+							"Opcode": 0,
+							"OpcodeIndex": 745,
+							"Inst": "LocalVariable",
+							"VariableType":
+							{
+								"PinCategory": "Text",
+								"PinSubCategory": "Text"
+							},
+							"VariableName": "CallFunc_GetRepresentationText_ReturnValue",
+							"OpSizeInBytes": 9
+						}
+					}
+				],
+				"DefaultResult":
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 754,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Text",
+						"PinSubCategory": "Text"
+					},
+					"VariableName": "K2Node_Select_Default",
+					"OpSizeInBytes": 9
+				},
+				"OpSizeInBytes": 53
+			}
+		],
+		"OpSizeInBytes": 67,
+		"StatementIndex": 697
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 764,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 764
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 765,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 774,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"VariableName": "CallFunc_GetRepresentationColor_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 783,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 784,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationColor_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 805,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationColor",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 765
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 819,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 820,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.MaterialInstanceDynamic"
+			},
+			"VariableName": "mMapIconMaterial",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 32,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 841,
+			"Inst": "FinalFunction",
+			"Function": "SetVectorParameterValue",
+			"Parameters": [
+				{
+					"Opcode": 33,
+					"OpcodeIndex": 850,
+					"Inst": "NameConst",
+					"Value": "BorderColor",
+					"OpSizeInBytes": 13
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 863,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Struct",
+						"PinSubCategory": "Struct",
+						"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+					},
+					"VariableName": "CallFunc_GetRepresentationColor_ReturnValue",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 819
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 873,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 873
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 874,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 883,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"VariableName": "CallFunc_GetRepresentationColor_ReturnValue_2",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 892,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 893,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationColor_ReturnValue_2",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 914,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationColor",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 874
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 928,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 929,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.MaterialInstanceDynamic"
+			},
+			"VariableName": "mMapIconMaterial",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 32,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 950,
+			"Inst": "FinalFunction",
+			"Function": "SetVectorParameterValue",
+			"Parameters": [
+				{
+					"Opcode": 33,
+					"OpcodeIndex": 959,
+					"Inst": "NameConst",
+					"Value": "ColorPrimary",
+					"OpSizeInBytes": 13
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 972,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Struct",
+						"PinSubCategory": "Struct",
+						"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+					},
+					"VariableName": "CallFunc_GetRepresentationColor_ReturnValue_2",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 928
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 982,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 982
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 983,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "SetupResourceIcon",
+		"Parameters": [],
+		"OpSizeInBytes": 14,
+		"StatementIndex": 983
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 997,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 997
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 998,
+		"Inst": "PushExecutionFlow",
+		"Offset": 1008,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 998
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 1003,
+		"Inst": "Jump",
+		"Offset": 874,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1003
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1008,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1009,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Actor"
+			},
+			"VariableName": "CallFunc_GetRealActor_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1018,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1019,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 10,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Actor"
+			},
+			"RValuePropertyName": "CallFunc_GetRealActor_ReturnValue_1",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 1040,
+				"Inst": "FinalFunction",
+				"Function": "GetRealActor",
+				"Parameters": [],
+				"OpSizeInBytes": 10
+			},
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 42,
+		"StatementIndex": 1008
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1050,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1059,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGTrain"
+			},
+			"VariableName": "K2Node_DynamicCast_AsFGTrain",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 46,
+			"OpcodeIndex": 1068,
+			"Inst": "DynamicCast",
+			"Class": "/Script/FactoryGame.FGTrain",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1077,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/Engine.Actor"
+				},
+				"VariableName": "CallFunc_GetRealActor_ReturnValue_1",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"OpSizeInBytes": 36,
+		"StatementIndex": 1050
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1086,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1095,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 56,
+			"OpcodeIndex": 1104,
+			"Inst": "Cast",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1106,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGTrain"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGTrain",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 1086
+	},
+	{
+		"Opcode": 79,
+		"OpcodeIndex": 1115,
+		"Inst": "PopExecutionFlowIfNot",
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1116,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 1115
+	},
+	{
+		"Opcode": 97,
+		"OpcodeIndex": 1125,
+		"Inst": "BindDelegate",
+		"FunctionName": "OnTrainStateChanged",
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1138,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_1",
+			"OpSizeInBytes": 9
+		},
+		"Object":
+		{
+			"Opcode": 23,
+			"OpcodeIndex": 1147,
+			"Inst": "Self",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 1125
+	},
+	{
+		"Opcode": 92,
+		"OpcodeIndex": 1148,
+		"Inst": "AddMulticastDelegate",
+		"MulticastDelegate":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1149,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1150,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGTrain"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGTrain",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 9,
+			"RValuePropertyType":
+			{
+				"PinCategory": "mcdelegate",
+				"PinSubCategory": "mcdelegate"
+			},
+			"RValuePropertyName": "mOnTrainStatusChanged",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1171,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "mcdelegate",
+					"PinSubCategory": "mcdelegate"
+				},
+				"VariableName": "mOnTrainStatusChanged",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 31
+		},
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1180,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 41,
+		"StatementIndex": 1148
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1189,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1198,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ETrainStatus"
+			},
+			"VariableName": "CallFunc_GetTrainStatus_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1207,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1208,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGTrain"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGTrain",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 10,
+			"RValuePropertyType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ETrainStatus"
+			},
+			"RValuePropertyName": "CallFunc_GetTrainStatus_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 1229,
+				"Inst": "FinalFunction",
+				"Function": "GetTrainStatus",
+				"Parameters": [],
+				"OpSizeInBytes": 10
+			},
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 50,
+		"StatementIndex": 1189
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 1239,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "OnTrainStateChanged",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1252,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "byte",
+					"PinSubCategory": "byte",
+					"PinSubCategoryObject": "/Script/FactoryGame.ETrainStatus"
+				},
+				"VariableName": "CallFunc_GetTrainStatus_ReturnValue",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 23,
+		"StatementIndex": 1239
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1262,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1262
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 1263,
+		"Inst": "PushExecutionFlow",
+		"Offset": 1273,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1263
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 1268,
+		"Inst": "Jump",
+		"Offset": 874,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1268
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1273,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1274,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Actor"
+			},
+			"VariableName": "CallFunc_GetRealActor_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1283,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1284,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 10,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Actor"
+			},
+			"RValuePropertyName": "CallFunc_GetRealActor_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 1305,
+				"Inst": "FinalFunction",
+				"Function": "GetRealActor",
+				"Parameters": [],
+				"OpSizeInBytes": 10
+			},
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 42,
+		"StatementIndex": 1273
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1315,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1324,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGWheeledVehicleInfo"
+			},
+			"VariableName": "K2Node_DynamicCast_AsFGWheeled_Vehicle_Info",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 46,
+			"OpcodeIndex": 1333,
+			"Inst": "DynamicCast",
+			"Class": "/Script/FactoryGame.FGWheeledVehicleInfo",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1342,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/Engine.Actor"
+				},
+				"VariableName": "CallFunc_GetRealActor_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"OpSizeInBytes": 36,
+		"StatementIndex": 1315
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1351,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1360,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 56,
+			"OpcodeIndex": 1369,
+			"Inst": "Cast",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1371,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGWheeledVehicleInfo"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGWheeled_Vehicle_Info",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 1351
+	},
+	{
+		"Opcode": 79,
+		"OpcodeIndex": 1380,
+		"Inst": "PopExecutionFlowIfNot",
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1381,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 1380
+	},
+	{
+		"Opcode": 97,
+		"OpcodeIndex": 1390,
+		"Inst": "BindDelegate",
+		"FunctionName": "OnVehicleStatusChanged",
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1403,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate",
+			"OpSizeInBytes": 9
+		},
+		"Object":
+		{
+			"Opcode": 23,
+			"OpcodeIndex": 1412,
+			"Inst": "Self",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 1390
+	},
+	{
+		"Opcode": 92,
+		"OpcodeIndex": 1413,
+		"Inst": "AddMulticastDelegate",
+		"MulticastDelegate":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1414,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1415,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGWheeledVehicleInfo"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGWheeled_Vehicle_Info",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 9,
+			"RValuePropertyType":
+			{
+				"PinCategory": "mcdelegate",
+				"PinSubCategory": "mcdelegate"
+			},
+			"RValuePropertyName": "VehicleStatusChangedDelegate",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1436,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "mcdelegate",
+					"PinSubCategory": "mcdelegate"
+				},
+				"VariableName": "VehicleStatusChangedDelegate",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 31
+		},
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1445,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 41,
+		"StatementIndex": 1413
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1454,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1463,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.EVehicleStatus"
+			},
+			"VariableName": "CallFunc_GetVehicleStatus_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1472,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1473,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGWheeledVehicleInfo"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGWheeled_Vehicle_Info",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 10,
+			"RValuePropertyType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.EVehicleStatus"
+			},
+			"RValuePropertyName": "CallFunc_GetVehicleStatus_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 1494,
+				"Inst": "FinalFunction",
+				"Function": "GetVehicleStatus",
+				"Parameters": [],
+				"OpSizeInBytes": 10
+			},
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 50,
+		"StatementIndex": 1454
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 1504,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "OnVehicleStatusChanged",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1517,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "byte",
+					"PinSubCategory": "byte",
+					"PinSubCategoryObject": "/Script/FactoryGame.EVehicleStatus"
+				},
+				"VariableName": "CallFunc_GetVehicleStatus_ReturnValue",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 23,
+		"StatementIndex": 1504
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1527,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1527
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 1528,
+		"Inst": "PushExecutionFlow",
+		"Offset": 1642,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1528
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1533,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1542,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"VariableName": "CallFunc_GetRepresentationColor_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1551,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1552,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationColor_ReturnValue_1",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 1573,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationColor",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 1533
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 1587,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 1588,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.MaterialInstanceDynamic"
+			},
+			"VariableName": "mMapIconMaterial",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 32,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 1609,
+			"Inst": "FinalFunction",
+			"Function": "SetVectorParameterValue",
+			"Parameters": [
+				{
+					"Opcode": 33,
+					"OpcodeIndex": 1618,
+					"Inst": "NameConst",
+					"Value": "ColorSecondary",
+					"OpSizeInBytes": 13
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1631,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Struct",
+						"PinSubCategory": "Struct",
+						"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+					},
+					"VariableName": "CallFunc_GetRepresentationColor_ReturnValue_1",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 1587
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1641,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1641
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 1642,
+		"Inst": "PushExecutionFlow",
+		"Offset": 1748,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 1642
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1647,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1648,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Texture2D"
+			},
+			"VariableName": "CallFunc_GetRepresentationTexture_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1657,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1658,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Texture2D"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationTexture_ReturnValue_1",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 1679,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationTexture",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 46,
+		"StatementIndex": 1647
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 1693,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 1694,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.MaterialInstanceDynamic"
+			},
+			"VariableName": "mMapIconMaterial",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 32,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 1715,
+			"Inst": "FinalFunction",
+			"Function": "SetTextureParameterValue",
+			"Parameters": [
+				{
+					"Opcode": 33,
+					"OpcodeIndex": 1724,
+					"Inst": "NameConst",
+					"Value": "Icon",
+					"OpSizeInBytes": 13
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1737,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/Engine.Texture2D"
+					},
+					"VariableName": "CallFunc_GetRepresentationTexture_ReturnValue_1",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 1693
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1747,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1747
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1748,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1757,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGMapMarkerRepresentation"
+			},
+			"VariableName": "K2Node_DynamicCast_AsFGMap_Marker_Representation",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 46,
+			"OpcodeIndex": 1766,
+			"Inst": "DynamicCast",
+			"Class": "/Script/FactoryGame.FGMapMarkerRepresentation",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1775,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"OpSizeInBytes": 36,
+		"StatementIndex": 1748
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1784,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1793,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_2",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 56,
+			"OpcodeIndex": 1802,
+			"Inst": "Cast",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1804,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGMapMarkerRepresentation"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGMap_Marker_Representation",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 1784
+	},
+	{
+		"Opcode": 79,
+		"OpcodeIndex": 1813,
+		"Inst": "PopExecutionFlowIfNot",
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1814,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_DynamicCast_bSuccess_2",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 1813
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1823,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1824,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGMapManager"
+			},
+			"VariableName": "CallFunc_Get_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 1833,
+			"Inst": "CallMath",
+			"Function": "Get",
+			"ContextClass": "/Script/FactoryGame.FGMapManager",
+			"Parameters": [
+				{
+					"Opcode": 23,
+					"OpcodeIndex": 1842,
+					"Inst": "Self",
+					"OpSizeInBytes": 1
+				}
+			],
+			"OpSizeInBytes": 11
+		},
+		"OpSizeInBytes": 21,
+		"StatementIndex": 1823
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1844,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1853,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/FactoryGame.MapMarker"
+			},
+			"VariableName": "CallFunc_GetMapMarker_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1862,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1863,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGMapMarkerRepresentation"
+				},
+				"VariableName": "K2Node_DynamicCast_AsFGMap_Marker_Representation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 10,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/FactoryGame.MapMarker"
+			},
+			"RValuePropertyName": "CallFunc_GetMapMarker_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 1884,
+				"Inst": "FinalFunction",
+				"Function": "GetMapMarker",
+				"Parameters": [],
+				"OpSizeInBytes": 10
+			},
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 50,
+		"StatementIndex": 1844
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1894,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1903,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"VariableName": "CallFunc_IsMarkerHighlighted_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1912,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1913,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGMapManager"
+				},
+				"VariableName": "CallFunc_Get_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 37,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Struct",
+				"PinSubCategory": "Struct",
+				"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+			},
+			"RValuePropertyName": "CallFunc_IsMarkerHighlighted_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 1934,
+				"Inst": "FinalFunction",
+				"Function": "IsMarkerHighlighted",
+				"Parameters": [
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1943,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Struct",
+							"PinSubCategory": "Struct",
+							"PinSubCategoryObject": "/Script/FactoryGame.MapMarker"
+						},
+						"VariableName": "CallFunc_GetMapMarker_ReturnValue",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1952,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "CallFunc_IsMarkerHighlighted_out_IsHighlighted",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1961,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "bool",
+							"PinSubCategory": "bool"
+						},
+						"VariableName": "CallFunc_IsMarkerHighlighted_out_HighlightedByLocalPlayer",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 37
+			},
+			"OpSizeInBytes": 59
+		},
+		"OpSizeInBytes": 77,
+		"StatementIndex": 1894
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 1971,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "SetIsHighlighted",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1984,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "bool",
+					"PinSubCategory": "bool"
+				},
+				"VariableName": "CallFunc_IsMarkerHighlighted_out_IsHighlighted",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1993,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Struct",
+					"PinSubCategory": "Struct",
+					"PinSubCategoryObject": "/Script/CoreUObject.LinearColor"
+				},
+				"VariableName": "CallFunc_IsMarkerHighlighted_ReturnValue",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 32,
+		"StatementIndex": 1971
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 2003,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 2003
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 2004,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 2005,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Texture2D"
+			},
+			"VariableName": "CallFunc_GetRepresentationTexture_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 2014,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 2015,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "mActorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.Texture2D"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationTexture_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 2036,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationTexture",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 46,
+		"StatementIndex": 2004
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 2050,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 2051,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.MaterialInstanceDynamic"
+			},
+			"VariableName": "mMapIconMaterial",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 32,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 2072,
+			"Inst": "FinalFunction",
+			"Function": "SetTextureParameterValue",
+			"Parameters": [
+				{
+					"Opcode": 33,
+					"OpcodeIndex": 2081,
+					"Inst": "NameConst",
+					"Value": "Icon",
+					"OpSizeInBytes": 13
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 2094,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/Engine.Texture2D"
+					},
+					"VariableName": "CallFunc_GetRepresentationTexture_ReturnValue",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 32
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 2050
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 2104,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 2104
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 2105,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 11,
+			"OpcodeIndex": 2106,
+			"Inst": "Nothing",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 2,
+		"StatementIndex": 2105
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 2107,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 2107
+	},
+	{
+		"Opcode": 104,
+		"OpcodeIndex": 2108,
+		"Inst": "CallMath",
+		"Function": "ExecuteBPHook",
+		"ContextClass": "/Script/SML.BlueprintHookManager",
+		"Parameters": [
+			{
+				"Opcode": 29,
+				"OpcodeIndex": 2117,
+				"Inst": "IntConst",
+				"Value": 108,
+				"OpSizeInBytes": 5
+			}
+		],
+		"OpSizeInBytes": 15,
+		"StatementIndex": 2108
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 2123,
+		"Inst": "Jump",
+		"Offset": 113,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 2123
+	}
+]

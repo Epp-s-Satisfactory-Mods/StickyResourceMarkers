@@ -1,0 +1,2276 @@
+[
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 0,
+		"Inst": "PushExecutionFlow",
+		"Offset": 1763,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 5,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 14,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "LocalType",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 36,
+			"OpcodeIndex": 23,
+			"Inst": "ByteConst",
+			"Value": 0,
+			"OpSizeInBytes": 2
+		},
+		"OpSizeInBytes": 20,
+		"StatementIndex": 5
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 25,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 32,
+			"OpcodeIndex": 26,
+			"Inst": "ObjectConst",
+			"Object": "/Script/Engine.Default__BlueprintMapLibrary",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 37,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 47,
+			"Inst": "FinalFunction",
+			"Function": "Map_Add",
+			"Parameters": [
+				{
+					"Opcode": 1,
+					"OpcodeIndex": 56,
+					"Inst": "InstanceVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation",
+						"PinValueType":
+						{
+							"TerminalCategory": "Object",
+							"TerminalSubCategory": "None",
+							"TerminalSubCategoryObject": "/Script/FactoryGame.FGMapObjectWidget",
+							"TerminalIsConst": false,
+							"TerminalIsWeakPointer": false
+						},
+						"ContainerType": 3
+					},
+					"VariableName": "mAllAddedObjects",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 65,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+					},
+					"VariableName": "actorRepresentation",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 74,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGMapObjectWidget"
+					},
+					"VariableName": "mMapObject",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 37
+		},
+		"OpSizeInBytes": 59,
+		"StatementIndex": 25
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 84,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 85,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_Map_Find_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 94,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 95,
+				"Inst": "ObjectConst",
+				"Object": "/Script/Engine.Default__BlueprintMapLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 37,
+			"RValuePropertyType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"RValuePropertyName": "CallFunc_Map_Find_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 116,
+				"Inst": "FinalFunction",
+				"Function": "Map_Find",
+				"Parameters": [
+					{
+						"Opcode": 1,
+						"OpcodeIndex": 125,
+						"Inst": "InstanceVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation",
+							"PinValueType":
+							{
+								"TerminalCategory": "Object",
+								"TerminalSubCategory": "None",
+								"TerminalSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C",
+								"TerminalIsConst": false,
+								"TerminalIsWeakPointer": false
+							},
+							"ContainerType": 3
+						},
+						"VariableName": "mAddedFilterButtons",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 134,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+						},
+						"VariableName": "actorRepresentation",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 143,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+						},
+						"VariableName": "CallFunc_Map_Find_Value",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 37
+			},
+			"OpSizeInBytes": 59
+		},
+		"OpSizeInBytes": 69,
+		"StatementIndex": 84
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 153,
+		"Inst": "JumpIfNot",
+		"Offset": 278,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 158,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_Map_Find_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 153
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 167,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 168,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_Map_Find_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 177,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 178,
+				"Inst": "ObjectConst",
+				"Object": "/Script/Engine.Default__BlueprintMapLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 37,
+			"RValuePropertyType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"RValuePropertyName": "CallFunc_Map_Find_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 199,
+				"Inst": "FinalFunction",
+				"Function": "Map_Find",
+				"Parameters": [
+					{
+						"Opcode": 1,
+						"OpcodeIndex": 208,
+						"Inst": "InstanceVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation",
+							"PinValueType":
+							{
+								"TerminalCategory": "Object",
+								"TerminalSubCategory": "None",
+								"TerminalSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C",
+								"TerminalIsConst": false,
+								"TerminalIsWeakPointer": false
+							},
+							"ContainerType": 3
+						},
+						"VariableName": "mAddedFilterButtons",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 217,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+						},
+						"VariableName": "actorRepresentation",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 226,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+						},
+						"VariableName": "CallFunc_Map_Find_Value",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 37
+			},
+			"OpSizeInBytes": 59
+		},
+		"OpSizeInBytes": 69,
+		"StatementIndex": 167
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 236,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 237,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 238,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+				},
+				"VariableName": "CallFunc_Map_Find_Value",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 9,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGMapObjectWidget"
+			},
+			"RValuePropertyName": "mMapObject",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 259,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGMapObjectWidget"
+				},
+				"VariableName": "mMapObject",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 31
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 268,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGMapObjectWidget"
+			},
+			"VariableName": "mMapObject",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 41,
+		"StatementIndex": 236
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 277,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 277
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 278,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 287,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 296,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 297,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "actorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 14,
+			"RValuePropertyType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"RValuePropertyName": "CallFunc_GetRepresentationType_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 27,
+				"OpcodeIndex": 318,
+				"Inst": "VirtualFunction",
+				"Function": "GetRepresentationType",
+				"Parameters": [],
+				"OpSizeInBytes": 14
+			},
+			"OpSizeInBytes": 36
+		},
+		"OpSizeInBytes": 54,
+		"StatementIndex": 278
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 332,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "ConvertRepresentationType",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 345,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "byte",
+					"PinSubCategory": "byte",
+					"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+				},
+				"VariableName": "CallFunc_GetRepresentationType_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 354,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "byte",
+					"PinSubCategory": "byte",
+					"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+				},
+				"VariableName": "CallFunc_ConvertRepresentationType_OutType",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 32,
+		"StatementIndex": 332
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 364,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 373,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "LocalType",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 382,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "CallFunc_ConvertRepresentationType_OutType",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 27,
+		"StatementIndex": 364
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 391,
+		"Inst": "PushExecutionFlow",
+		"Offset": 568,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 391
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 396,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 397,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_Map_Find_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 406,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 407,
+				"Inst": "ObjectConst",
+				"Object": "/Script/Engine.Default__BlueprintMapLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 37,
+			"RValuePropertyType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"RValuePropertyName": "CallFunc_Map_Find_ReturnValue_1",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 428,
+				"Inst": "FinalFunction",
+				"Function": "Map_Find",
+				"Parameters": [
+					{
+						"Opcode": 1,
+						"OpcodeIndex": 437,
+						"Inst": "InstanceVariable",
+						"VariableType":
+						{
+							"PinCategory": "byte",
+							"PinSubCategory": "byte",
+							"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType",
+							"PinValueType":
+							{
+								"TerminalCategory": "Object",
+								"TerminalSubCategory": "None",
+								"TerminalSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C",
+								"TerminalIsConst": false,
+								"TerminalIsWeakPointer": false
+							},
+							"ContainerType": 3
+						},
+						"VariableName": "mAddedCategories",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 446,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "byte",
+							"PinSubCategory": "byte",
+							"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+						},
+						"VariableName": "LocalType",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 455,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+						},
+						"VariableName": "CallFunc_Map_Find_Value_1",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 37
+			},
+			"OpSizeInBytes": 59
+		},
+		"OpSizeInBytes": 69,
+		"StatementIndex": 396
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 465,
+		"Inst": "JumpIfNot",
+		"Offset": 1581,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 470,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_Map_Find_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 465
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 479,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 480,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_Map_Find_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 489,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 490,
+				"Inst": "ObjectConst",
+				"Object": "/Script/Engine.Default__BlueprintMapLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 37,
+			"RValuePropertyType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"RValuePropertyName": "CallFunc_Map_Find_ReturnValue_1",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 511,
+				"Inst": "FinalFunction",
+				"Function": "Map_Find",
+				"Parameters": [
+					{
+						"Opcode": 1,
+						"OpcodeIndex": 520,
+						"Inst": "InstanceVariable",
+						"VariableType":
+						{
+							"PinCategory": "byte",
+							"PinSubCategory": "byte",
+							"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType",
+							"PinValueType":
+							{
+								"TerminalCategory": "Object",
+								"TerminalSubCategory": "None",
+								"TerminalSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C",
+								"TerminalIsConst": false,
+								"TerminalIsWeakPointer": false
+							},
+							"ContainerType": 3
+						},
+						"VariableName": "mAddedCategories",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 529,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "byte",
+							"PinSubCategory": "byte",
+							"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+						},
+						"VariableName": "LocalType",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 538,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+						},
+						"VariableName": "CallFunc_Map_Find_Value_1",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 37
+			},
+			"OpSizeInBytes": 59
+		},
+		"OpSizeInBytes": 69,
+		"StatementIndex": 479
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 548,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 549,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+			},
+			"VariableName": "LocalCategory",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 558,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+			},
+			"VariableName": "CallFunc_Map_Find_Value_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 548
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 567,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 567
+	},
+	{
+		"Opcode": 76,
+		"OpcodeIndex": 568,
+		"Inst": "PushExecutionFlow",
+		"Offset": 1416,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 568
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 573,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 574,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_ShouldAddToMenu_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 69,
+			"OpcodeIndex": 583,
+			"Inst": "LocalVirtualFunction",
+			"FunctionName": "ShouldAddToMenu",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 596,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+					},
+					"VariableName": "actorRepresentation",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 23
+		},
+		"OpSizeInBytes": 33,
+		"StatementIndex": 573
+	},
+	{
+		"Opcode": 79,
+		"OpcodeIndex": 606,
+		"Inst": "PopExecutionFlowIfNot",
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 607,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_ShouldAddToMenu_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 606
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 616,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 617,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.PlayerController"
+			},
+			"VariableName": "CallFunc_GetOwningPlayer_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 27,
+			"OpcodeIndex": 626,
+			"Inst": "VirtualFunction",
+			"Function": "GetOwningPlayer",
+			"Parameters": [],
+			"OpSizeInBytes": 14
+		},
+		"OpSizeInBytes": 24,
+		"StatementIndex": 616
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 640,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 641,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+			},
+			"VariableName": "CallFunc_Create_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 650,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 651,
+				"Inst": "ObjectConst",
+				"Object": "/Script/UMG.Default__WidgetBlueprintLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 29,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+			},
+			"RValuePropertyName": "CallFunc_Create_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 672,
+				"Inst": "FinalFunction",
+				"Function": "Create",
+				"Parameters": [
+					{
+						"Opcode": 23,
+						"OpcodeIndex": 681,
+						"Inst": "Self",
+						"OpSizeInBytes": 1
+					},
+					{
+						"Opcode": 32,
+						"OpcodeIndex": 682,
+						"Inst": "ObjectConst",
+						"Object": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 691,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/Engine.PlayerController"
+						},
+						"VariableName": "CallFunc_GetOwningPlayer_ReturnValue",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 29
+			},
+			"OpSizeInBytes": 51
+		},
+		"OpSizeInBytes": 61,
+		"StatementIndex": 640
+	},
+	{
+		"Opcode": 104,
+		"OpcodeIndex": 701,
+		"Inst": "CallMath",
+		"Function": "SetObjectPropertyByName",
+		"ContextClass": "/Script/Engine.KismetSystemLibrary",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 710,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+				},
+				"VariableName": "CallFunc_Create_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 33,
+				"OpcodeIndex": 719,
+				"Inst": "NameConst",
+				"Value": "mActorRepresentation",
+				"OpSizeInBytes": 13
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 732,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "actorRepresentation",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 41,
+		"StatementIndex": 701
+	},
+	{
+		"Opcode": 104,
+		"OpcodeIndex": 742,
+		"Inst": "CallMath",
+		"Function": "SetObjectPropertyByName",
+		"ContextClass": "/Script/Engine.KismetSystemLibrary",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 751,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+				},
+				"VariableName": "CallFunc_Create_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 33,
+				"OpcodeIndex": 760,
+				"Inst": "NameConst",
+				"Value": "mMapObject",
+				"OpSizeInBytes": 13
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 773,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGMapObjectWidget"
+				},
+				"VariableName": "mMapObject",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 41,
+		"StatementIndex": 742
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 783,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 784,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+			},
+			"VariableName": "LocalCategory",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 23,
+		"Expression":
+		{
+			"Opcode": 69,
+			"OpcodeIndex": 805,
+			"Inst": "LocalVirtualFunction",
+			"FunctionName": "AddChild",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 818,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+					},
+					"VariableName": "CallFunc_Create_ReturnValue",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 23
+		},
+		"OpSizeInBytes": 45,
+		"StatementIndex": 783
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 828,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "GetGenericClass",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 841,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "actorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 850,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Class",
+					"PinSubCategory": "Class",
+					"PinSubCategoryObject": "/Script/CoreUObject.Object"
+				},
+				"VariableName": "CallFunc_GetGenericClass_Class",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 859,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "bool",
+					"PinSubCategory": "bool"
+				},
+				"VariableName": "CallFunc_GetGenericClass_HasGenericClass",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 41,
+		"StatementIndex": 828
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 869,
+		"Inst": "JumpIfNot",
+		"Offset": 1634,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 874,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_GetGenericClass_HasGenericClass",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 869
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 883,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "GetGenericClass",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 896,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "actorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 905,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Class",
+					"PinSubCategory": "Class",
+					"PinSubCategoryObject": "/Script/CoreUObject.Object"
+				},
+				"VariableName": "CallFunc_GetGenericClass_Class",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 914,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "bool",
+					"PinSubCategory": "bool"
+				},
+				"VariableName": "CallFunc_GetGenericClass_HasGenericClass",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 41,
+		"StatementIndex": 883
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 924,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 32,
+			"OpcodeIndex": 925,
+			"Inst": "ObjectConst",
+			"Object": "/Script/Engine.Default__BlueprintMapLibrary",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 37,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 946,
+			"Inst": "FinalFunction",
+			"Function": "Map_Add",
+			"Parameters": [
+				{
+					"Opcode": 1,
+					"OpcodeIndex": 955,
+					"Inst": "InstanceVariable",
+					"VariableType":
+					{
+						"PinCategory": "Class",
+						"PinSubCategory": "Class",
+						"PinSubCategoryObject": "/Script/CoreUObject.Object",
+						"PinValueType":
+						{
+							"TerminalCategory": "Object",
+							"TerminalSubCategory": "None",
+							"TerminalSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C",
+							"TerminalIsConst": false,
+							"TerminalIsWeakPointer": false
+						},
+						"ContainerType": 3
+					},
+					"VariableName": "mAddedGenericButtons",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 964,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Class",
+						"PinSubCategory": "Class",
+						"PinSubCategoryObject": "/Script/CoreUObject.Object"
+					},
+					"VariableName": "CallFunc_GetGenericClass_Class",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 973,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+					},
+					"VariableName": "CallFunc_Create_ReturnValue",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 37
+		},
+		"OpSizeInBytes": 59,
+		"StatementIndex": 924
+	},
+	{
+		"Opcode": 97,
+		"OpcodeIndex": 983,
+		"Inst": "BindDelegate",
+		"FunctionName": "FocusGenericClass",
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 996,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_3",
+			"OpSizeInBytes": 9
+		},
+		"Object":
+		{
+			"Opcode": 23,
+			"OpcodeIndex": 1005,
+			"Inst": "Self",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 983
+	},
+	{
+		"Opcode": 92,
+		"OpcodeIndex": 1006,
+		"Inst": "AddMulticastDelegate",
+		"MulticastDelegate":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1007,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1008,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+				},
+				"VariableName": "CallFunc_Create_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 9,
+			"RValuePropertyType":
+			{
+				"PinCategory": "mcdelegate",
+				"PinSubCategory": "mcdelegate"
+			},
+			"RValuePropertyName": "OnGenericClassHovered",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1029,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "mcdelegate",
+					"PinSubCategory": "mcdelegate"
+				},
+				"VariableName": "OnGenericClassHovered",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 31
+		},
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1038,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_3",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 41,
+		"StatementIndex": 1006
+	},
+	{
+		"Opcode": 97,
+		"OpcodeIndex": 1047,
+		"Inst": "BindDelegate",
+		"FunctionName": "UnfocusGenericClass",
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1060,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_2",
+			"OpSizeInBytes": 9
+		},
+		"Object":
+		{
+			"Opcode": 23,
+			"OpcodeIndex": 1069,
+			"Inst": "Self",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 1047
+	},
+	{
+		"Opcode": 92,
+		"OpcodeIndex": 1070,
+		"Inst": "AddMulticastDelegate",
+		"MulticastDelegate":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1071,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1072,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+				},
+				"VariableName": "CallFunc_Create_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 9,
+			"RValuePropertyType":
+			{
+				"PinCategory": "mcdelegate",
+				"PinSubCategory": "mcdelegate"
+			},
+			"RValuePropertyName": "OnGenericClassUnhovered",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1093,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "mcdelegate",
+					"PinSubCategory": "mcdelegate"
+				},
+				"VariableName": "OnGenericClassUnhovered",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 31
+		},
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1102,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_2",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 41,
+		"StatementIndex": 1070
+	},
+	{
+		"Opcode": 49,
+		"OpcodeIndex": 1111,
+		"Inst": "SetArray",
+		"LeftSideExpression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1112,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Text",
+				"PinSubCategory": "Text",
+				"ContainerType": 1
+			},
+			"VariableName": "K2Node_MakeArray_Array",
+			"OpSizeInBytes": 9
+		},
+		"Values": [
+			{
+				"Opcode": 41,
+				"OpcodeIndex": 1121,
+				"Inst": "TextConst",
+				"TextLiteralType": "StringTableEntry",
+				"TableId": "Map_UI",
+				"TableKey": "MapMenu/Filter/ResourceStatuses/Claimed",
+				"OpSizeInBytes": 59
+			},
+			{
+				"Opcode": 41,
+				"OpcodeIndex": 1180,
+				"Inst": "TextConst",
+				"TextLiteralType": "StringTableEntry",
+				"TableId": "Map_UI",
+				"TableKey": "MapMenu/Filter/ResourceStatuses/Unclaimed",
+				"OpSizeInBytes": 61
+			}
+		],
+		"OpSizeInBytes": 131,
+		"StatementIndex": 1111
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 1242,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1243,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+			},
+			"VariableName": "CallFunc_Create_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 23,
+		"Expression":
+		{
+			"Opcode": 69,
+			"OpcodeIndex": 1264,
+			"Inst": "LocalVirtualFunction",
+			"FunctionName": "AddCustomButtons",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1277,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Text",
+						"PinSubCategory": "Text",
+						"ContainerType": 1
+					},
+					"VariableName": "K2Node_MakeArray_Array",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 23
+		},
+		"OpSizeInBytes": 45,
+		"StatementIndex": 1242
+	},
+	{
+		"Opcode": 97,
+		"OpcodeIndex": 1287,
+		"Inst": "BindDelegate",
+		"FunctionName": "FocusResources",
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1300,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate",
+			"OpSizeInBytes": 9
+		},
+		"Object":
+		{
+			"Opcode": 23,
+			"OpcodeIndex": 1309,
+			"Inst": "Self",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 1287
+	},
+	{
+		"Opcode": 92,
+		"OpcodeIndex": 1310,
+		"Inst": "AddMulticastDelegate",
+		"MulticastDelegate":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1311,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1312,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+				},
+				"VariableName": "CallFunc_Create_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 9,
+			"RValuePropertyType":
+			{
+				"PinCategory": "mcdelegate",
+				"PinSubCategory": "mcdelegate"
+			},
+			"RValuePropertyName": "OnCustomButtonHovered",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1333,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "mcdelegate",
+					"PinSubCategory": "mcdelegate"
+				},
+				"VariableName": "OnCustomButtonHovered",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 31
+		},
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1342,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 41,
+		"StatementIndex": 1310
+	},
+	{
+		"Opcode": 97,
+		"OpcodeIndex": 1351,
+		"Inst": "BindDelegate",
+		"FunctionName": "UnfocusResources",
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1364,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_1",
+			"OpSizeInBytes": 9
+		},
+		"Object":
+		{
+			"Opcode": 23,
+			"OpcodeIndex": 1373,
+			"Inst": "Self",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 1351
+	},
+	{
+		"Opcode": 92,
+		"OpcodeIndex": 1374,
+		"Inst": "AddMulticastDelegate",
+		"MulticastDelegate":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1375,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1376,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+				},
+				"VariableName": "CallFunc_Create_ReturnValue",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 9,
+			"RValuePropertyType":
+			{
+				"PinCategory": "mcdelegate",
+				"PinSubCategory": "mcdelegate"
+			},
+			"RValuePropertyName": "OnCustomButtonUnhovered",
+			"Expression":
+			{
+				"Opcode": 1,
+				"OpcodeIndex": 1397,
+				"Inst": "InstanceVariable",
+				"VariableType":
+				{
+					"PinCategory": "mcdelegate",
+					"PinSubCategory": "mcdelegate"
+				},
+				"VariableName": "OnCustomButtonUnhovered",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 31
+		},
+		"Delegate":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1406,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "delegate",
+				"PinSubCategory": "delegate"
+			},
+			"VariableName": "K2Node_CreateDelegate_OutputDelegate_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 41,
+		"StatementIndex": 1374
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1415,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1415
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 1416,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1417,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 1426,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1435,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "LocalType",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 1444,
+					"Inst": "ByteConst",
+					"Value": 7,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 1416
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 1447,
+		"Inst": "JumpIfNot",
+		"Offset": 1507,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1452,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 1447
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 1461,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1462,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 1471,
+			"Inst": "CallMath",
+			"Function": "NotEqual_ByteByte",
+			"ContextClass": "/Script/Engine.KismetMathLibrary",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1480,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "LocalType",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 36,
+					"OpcodeIndex": 1489,
+					"Inst": "ByteConst",
+					"Value": 17,
+					"OpSizeInBytes": 2
+				}
+			],
+			"OpSizeInBytes": 21
+		},
+		"OpSizeInBytes": 31,
+		"StatementIndex": 1461
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 1492,
+		"Inst": "JumpIfNot",
+		"Offset": 1694,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1497,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "K2Node_SwitchEnum_CmpSuccess",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 1492
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1506,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1506
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 1507,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "GetGenericClass",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1520,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "actorRepresentation",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1529,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Class",
+					"PinSubCategory": "Class",
+					"PinSubCategoryObject": "/Script/CoreUObject.Object"
+				},
+				"VariableName": "CallFunc_GetGenericClass_Class_1",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1538,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "bool",
+					"PinSubCategory": "bool"
+				},
+				"VariableName": "CallFunc_GetGenericClass_HasGenericClass_1",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 41,
+		"StatementIndex": 1507
+	},
+	{
+		"Opcode": 69,
+		"OpcodeIndex": 1548,
+		"Inst": "LocalVirtualFunction",
+		"FunctionName": "AddGenericActor",
+		"Parameters": [
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1561,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Class",
+					"PinSubCategory": "Class",
+					"PinSubCategoryObject": "/Script/CoreUObject.Object"
+				},
+				"VariableName": "CallFunc_GetGenericClass_Class_1",
+				"OpSizeInBytes": 9
+			},
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 1570,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Object",
+					"PinSubCategory": "Object",
+					"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+				},
+				"VariableName": "actorRepresentation",
+				"OpSizeInBytes": 9
+			}
+		],
+		"OpSizeInBytes": 32,
+		"StatementIndex": 1548
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1580,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1580
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1581,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1582,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+			},
+			"VariableName": "CallFunc_AddCategory_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 69,
+			"OpcodeIndex": 1591,
+			"Inst": "LocalVirtualFunction",
+			"FunctionName": "AddCategory",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1604,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "byte",
+						"PinSubCategory": "byte",
+						"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+					},
+					"VariableName": "LocalType",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 23
+		},
+		"OpSizeInBytes": 33,
+		"StatementIndex": 1581
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 1614,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1615,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+			},
+			"VariableName": "LocalCategory",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1624,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterCategories.BPW_MapFilterCategories_C"
+			},
+			"VariableName": "CallFunc_AddCategory_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 1614
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1633,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1633
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 1634,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 32,
+			"OpcodeIndex": 1635,
+			"Inst": "ObjectConst",
+			"Object": "/Script/Engine.Default__BlueprintMapLibrary",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 37,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 1656,
+			"Inst": "FinalFunction",
+			"Function": "Map_Add",
+			"Parameters": [
+				{
+					"Opcode": 1,
+					"OpcodeIndex": 1665,
+					"Inst": "InstanceVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation",
+						"PinValueType":
+						{
+							"TerminalCategory": "Object",
+							"TerminalSubCategory": "None",
+							"TerminalSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C",
+							"TerminalIsConst": false,
+							"TerminalIsWeakPointer": false
+						},
+						"ContainerType": 3
+					},
+					"VariableName": "mAddedFilterButtons",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1674,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+					},
+					"VariableName": "actorRepresentation",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 1683,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/Minimap/MapFilters/BPW_MapFilterButton.BPW_MapFilterButton_C"
+					},
+					"VariableName": "CallFunc_Create_ReturnValue",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 37
+		},
+		"OpSizeInBytes": 59,
+		"StatementIndex": 1634
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1693,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1693
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 1694,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1703,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "CallFunc_Array_AddUnique_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 1712,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 1713,
+				"Inst": "ObjectConst",
+				"Object": "/Script/Engine.Default__KismetArrayLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 28,
+			"RValuePropertyType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"RValuePropertyName": "CallFunc_Array_AddUnique_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 1734,
+				"Inst": "FinalFunction",
+				"Function": "Array_AddUnique",
+				"Parameters": [
+					{
+						"Opcode": 1,
+						"OpcodeIndex": 1743,
+						"Inst": "InstanceVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation",
+							"ContainerType": 1
+						},
+						"VariableName": "mAddedStamps",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 1752,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/FactoryGame.FGActorRepresentation"
+						},
+						"VariableName": "actorRepresentation",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 28
+			},
+			"OpSizeInBytes": 50
+		},
+		"OpSizeInBytes": 68,
+		"StatementIndex": 1694
+	},
+	{
+		"Opcode": 77,
+		"OpcodeIndex": 1762,
+		"Inst": "PopExecutionFlow",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1762
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 1763,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 11,
+			"OpcodeIndex": 1764,
+			"Inst": "Nothing",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 2,
+		"StatementIndex": 1763
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 1765,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 1765
+	}
+]

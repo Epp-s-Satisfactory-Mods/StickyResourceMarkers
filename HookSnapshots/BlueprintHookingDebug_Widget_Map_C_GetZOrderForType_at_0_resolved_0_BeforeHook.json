@@ -1,0 +1,1213 @@
+[
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 0,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 9,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "Temp_byte_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 18,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "byte",
+				"PinSubCategory": "byte",
+				"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+			},
+			"VariableName": "representationType",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 27,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 27,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 36,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 45,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 27
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 50,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 59,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 68,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 50
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 73,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 82,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_2",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 91,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 73
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 96,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 105,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_3",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 114,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 96
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 119,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 128,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_4",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 137,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 119
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 142,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 151,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_5",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 160,
+			"Inst": "IntConst",
+			"Value": 18,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 142
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 165,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 174,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_6",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 183,
+			"Inst": "IntConst",
+			"Value": 17,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 165
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 188,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 197,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_7",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 206,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 188
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 211,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 220,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_8",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 229,
+			"Inst": "IntConst",
+			"Value": 9,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 211
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 234,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 243,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_9",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 252,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 234
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 257,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 266,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_10",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 275,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 257
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 280,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 289,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_11",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 298,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 280
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 303,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 312,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_12",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 321,
+			"Inst": "IntConst",
+			"Value": 2,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 303
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 326,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 335,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_13",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 344,
+			"Inst": "IntConst",
+			"Value": 8,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 326
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 349,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 358,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_14",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 367,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 349
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 372,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 381,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_15",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 390,
+			"Inst": "IntConst",
+			"Value": 10,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 372
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 395,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 404,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_16",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 413,
+			"Inst": "IntConst",
+			"Value": 15,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 395
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 418,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 427,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_17",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 436,
+			"Inst": "IntConst",
+			"Value": 1,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 418
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 441,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 450,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_18",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 459,
+			"Inst": "IntConst",
+			"Value": 6,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 441
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 464,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 473,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_19",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 482,
+			"Inst": "IntConst",
+			"Value": 7,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 464
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 487,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 496,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "Temp_int_Variable_20",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 505,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 23,
+		"StatementIndex": 487
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 510,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 519,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 105,
+			"OpcodeIndex": 528,
+			"Inst": "SwitchValue",
+			"Expression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 535,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "byte",
+					"PinSubCategory": "byte",
+					"PinSubCategoryObject": "/Script/FactoryGame.ERepresentationType"
+				},
+				"VariableName": "Temp_byte_Variable",
+				"OpSizeInBytes": 9
+			},
+			"OffsetToSwitchEnd": 868,
+			"Cases": [
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 544,
+						"Inst": "ByteConst",
+						"Value": 0,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 559,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 550,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_20",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 559,
+						"Inst": "ByteConst",
+						"Value": 1,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 574,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 565,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_19",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 574,
+						"Inst": "ByteConst",
+						"Value": 2,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 589,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 580,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_18",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 589,
+						"Inst": "ByteConst",
+						"Value": 3,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 604,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 595,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_17",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 604,
+						"Inst": "ByteConst",
+						"Value": 4,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 619,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 610,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_16",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 619,
+						"Inst": "ByteConst",
+						"Value": 5,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 634,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 625,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_15",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 634,
+						"Inst": "ByteConst",
+						"Value": 6,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 649,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 640,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_14",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 649,
+						"Inst": "ByteConst",
+						"Value": 7,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 664,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 655,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_13",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 664,
+						"Inst": "ByteConst",
+						"Value": 8,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 679,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 670,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_12",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 679,
+						"Inst": "ByteConst",
+						"Value": 9,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 694,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 685,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_11",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 694,
+						"Inst": "ByteConst",
+						"Value": 10,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 709,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 700,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_10",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 709,
+						"Inst": "ByteConst",
+						"Value": 11,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 724,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 715,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_9",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 724,
+						"Inst": "ByteConst",
+						"Value": 12,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 739,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 730,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_8",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 739,
+						"Inst": "ByteConst",
+						"Value": 13,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 754,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 745,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_7",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 754,
+						"Inst": "ByteConst",
+						"Value": 14,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 769,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 760,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_6",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 769,
+						"Inst": "ByteConst",
+						"Value": 15,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 784,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 775,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_5",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 784,
+						"Inst": "ByteConst",
+						"Value": 16,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 799,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 790,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_4",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 799,
+						"Inst": "ByteConst",
+						"Value": 17,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 814,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 805,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_3",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 814,
+						"Inst": "ByteConst",
+						"Value": 18,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 829,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 820,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_2",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 829,
+						"Inst": "ByteConst",
+						"Value": 19,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 844,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 835,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable_1",
+						"OpSizeInBytes": 9
+					}
+				},
+				{
+					"CaseValue":
+					{
+						"Opcode": 36,
+						"OpcodeIndex": 844,
+						"Inst": "ByteConst",
+						"Value": 20,
+						"OpSizeInBytes": 2
+					},
+					"OffsetToNextCase": 859,
+					"CaseResult":
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 850,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "int",
+							"PinSubCategory": "int"
+						},
+						"VariableName": "Temp_int_Variable",
+						"OpSizeInBytes": 9
+					}
+				}
+			],
+			"DefaultResult":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 859,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "int",
+					"PinSubCategory": "int"
+				},
+				"VariableName": "K2Node_Select_Default",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 340
+		},
+		"OpSizeInBytes": 358,
+		"StatementIndex": 510
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 868,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 869,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 868
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 878,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 878
+	}
+]

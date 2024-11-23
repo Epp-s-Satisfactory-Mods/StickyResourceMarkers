@@ -1,0 +1,794 @@
+[
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 0,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 1,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_IsValidClass_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 10,
+			"Inst": "CallMath",
+			"Function": "IsValidClass",
+			"ContextClass": "/Script/Engine.KismetSystemLibrary",
+			"Parameters": [
+				{
+					"Opcode": 1,
+					"OpcodeIndex": 19,
+					"Inst": "InstanceVariable",
+					"VariableType":
+					{
+						"PinCategory": "Class",
+						"PinSubCategory": "Class",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGItemDescriptor"
+					},
+					"VariableName": "mItemClass",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 19
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 0
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 29,
+		"Inst": "JumpIfNot",
+		"Offset": 275,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 34,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_IsValidClass_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 29
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 43,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 44,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.PlayerController"
+			},
+			"VariableName": "CallFunc_GetOwningPlayer_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 27,
+			"OpcodeIndex": 53,
+			"Inst": "VirtualFunction",
+			"Function": "GetOwningPlayer",
+			"Parameters": [],
+			"OpSizeInBytes": 14
+		},
+		"OpSizeInBytes": 24,
+		"StatementIndex": 43
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 67,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 68,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+			},
+			"VariableName": "CallFunc_Create_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 77,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 78,
+				"Inst": "ObjectConst",
+				"Object": "/Script/UMG.Default__WidgetBlueprintLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 29,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+			},
+			"RValuePropertyName": "CallFunc_Create_ReturnValue_1",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 99,
+				"Inst": "FinalFunction",
+				"Function": "Create",
+				"Parameters": [
+					{
+						"Opcode": 23,
+						"OpcodeIndex": 108,
+						"Inst": "Self",
+						"OpSizeInBytes": 1
+					},
+					{
+						"Opcode": 32,
+						"OpcodeIndex": 109,
+						"Inst": "ObjectConst",
+						"Object": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 118,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/Engine.PlayerController"
+						},
+						"VariableName": "CallFunc_GetOwningPlayer_ReturnValue_1",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 29
+			},
+			"OpSizeInBytes": 51
+		},
+		"OpSizeInBytes": 61,
+		"StatementIndex": 67
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 128,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 66,
+			"OpcodeIndex": 129,
+			"Inst": "StructMemberContext",
+			"PropertyType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGItemDescriptor"
+			},
+			"PropertyName": "ItemClass",
+			"StructExpression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 138,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Struct",
+					"PinSubCategory": "Struct",
+					"PinSubCategoryObject": "/Script/FactoryGame.ItemAmount"
+				},
+				"VariableName": "K2Node_MakeStruct_ItemAmount_1",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"Expression":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 147,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGItemDescriptor"
+			},
+			"VariableName": "mItemClass",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 28,
+		"StatementIndex": 128
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 156,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 66,
+			"OpcodeIndex": 165,
+			"Inst": "StructMemberContext",
+			"PropertyType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"PropertyName": "amount",
+			"StructExpression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 174,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Struct",
+					"PinSubCategory": "Struct",
+					"PinSubCategoryObject": "/Script/FactoryGame.ItemAmount"
+				},
+				"VariableName": "K2Node_MakeStruct_ItemAmount_1",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 183,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 32,
+		"StatementIndex": 156
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 188,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 32,
+			"OpcodeIndex": 189,
+			"Inst": "ObjectConst",
+			"Object": "/Script/Engine.Default__KismetSystemLibrary",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 41,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 210,
+			"Inst": "FinalFunction",
+			"Function": "SetStructurePropertyByName",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 219,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+					},
+					"VariableName": "CallFunc_Create_ReturnValue_1",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 33,
+					"OpcodeIndex": 228,
+					"Inst": "NameConst",
+					"Value": "mItemDescriptor",
+					"OpSizeInBytes": 13
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 241,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Struct",
+						"PinSubCategory": "Struct",
+						"PinSubCategoryObject": "/Script/FactoryGame.ItemAmount"
+					},
+					"VariableName": "K2Node_MakeStruct_ItemAmount_1",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 41
+		},
+		"OpSizeInBytes": 63,
+		"StatementIndex": 188
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 251,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 252,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/UMG.Widget"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 261,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+			},
+			"VariableName": "CallFunc_Create_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 251
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 270,
+		"Inst": "Jump",
+		"Offset": 561,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 270
+	},
+	{
+		"Opcode": 20,
+		"OpcodeIndex": 275,
+		"Inst": "LetBool",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 276,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_IsValidClass_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 104,
+			"OpcodeIndex": 285,
+			"Inst": "CallMath",
+			"Function": "IsValidClass",
+			"ContextClass": "/Script/Engine.KismetSystemLibrary",
+			"Parameters": [
+				{
+					"Opcode": 1,
+					"OpcodeIndex": 294,
+					"Inst": "InstanceVariable",
+					"VariableType":
+					{
+						"PinCategory": "Class",
+						"PinSubCategory": "Class",
+						"PinSubCategoryObject": "/Script/FactoryGame.FGItemDescriptor"
+					},
+					"VariableName": "mFilterItemDescriptor",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 19
+		},
+		"OpSizeInBytes": 29,
+		"StatementIndex": 275
+	},
+	{
+		"Opcode": 7,
+		"OpcodeIndex": 304,
+		"Inst": "JumpIfNot",
+		"Offset": 550,
+		"Condition":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 309,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "bool",
+				"PinSubCategory": "bool"
+			},
+			"VariableName": "CallFunc_IsValidClass_ReturnValue_1",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 14,
+		"StatementIndex": 304
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 318,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 319,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/Engine.PlayerController"
+			},
+			"VariableName": "CallFunc_GetOwningPlayer_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 27,
+			"OpcodeIndex": 328,
+			"Inst": "VirtualFunction",
+			"Function": "GetOwningPlayer",
+			"Parameters": [],
+			"OpSizeInBytes": 14
+		},
+		"OpSizeInBytes": 24,
+		"StatementIndex": 318
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 342,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 343,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+			},
+			"VariableName": "CallFunc_Create_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 25,
+			"OpcodeIndex": 352,
+			"Inst": "Context",
+			"Context":
+			{
+				"Opcode": 32,
+				"OpcodeIndex": 353,
+				"Inst": "ObjectConst",
+				"Object": "/Script/UMG.Default__WidgetBlueprintLibrary",
+				"OpSizeInBytes": 9
+			},
+			"SkipOffsetForNull": 29,
+			"RValuePropertyType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+			},
+			"RValuePropertyName": "CallFunc_Create_ReturnValue",
+			"Expression":
+			{
+				"Opcode": 28,
+				"OpcodeIndex": 374,
+				"Inst": "FinalFunction",
+				"Function": "Create",
+				"Parameters": [
+					{
+						"Opcode": 23,
+						"OpcodeIndex": 383,
+						"Inst": "Self",
+						"OpSizeInBytes": 1
+					},
+					{
+						"Opcode": 32,
+						"OpcodeIndex": 384,
+						"Inst": "ObjectConst",
+						"Object": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C",
+						"OpSizeInBytes": 9
+					},
+					{
+						"Opcode": 0,
+						"OpcodeIndex": 393,
+						"Inst": "LocalVariable",
+						"VariableType":
+						{
+							"PinCategory": "Object",
+							"PinSubCategory": "Object",
+							"PinSubCategoryObject": "/Script/Engine.PlayerController"
+						},
+						"VariableName": "CallFunc_GetOwningPlayer_ReturnValue",
+						"OpSizeInBytes": 9
+					}
+				],
+				"OpSizeInBytes": 29
+			},
+			"OpSizeInBytes": 51
+		},
+		"OpSizeInBytes": 61,
+		"StatementIndex": 342
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 403,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 66,
+			"OpcodeIndex": 404,
+			"Inst": "StructMemberContext",
+			"PropertyType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGItemDescriptor"
+			},
+			"PropertyName": "ItemClass",
+			"StructExpression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 413,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Struct",
+					"PinSubCategory": "Struct",
+					"PinSubCategoryObject": "/Script/FactoryGame.ItemAmount"
+				},
+				"VariableName": "K2Node_MakeStruct_ItemAmount",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"Expression":
+		{
+			"Opcode": 1,
+			"OpcodeIndex": 422,
+			"Inst": "InstanceVariable",
+			"VariableType":
+			{
+				"PinCategory": "Class",
+				"PinSubCategory": "Class",
+				"PinSubCategoryObject": "/Script/FactoryGame.FGItemDescriptor"
+			},
+			"VariableName": "mFilterItemDescriptor",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 28,
+		"StatementIndex": 403
+	},
+	{
+		"Opcode": 15,
+		"OpcodeIndex": 431,
+		"Inst": "Let",
+		"Variable":
+		{
+			"Opcode": 66,
+			"OpcodeIndex": 440,
+			"Inst": "StructMemberContext",
+			"PropertyType":
+			{
+				"PinCategory": "int",
+				"PinSubCategory": "int"
+			},
+			"PropertyName": "amount",
+			"StructExpression":
+			{
+				"Opcode": 0,
+				"OpcodeIndex": 449,
+				"Inst": "LocalVariable",
+				"VariableType":
+				{
+					"PinCategory": "Struct",
+					"PinSubCategory": "Struct",
+					"PinSubCategoryObject": "/Script/FactoryGame.ItemAmount"
+				},
+				"VariableName": "K2Node_MakeStruct_ItemAmount",
+				"OpSizeInBytes": 9
+			},
+			"OpSizeInBytes": 18
+		},
+		"Expression":
+		{
+			"Opcode": 29,
+			"OpcodeIndex": 458,
+			"Inst": "IntConst",
+			"Value": 0,
+			"OpSizeInBytes": 5
+		},
+		"OpSizeInBytes": 32,
+		"StatementIndex": 431
+	},
+	{
+		"Opcode": 25,
+		"OpcodeIndex": 463,
+		"Inst": "Context",
+		"Context":
+		{
+			"Opcode": 32,
+			"OpcodeIndex": 464,
+			"Inst": "ObjectConst",
+			"Object": "/Script/Engine.Default__KismetSystemLibrary",
+			"OpSizeInBytes": 9
+		},
+		"SkipOffsetForNull": 41,
+		"Expression":
+		{
+			"Opcode": 28,
+			"OpcodeIndex": 485,
+			"Inst": "FinalFunction",
+			"Function": "SetStructurePropertyByName",
+			"Parameters": [
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 494,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Object",
+						"PinSubCategory": "Object",
+						"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+					},
+					"VariableName": "CallFunc_Create_ReturnValue",
+					"OpSizeInBytes": 9
+				},
+				{
+					"Opcode": 33,
+					"OpcodeIndex": 503,
+					"Inst": "NameConst",
+					"Value": "mItemDescriptor",
+					"OpSizeInBytes": 13
+				},
+				{
+					"Opcode": 0,
+					"OpcodeIndex": 516,
+					"Inst": "LocalVariable",
+					"VariableType":
+					{
+						"PinCategory": "Struct",
+						"PinSubCategory": "Struct",
+						"PinSubCategoryObject": "/Script/FactoryGame.ItemAmount"
+					},
+					"VariableName": "K2Node_MakeStruct_ItemAmount",
+					"OpSizeInBytes": 9
+				}
+			],
+			"OpSizeInBytes": 41
+		},
+		"OpSizeInBytes": 63,
+		"StatementIndex": 463
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 526,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 527,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/UMG.Widget"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 0,
+			"OpcodeIndex": 536,
+			"Inst": "LocalVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Game/FactoryGame/Interface/UI/InGame/Tooltip/Widget_Tooltip.Widget_Tooltip_C"
+			},
+			"VariableName": "CallFunc_Create_ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 19,
+		"StatementIndex": 526
+	},
+	{
+		"Opcode": 6,
+		"OpcodeIndex": 545,
+		"Inst": "Jump",
+		"Offset": 561,
+		"OpSizeInBytes": 5,
+		"StatementIndex": 545
+	},
+	{
+		"Opcode": 95,
+		"OpcodeIndex": 550,
+		"Inst": "LetObj",
+		"Variable":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 551,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/UMG.Widget"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"Expression":
+		{
+			"Opcode": 42,
+			"OpcodeIndex": 560,
+			"Inst": "NoObject",
+			"OpSizeInBytes": 1
+		},
+		"OpSizeInBytes": 11,
+		"StatementIndex": 550
+	},
+	{
+		"Opcode": 4,
+		"OpcodeIndex": 561,
+		"Inst": "Return",
+		"Expression":
+		{
+			"Opcode": 72,
+			"OpcodeIndex": 562,
+			"Inst": "LocalOutVariable",
+			"VariableType":
+			{
+				"PinCategory": "Object",
+				"PinSubCategory": "Object",
+				"PinSubCategoryObject": "/Script/UMG.Widget"
+			},
+			"VariableName": "ReturnValue",
+			"OpSizeInBytes": 9
+		},
+		"OpSizeInBytes": 10,
+		"StatementIndex": 561
+	},
+	{
+		"Opcode": 83,
+		"OpcodeIndex": 571,
+		"Inst": "EndOfScript",
+		"OpSizeInBytes": 1,
+		"StatementIndex": 571
+	}
+]
