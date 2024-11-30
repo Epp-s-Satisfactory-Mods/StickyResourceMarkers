@@ -1,7 +1,10 @@
 #include "SRMDebugging.h"
 
 #include "FGActorRepresentationManager.h"
+#include "FGBuildableRadarTower.h"
 #include "FGResourceNode.h"
+#include "FGResourceNodeFrackingCore.h"
+#include "FGResourceNodeFrackingSatellite.h"
 #include "FGResourceNodeRepresentation.h"
 #include "FGResourceScanner.h"
 #include "FGHUD.h"
@@ -9,8 +12,9 @@
 #include "SRMLogMacros.h"
 #include "Patching/NativeHookManager.h"
 #include "Widget.h"
+#include "Struct_ActorRep.h"
 
-void DumpWidget(FString prefix, const UWidget* widget)
+void SRMDebugging::DumpWidget(FString prefix, const UWidget* widget)
 {
     SRM_LOG("%s: Dumping UWidget", *prefix);
     if (!widget)
@@ -22,7 +26,7 @@ void DumpWidget(FString prefix, const UWidget* widget)
     SRM_LOG("%s: Widget: %x.", *prefix, widget->GetClass());//, * widget->GetClass()->GetName());
 }
 
-void DumpResourceNode(FString prefix, AFGResourceNodeBase* res)
+void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* res)
 {
     if (!res)
     {
@@ -30,14 +34,39 @@ void DumpResourceNode(FString prefix, AFGResourceNodeBase* res)
         return;
     }
 
-    SRM_LOG("%s AFGResourceNodeBase: %s (%s)", *prefix, *res->GetName(), *res->GetClass()->GetName());
-    SRM_LOG("%s\tIsOccupied: %d", *prefix, res->IsOccupied());
-    SRM_LOG("%s\tCanBecomeOccupied: %d", *prefix, res->CanBecomeOccupied());
-    SRM_LOG("%s\tGetResourceClass: %s", *prefix, *res->GetResourceClass()->GetName());
+    SRM_LOG("%s AFGResourceNodeBase: %s (%s) at %s", *prefix, *res->GetName(), *res->GetClass()->GetName(), *res->GetActorLocation().ToString());
+    auto nestedPrefix = prefix + "\t";
+    SRM_LOG("%s IsOccupied: %d", *nestedPrefix, res->IsOccupied());
+    SRM_LOG("%s CanBecomeOccupied: %d", *nestedPrefix, res->CanBecomeOccupied());
+    SRM_LOG("%s GetResourceClass: %s", *nestedPrefix, *res->GetResourceClass()->GetName());
+
+    if (auto f = Cast<AFGResourceNodeFrackingCore>(res))
+    {
+        SRM_LOG("%s Is FrackingCore!", *nestedPrefix);
+        SRM_LOG("%s IsAllSatellitesOccupied: %d", *nestedPrefix, f->IsAllSatellitesOccupied());
+        int32 occupiedSatellites;
+        SRM_LOG("%s GetNumOccupiedSatellites Returns: %d", *nestedPrefix, f->GetNumOccupiedSatellites(occupiedSatellites));
+        SRM_LOG("%s GetNumOccupiedSatellites Output Param: %d", *nestedPrefix, occupiedSatellites);
+
+        TArray<  AFGResourceNodeFrackingSatellite* > satellites;
+        f->GetSatellites(satellites);
+        SRM_LOG("%s Satellites: %d", *nestedPrefix, satellites.Num());
+
+        auto satPrefix = nestedPrefix + "\t";
+        int i = 0;
+        for (auto s : satellites)
+        {
+            SRM_LOG("%s Satellite[%d]", *nestedPrefix, i);
+            SRM_LOG("%s CanPlaceResourceExtractor: %d", *satPrefix, s->CanPlaceResourceExtractor());
+            SRM_LOG("%s GetState: %d", *satPrefix, s->GetState());
+            ++i;
+        }
+    }
 }
 
-void DumpRepresentation(FString prefix, UFGActorRepresentation* rep)
+void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentation* rep)
 {
+
     if (!rep)
     {
         SRM_LOG("%s UFGActorRepresentation: null", *prefix);
@@ -45,41 +74,81 @@ void DumpRepresentation(FString prefix, UFGActorRepresentation* rep)
     }
 
     SRM_LOG("%s UFGActorRepresentation: %s", *prefix, *rep->GetName());
-    SRM_LOG("%s UFGActorRepresentation Representation Text:\t%s", *prefix, *rep->GetRepresentationText().ToString());
+
     auto nestedPrefix = prefix + "\t";
+    SRM_LOG("%s Representation Text: %s", *nestedPrefix, *rep->GetRepresentationText().ToString());
+    SRM_LOG("%s GetShouldShowInCompass: %d", *nestedPrefix, rep->GetShouldShowInCompass());
+    SRM_LOG("%s mCachedShouldShowInCompass: %d", *nestedPrefix, rep->mCachedShouldShowInCompass);
+    SRM_LOG("%s GetShouldShowOnMap: %d", *nestedPrefix, rep->GetShouldShowOnMap());
+    SRM_LOG("%s mCachedShouldShowOnMap: %d", *nestedPrefix, rep->mCachedShouldShowOnMap);
+    SRM_LOG("%s GetCompassViewDistance: %d", *nestedPrefix, rep->GetCompassViewDistance());
+    SRM_LOG("%s mBackgroundIsPrimaryColor: %d", *nestedPrefix, rep->mBackgroundIsPrimaryColor);
+    //SRM_LOG("%s GetRepresentationCompassMaterial: %s", *nestedPrefix, *rep->GetRepresentationCompassMaterial()->GetName());
+    SRM_LOG("%s GetCompassHeightAlignment: %f", *nestedPrefix, rep->GetCompassHeightAlignment());
+    SRM_LOG("%s mRepresentationCompassMaterial: %s", *nestedPrefix, *(rep->mRepresentationCompassMaterial == nullptr ? TEXT("null") : rep->mRepresentationCompassMaterial->GetName()));
+    SRM_LOG("%s GetRepresentationTexture: %s", *nestedPrefix, *rep->GetRepresentationTexture()->GetName());
+    SRM_LOG("%s mRepresentationTexture: %s", *nestedPrefix, *(rep->mRepresentationTexture == nullptr ? TEXT("null") : rep->mRepresentationTexture->GetName()));
+    SRM_LOG("%s mRepresentationColor: %s", *nestedPrefix, *rep->mRepresentationColor.ToString());
+    SRM_LOG("%s IsImportantCompassRepresentation: %d", *nestedPrefix, rep->IsImportantCompassRepresentation());
+    SRM_LOG("%s NeedsDynamicCompassRepresentationText: %d", *nestedPrefix, rep->NeedsDynamicCompassRepresentationText());
+    SRM_LOG("%s NeedsDynamicCompassRepresentationScale: %d", *nestedPrefix, rep->NeedsDynamicCompassRepresentationScale());
+    SRM_LOG("%s GetRepresentationCompassEffectMaterial: %s", *nestedPrefix, *(rep->GetRepresentationCompassEffectMaterial() == nullptr ? TEXT("null") : rep->GetRepresentationCompassEffectMaterial()->GetName()));
+    SRM_LOG("%s GetRepresentationCompassEffectSize: %s", *nestedPrefix, *rep->GetRepresentationCompassEffectSize().ToString());
+
     if (auto res = Cast<UFGResourceNodeRepresentation>(rep))
     {
-        SRM_LOG("%s Resource node:", *prefix);
-        SRM_LOG("%s\tIsCluster: %d", *prefix, res->IsCluster());
-        SRM_LOG("%s\tRepresentationType: %d", *prefix, res->GetRepresentationType());
-        DumpResourceNode(nestedPrefix, res->GetResourceNode());
+        SRM_LOG("%s Resource Node Representation:", *nestedPrefix);
+        SRM_LOG("%s\t IsCluster: %d", *nestedPrefix, res->IsCluster());
+        SRM_LOG("%s\t mIsCluster: %d", *nestedPrefix, res->mIsCluster);
+        SRM_LOG("%s\t IsOccupied: %d", *nestedPrefix, res->IsOccupied());
+        SRM_LOG("%s\t mIsOccupied: %d", *nestedPrefix, res->mIsOccupied);
+        SRM_LOG("%s\t mIsScannerOwned: %d", *nestedPrefix, res->mIsScannerOwned);
+        SRM_LOG("%s\t mScanCount: %d", *nestedPrefix, res->mScanCount);
+        SRM_LOG("%s\t RepresentationType: %d", *nestedPrefix, res->GetRepresentationType());
+        DumpResourceNode(nestedPrefix + "\t", res->GetResourceNode());
     }
 }
 
-void DumpFScriptMap(FString prefix, FScriptMap* map)
+void SRMDebugging::DumpFStruct_ActorRep(FString prefix, FStruct_ActorRep* actorRep)
 {
-    if (!map)
+    if (!actorRep)
     {
-        SRM_LOG("%s FScriptMap: null", *prefix);
-        return;
+        SRM_LOG("%s FStruct_ActorRep: null", *prefix);
     }
 
-    SRM_LOG("%s FScriptMap:", *prefix);
+    SRM_LOG("%s FStruct_ActorRep", *prefix);
     auto nestedPrefix = prefix + "\t";
-    SRM_LOG("%s\tCount: %d", *prefix, map->Num());
+    SRM_LOG("%s Count %d", *nestedPrefix, actorRep->ActorRepresentations.Num());
+
+    nestedPrefix = prefix + "\t";
+    int i = 0;
+    for (UFGActorRepresentation* rep : actorRep->ActorRepresentations)
+    {
+        DumpRepresentation( FString::Printf( TEXT("%s[%d]"), *nestedPrefix, i ), rep);
+        ++i;
+    }
+}
+void SRMDebugging::DumpColor(FString prefix, FLinearColor color)
+{
+    SRM_LOG("%s FLinearColor: %s", *prefix, *color.ToString());
 }
 
-void DumpObject(FString prefix, UObject* object)
+void SRMDebugging::DumpUObjectPtr(FString prefix, UObject** object)
 {
-    if (!object)
+    DumpUObject(prefix, *object);
+}
+
+void SRMDebugging::DumpUObject(FString prefix, UObject* object)
+{
+    if (!object )
     {
         SRM_LOG("%s UObject: null", *prefix);
         return;
     }
 
-    if (object->GetClass()->IsChildOf(UFGActorRepresentation::StaticClass()))
+    if (auto rep = Cast<UFGActorRepresentation>(object))
     {
-        DumpRepresentation(prefix, (UFGActorRepresentation*)object);
+        DumpRepresentation(prefix, rep);
     }
     else
     {
@@ -87,22 +156,30 @@ void DumpObject(FString prefix, UObject* object)
     }
 }
 
-void DumpCompassEntry(FString& prefix, FCompassEntry& compassEntry)
+void SRMDebugging::DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr )
 {
+    FString indexStr = indexPtr == nullptr ? TEXT("") : FString::Printf(TEXT("[%d]"), *indexPtr);
 
-    SRM_LOG("%s FCompassEntry: %s at %x", *prefix, *compassEntry.Text.ToString(), &compassEntry);
+    SRM_LOG("%s FCompassEntry%s: %s at %x", *prefix, *indexStr, *compassEntry.Text.ToString(), &compassEntry);
     auto nestedPrefix = prefix + "\t";
-    DumpRepresentation(nestedPrefix + "RepresentingActor:", compassEntry.RepresentingActor);
+    SRM_LOG("%s bEnabled: %d", *nestedPrefix, compassEntry.bEnabled);
+    SRM_LOG("%s bCanShowName: %d", *nestedPrefix, compassEntry.bCanShowName);
+    SRM_LOG("%s bShouldShowName: %d", *nestedPrefix, compassEntry.bShouldShowName);
+    SRM_LOG("%s bIsFilteredOut: %d", *nestedPrefix, compassEntry.bIsFilteredOut);
+    SRM_LOG("%s bImportantEntry: %d", *nestedPrefix, compassEntry.bImportantEntry);
+    DumpRepresentation(nestedPrefix + " RepresentingActor:", compassEntry.RepresentingActor);
 }
 
-void DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries)
+void SRMDebugging::DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries)
 {
     SRM_LOG("%s CompassEntries Count: %d", *prefix, compassEntries.Num());
 
     auto nestedPrefix = prefix + "\t";
+    int i = 0;
     for (auto& entry : compassEntries)
     {
-        DumpCompassEntry(nestedPrefix, entry);
+        DumpCompassEntry(nestedPrefix, entry, &i);
+        ++i;
     }
 }
 
@@ -147,13 +224,14 @@ void SRMDebugging::RegisterNativeDebugHooks()
             SRM_LOG("AFGActorRepresentationManager::RemoveRepresentationOfActor: END");
         });
 
-    SUBSCRIBE_METHOD(AFGActorRepresentationManager::RemoveRepresentation,
-        [](auto& scope, AFGActorRepresentationManager* self, UFGActorRepresentation* actorRepresentation)
-        {
-            DumpRepresentation("AFGActorRepresentationManager::RemoveRepresentation: START", actorRepresentation);
-            scope(self, actorRepresentation);
-            SRM_LOG("AFGActorRepresentationManager::RemoveRepresentation: END");
-        });
+    // Causes crashes?
+    //SUBSCRIBE_METHOD(AFGActorRepresentationManager::RemoveRepresentation,
+    //    [](auto& scope, AFGActorRepresentationManager* self, UFGActorRepresentation* actorRepresentation)
+    //    {
+    //        DumpRepresentation("AFGActorRepresentationManager::RemoveRepresentation: START", actorRepresentation);
+    //        scope(self, actorRepresentation);
+    //        SRM_LOG("AFGActorRepresentationManager::RemoveRepresentation: END");
+    //    });
 
     SUBSCRIBE_METHOD(AFGActorRepresentationManager::FindResourceNodeRepresentation,
         [](auto& scope, AFGActorRepresentationManager* self, AFGResourceNodeBase* resourceNode)
@@ -180,19 +258,6 @@ void SRMDebugging::RegisterNativeDebugHooks()
             SRM_LOG("AFGActorRepresentationManager::SetCompassRepresentationTypeFilter: END");
         });
 
-    SUBSCRIBE_METHOD(AFGResourceScanner::CreateResourceNodeRepresentations,
-        [](auto& scope, AFGResourceScanner* self, const FNodeClusterData& cluster)
-        {
-            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: START %d nodes", cluster.Nodes.Num());
-
-            for (auto node : cluster.Nodes)
-            {
-                DumpResourceNode("AFGResourceScanner::CreateResourceNodeRepresentations:", node);
-            }
-            scope(self, cluster);
-            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END");
-        });
-
     SUBSCRIBE_METHOD_VIRTUAL(UFGResourceNodeRepresentation::SetupActorRepresentation,
         GetMutableDefault<UFGResourceNodeRepresentation>(),
         [](auto& scope, UFGResourceNodeRepresentation* self, AActor* realActor, bool isLocal, float lifeSpan)
@@ -202,6 +267,13 @@ void SRMDebugging::RegisterNativeDebugHooks()
             DumpRepresentation("UFGResourceNodeRepresentation::SetupActorRepresentation: END", self);
         });
 
+    //SUBSCRIBE_METHOD_VIRTUAL_AFTER(UFGResourceNodeRepresentation::GetRepresentationCompassMaterial,
+    //    GetMutableDefault<UFGResourceNodeRepresentation>(),
+    //    [](UMaterialInterface* material, const UFGResourceNodeRepresentation* self)
+    //    {
+    //        DumpRepresentation("UFGResourceNodeRepresentation::GetRepresentationCompassMaterial: AFTER", self);
+    //    });
+
     SUBSCRIBE_METHOD_VIRTUAL(UFGActorRepresentation::RemoveActorRepresentation,
         GetMutableDefault<UFGActorRepresentation>(),
         [](auto& scope, UFGActorRepresentation* self)
@@ -210,7 +282,6 @@ void SRMDebugging::RegisterNativeDebugHooks()
             scope(self);
             DumpRepresentation("UFGActorRepresentation::RemoveActorRepresentation: END", self);
         });
-
 
     SUBSCRIBE_METHOD_VIRTUAL(UFGActorRepresentation::SetupActorRepresentation,
         GetMutableDefault<UFGActorRepresentation>(),
@@ -238,12 +309,84 @@ void SRMDebugging::RegisterNativeDebugHooks()
             DumpRepresentation("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation: END", self);
         });
 
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNode_Local,
+        [](auto& scope, AFGResourceNodeBase* self, float lifeSpan)
+        {
+            SRM_LOG("AFGResourceNodeBase::ScanResourceNode_Local: START %s. lifeSpan: %f", *self->GetName(), lifeSpan);
+            DumpResourceNode("AFGResourceNodeBase::ScanResourceNode_Local", self);
+            scope(self, lifeSpan);
+            DumpResourceNode("AFGResourceNodeBase::ScanResourceNode_Local: END", self);
+        });
+
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::RemoveResourceNodeScan_Local,
+        [](auto& scope, AFGResourceNodeBase* self)
+        {
+            DumpResourceNode("AFGResourceNodeBase::RemoveResourceNodeScan_Local: START", self);
+            scope(self);
+            DumpResourceNode("AFGResourceNodeBase::RemoveResourceNodeScan_Local: END", self);
+        });
+
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNodeScan_Server,
+        [](auto& scope, AFGResourceNodeBase* self)
+        {
+            DumpResourceNode("AFGResourceNodeBase::ScanResourceNodeScan_Server: START", self);
+            scope(self);
+            DumpResourceNode("AFGResourceNodeBase::ScanResourceNodeScan_Server: END", self);
+        });
+
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::RemoveResourceNodeScan_Server,
+        [](auto& scope, AFGResourceNodeBase* self)
+        {
+            DumpResourceNode("AFGResourceNodeBase::RemoveResourceNodeScan_Server: START", self);
+            scope(self);
+            DumpResourceNode("AFGResourceNodeBase::RemoveResourceNodeScan_Server: END", self);
+        });
+
     SUBSCRIBE_METHOD(AFGResourceNodeBase::UpdateNodeRepresentation,
         [](auto& scope, AFGResourceNodeBase* self)
         {
             DumpResourceNode("AFGResourceNodeBase::UpdateNodeRepresentation: START", self);
             scope(self);
             DumpResourceNode("AFGResourceNodeBase::UpdateNodeRepresentation: END", self);
+        });
+
+    SUBSCRIBE_METHOD_VIRTUAL(AFGResourceNodeFrackingCore::BeginPlay,
+        GetMutableDefault<AFGResourceNodeFrackingCore>(),
+        [&](auto& scope, AFGResourceNodeFrackingCore* self)
+        {
+            int32 totalSatellites = 0;
+            int32 numOccupied = 0;
+            numOccupied = self->GetNumOccupiedSatellites(totalSatellites);
+            SRM_LOG("AFGResourceNodeFrackingCore::BeginPlay: START %s. Num Satellites: %d", *self->GetName(), totalSatellites);
+            scope(self);
+            numOccupied = self->GetNumOccupiedSatellites(totalSatellites);
+            SRM_LOG("AFGResourceNodeFrackingCore::BeginPlay: END %s. NumSatellites: %d", *self->GetName(), totalSatellites);
+        });
+
+    SUBSCRIBE_METHOD(AFGResourceNodeFrackingCore::Factory_SetSatellitesActive,
+        [&](auto& scope, AFGResourceNodeFrackingCore* self, bool isActive)
+        {
+            int32 totalSatellites = 0;
+            int32 numOccupied = 0;
+            numOccupied = self->GetNumOccupiedSatellites(totalSatellites);
+            SRM_LOG("AFGResourceNodeFrackingCore::Factory_SetSatellitesActive: START %s. IsActive: %d, Num Satellites: %d", *self->GetName(), isActive, totalSatellites);
+            scope(self, isActive);
+            numOccupied = self->GetNumOccupiedSatellites(totalSatellites);
+            SRM_LOG("AFGResourceNodeFrackingCore::Factory_SetSatellitesActive: END %s. IsActive: %d, NumSatellites: %d", *self->GetName(), isActive, totalSatellites);
+        });
+
+    SUBSCRIBE_METHOD_VIRTUAL(AFGResourceNodeFrackingSatellite::BeginPlay,
+        GetMutableDefault<AFGResourceNodeFrackingSatellite>(),
+        [&](auto& scope, AFGResourceNodeFrackingSatellite* self)
+        {
+            int32 totalSatellites = 0;
+            int32 numOccupied = 0;
+            numOccupied = self->GetCore()->GetNumOccupiedSatellites(totalSatellites);
+            SRM_LOG("AFGResourceNodeFrackingSatellite::BeginPlay: START %s. Core ptr: %s. Num satellites: %d", *self->GetName(), *self->GetCore()->GetName(), totalSatellites);
+            scope(self);
+
+            numOccupied = self->GetCore()->GetNumOccupiedSatellites(totalSatellites);
+            SRM_LOG("AFGResourceNodeFrackingSatellite::BeginPlay: END %s. Core ptr: %s. Num satellites: %d", *self->GetName(), *self->GetCore()->GetName(), totalSatellites);
         });
 
     SUBSCRIBE_METHOD(AFGHUD::SetCompassEntryVisibility,
@@ -258,10 +401,8 @@ void SRMDebugging::RegisterNativeDebugHooks()
         [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
         {
             SRM_LOG("AFGHUD::OnActorRepresentationAdded: START %s", *self->GetName());
-            DumpRepresentation("AFGHUD::OnActorRepresentationAdded:", actorRepresentation);
-            DumpCompassEntries("AFGHUD::OnActorRepresentationAdded BEFORE:", self->GetCompassEntries());
+            //DumpRepresentation("AFGHUD::OnActorRepresentationAdded:", actorRepresentation);
             scope(self, actorRepresentation);
-            DumpCompassEntries("AFGHUD::OnActorRepresentationAdded AFTER:", self->GetCompassEntries());
             SRM_LOG("AFGHUD::OnActorRepresentationAdded: END %s", *self->GetName());
         });
 
@@ -269,10 +410,8 @@ void SRMDebugging::RegisterNativeDebugHooks()
         [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
         {
             SRM_LOG("AFGHUD::OnActorRepresentationRemoved: START %s", *self->GetName());
-            DumpRepresentation("AFGHUD::OnActorRepresentationRemoved:", actorRepresentation);
-            DumpCompassEntries("AFGHUD::OnActorRepresentationRemoved BEFORE:", self->GetCompassEntries());
+            //DumpRepresentation("AFGHUD::OnActorRepresentationRemoved:", actorRepresentation);
             scope(self, actorRepresentation);
-            DumpCompassEntries("AFGHUD::OnActorRepresentationRemoved AFTER:", self->GetCompassEntries());
             SRM_LOG("AFGHUD::OnActorRepresentationRemoved: END %s", *self->GetName());
         });
 
@@ -280,10 +419,33 @@ void SRMDebugging::RegisterNativeDebugHooks()
         [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
         {
             SRM_LOG("AFGHUD::OnActorRepresentationUpdated: START %s", *self->GetName());
-            DumpRepresentation("AFGHUD::OnActorRepresentationUpdated:", actorRepresentation);
-            DumpCompassEntries("AFGHUD::OnActorRepresentationUpdated:", self->GetCompassEntries());
+            //DumpRepresentation("AFGHUD::OnActorRepresentationUpdated:", actorRepresentation);
             scope(self, actorRepresentation);
             SRM_LOG("AFGHUD::OnActorRepresentationUpdated: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_METHOD(AFGHUD::OnActorRepresentationFiltered,
+        [&](auto& scope, AFGHUD* self, ERepresentationType type, bool visible)
+        {
+            DumpCompassEntries("AFGHUD::OnActorRepresentationFiltered START:", self->GetCompassEntries());
+            scope(self, type, visible);
+            DumpCompassEntries("AFGHUD::OnActorRepresentationFiltered END:", self->GetCompassEntries());
+        });
+
+    SUBSCRIBE_METHOD(AFGBuildableRadarTower::ScanForResources,
+        [](auto& scope, AFGBuildableRadarTower* self)
+        {
+            SRM_LOG("AFGBuildableRadarTower::ScanForResources: START %s", *self->GetName());
+            scope(self);
+            SRM_LOG("AFGBuildableRadarTower::ScanForResources: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_METHOD(AFGBuildableRadarTower::AddResourceNodes,
+        [](auto& scope, AFGBuildableRadarTower* self, const TArray< class AFGResourceNodeBase* >& resourceNodes)
+        {
+            SRM_LOG("AFGBuildableRadarTower::AddResourceNodes: START %s", *self->GetName());
+            scope(self, resourceNodes);
+            SRM_LOG("AFGBuildableRadarTower::AddResourceNodes: END %s", *self->GetName());
         });
 }
 
@@ -363,6 +525,8 @@ void SRMDebugging::RegisterDebugHooks_Widget_Map(UClass* Class)
     HOOK_START_AND_RETURN(Class, SetHighilightViaRepresentation);
     HOOK_START_AND_RETURN(Class, DiscardInput);
     HOOK_START_AND_RETURN(Class, UpdateObjectOnMap);
+    BEGIN_HOOK(Class, UpdateObjectOnMap, 224)
+    FINISH_HOOK
     HOOK_START_AND_RETURN(Class, OnIconUnhover);
     HOOK_START_AND_RETURN(Class, OnIconHover);
 
@@ -410,8 +574,23 @@ void SRMDebugging::RegisterDebugHooks_Widget_MapCompass_Icon(UClass* Class)
 
     BEGIN_BLUEPRINT_HOOK_DEFINITIONS
     HOOK_START_AND_RETURN(Class, SetupResourceWell);
-    HOOK_START_AND_RETURN(Class, SetupResourceIcon);
-    HOOK_START_AND_RETURN(Class, SetIsHighlighted);
+
+    BEGIN_HOOK_START(Class, SetupResourceIcon)
+        LOG_CONTEXT_STRUCT_T(mColor, FLinearColor, DumpColor)
+        LOG_CONTEXT_OBJ(mActorRepresentation)
+    FINISH_HOOK
+    BEGIN_HOOK_RETURN(Class, SetupResourceIcon)
+        LOG_CONTEXT_STRUCT_T(mColor, FLinearColor, DumpColor)
+        LOG_CONTEXT_OBJ(mActorRepresentation)
+    FINISH_HOOK
+
+    BEGIN_HOOK_START(Class, SetIsHighlighted)
+        //LOG_CONTEXT_STRUCT_T(mColor, FLinearColor, DumpColor)
+        //LOG_CONTEXT_OBJ(mActorRepresentation)
+    FINISH_HOOK
+    BEGIN_HOOK_RETURN(Class, SetIsHighlighted)
+    FINISH_HOOK
+
     HOOK_START_AND_RETURN(Class, SetOverwriteTexture);
     HOOK_START_AND_RETURN(Class, DisplayWarning);
     HOOK_START_AND_RETURN(Class, OnTruckStationStatusChanged);
@@ -459,20 +638,20 @@ void SRMDebugging::RegisterDebugHooks_BPW_MapMenu(UClass* Class)
         LOG_LOCAL_OBJ( actorRepresentation )
     FINISH_HOOK
     BEGIN_HOOK_RETURN(Class, AddGenericActor)
-        LOG_CONTEXT_PROPERTY(mGenericClasses, FMapProperty, DumpFScriptMap)
+        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep)
     FINISH_HOOK
 
     BEGIN_HOOK_START(Class, UnfocusGenericClass)
         LOG_LOCAL_OBJ( Class )
-        LOG_CONTEXT_PROPERTY(mGenericClasses, FMapProperty, DumpFScriptMap)
-        LOG_CONTEXT_PROPERTY(mAllAddedObjects, FMapProperty, DumpFScriptMap)
+        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep)
+        LOG_CONTEXT_MAP(mAllAddedObjects)
     FINISH_HOOK
     HOOK_RETURN(Class, UnfocusGenericClass);
 
     BEGIN_HOOK_START(Class, FocusGenericClass)
         LOG_LOCAL_OBJ( Class )
-        LOG_CONTEXT_PROPERTY(mGenericClasses, FMapProperty, DumpFScriptMap)
-        LOG_CONTEXT_PROPERTY(mAllAddedObjects, FMapProperty, DumpFScriptMap)
+        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep )
+        LOG_CONTEXT_MAP(mAllAddedObjects)
     FINISH_HOOK
     HOOK_RETURN(Class, FocusGenericClass);
 
@@ -480,7 +659,7 @@ void SRMDebugging::RegisterDebugHooks_BPW_MapMenu(UClass* Class)
         LOG_LOCAL_OBJ(actorRepresentation)
     FINISH_HOOK
     BEGIN_HOOK_RETURN(Class, ShouldAddToMenu)
-        LOG_CONTEXT_PROPERTY( mGenericClasses, FMapProperty, DumpFScriptMap )
+        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep)
         LOG_RETURN_BOOL
     FINISH_HOOK
 

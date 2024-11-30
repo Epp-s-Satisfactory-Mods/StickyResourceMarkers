@@ -1,35 +1,27 @@
 #include "StickyResourceMarkersRootInstance.h"
-#include "StickyResourceMarkers.h"
 
 #include "FGActorRepresentation.h"
-#include "FGActorRepresentationManager.h"
-#include "FGMapWidget.h"
-#include "FGMapObjectWidget.h"
+#include "FGBuildableRadarTower.h"
 #include "FGResourceNodeBase.h"
+#include "FGResourceNodeFrackingCore.h"
 #include "FGResourceNodeRepresentation.h"
 #include "FGResourceScanner.h"
 #include "FGHUD.h"
-#include "FGInteractWidget.h"
-#include "FGUserWidget.h"
-#include "Field.h"
-#include "UObjectGlobals.h"
-#include "FGBuildGunBuild.h"
-#include "FGUserWidget.h"
-#include "PanelWidget.h"
-#include "VerticalBox.h"
-#include "GameFramework/Pawn.h"
 #include "Patching/NativeHookManager.h"
 #include "Patching/BlueprintHookManager.h"
 #include "Patching/BlueprintHookHelper.h"
-#include "UnrealType.h"
+#include "RootGameWorldModule_SRM.h"
 
 #include "SRMDebugging.h"
 #include "SRMHookMacros.h"
 #include "SRMLogMacros.h"
 
+URootGameWorldModule_SRM* UStickyResourceMarkersRootInstance::CurrentGameWorldModule = nullptr;
+
 void UStickyResourceMarkersRootInstance::DispatchLifecycleEvent(ELifecyclePhase phase)
 {
     SRM_LOG("UStickyResourceMarkersRootInstance::DispatchLifecycleEvent: Phase %d", phase);
+
     switch (phase)
     {
     case ELifecyclePhase::CONSTRUCTION:
@@ -40,15 +32,13 @@ void UStickyResourceMarkersRootInstance::DispatchLifecycleEvent(ELifecyclePhase 
     Super::DispatchLifecycleEvent(phase);
 }
 
-bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, EResourceRepresentationType& resourceRepresentationType)
+bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, EResourceRepresentationType& resourceRepresentationType)
 {
-    if (nodeRep->IsCluster() || !nodeRep->GetResourceNode())
+    if (!resourceNode)
     {
-        // We won't end up adding clusters or representations without a resource node to the map/menu, so just use the default
         return false;
     }
 
-    auto resourceNode = nodeRep->GetResourceNode();
     auto resourceDescriptor = resourceNode->GetResourceClass();
     auto resourceDescriptorName = resourceDescriptor->GetName();
 
@@ -61,6 +51,17 @@ bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const 
     }
 
     return false;
+}
+
+bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, EResourceRepresentationType& resourceRepresentationType)
+{
+    if (nodeRep->IsCluster())
+    {
+        // We won't end up adding clusters to the compass/map/menu, so just use the default
+        return false;
+    }
+
+    return TryGetResourceRepresentationType(nodeRep->GetResourceNode(), resourceRepresentationType);
 }
 
 void UStickyResourceMarkersRootInstance::Initialize()
@@ -99,22 +100,108 @@ void UStickyResourceMarkersRootInstance::Initialize()
         return;
     }
 
-    SUBSCRIBE_METHOD(AFGActorRepresentationManager::AddRepresentation,
-        [](auto& scope, AFGActorRepresentationManager* self, UFGActorRepresentation* actorRepresentation)
+    SUBSCRIBE_METHOD_VIRTUAL(AFGBuildableRadarTower::BeginPlay,
+        GetMutableDefault<AFGBuildableRadarTower>(),
+        [&](auto& scope, AFGBuildableRadarTower* self)
         {
-            SRM_LOG("AFGActorRepresentationManager::AddRepresentation: START");
-            if (auto resourceRepresentation = Cast<UFGResourceNodeRepresentation>( actorRepresentation ))
+            SRM_LOG("AFGBuildableRadarTower::BeginPlay: START %s", *self->GetName());
+            scope(self);
+            SRM_LOG("AFGBuildableRadarTower::BeginPlay: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_METHOD(AFGBuildableRadarTower::ScanForResources,
+        [&](auto& scope, AFGBuildableRadarTower* self)
+        {
+            SRM_LOG("AFGBuildableRadarTower::ScanForResources: START %s", *self->GetName());
+            this->GetGameWorldModule()->AddingFromResourceScanner = false;
+            scope(self);
+            this->GetGameWorldModule()->AddingFromResourceScanner = true;
+            SRM_LOG("AFGBuildableRadarTower::ScanForResources: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_METHOD(AFGBuildableRadarTower::AddResourceNodes,
+        [&](auto& scope, AFGBuildableRadarTower* self, const TArray<  AFGResourceNodeBase* >& resourceNodes)
+        {
+            SRM_LOG("AFGBuildableRadarTower::AddResourceNodes: START %s", *self->GetName());
+            scope(self, resourceNodes);
+            SRM_LOG("AFGBuildableRadarTower::AddResourceNodes: END %s", *self->GetName());
+        });
+
+    // By default, UFGResourceNodeRepresentation::IsOccupied returns IsAllSatellitesOccupied if the resource node is a fracking core.
+    // And when a save is being loaded, the radar tower scan runs before all the satellites get added to the fracking core and it
+    // seems that, since it has 0 nodes, it returns that all are occupied.  But... why would it return occupied only if ALL Satellites
+    // are occupied?  Logically, it's occupied if the main node is occupied (regardless of the satellite nodes) and, visually, the
+    // ring around the node tells you how full it is.  Since we don't have a clear way to fix the initialization order and such an
+    // obscure bug is not likely to be worked by CSS, we change the logic to avoid the issue and hopefully be more intuitive, anyway.
+    SUBSCRIBE_METHOD(UFGResourceNodeRepresentation::IsOccupied,
+        [&](auto& scope, const UFGResourceNodeRepresentation* self)
+        {
+            if (auto resourceNode = self->GetResourceNode())
             {
-                if (resourceRepresentation->IsCluster())
+                auto isOccupied = resourceNode->IsOccupied();
+                scope.Override(isOccupied);
+                return isOccupied;
+            }
+
+            scope.Override(self->mIsOccupied);
+            return self->mIsOccupied;
+        });
+
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::UpdateNodeRepresentation,
+        [&](auto& scope, AFGResourceNodeBase* self)
+        {
+            SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: START %s", *self->GetName());
+
+            auto gameWorldModule = this->GetGameWorldModule();
+            if (!gameWorldModule->AddingFromResourceScanner)
+            {
+                if (auto frackingCore = Cast<AFGResourceNodeFrackingCore>(self))
                 {
-                    scope.Cancel();
-                    SRM_LOG("AFGActorRepresentationManager::AddRepresentation: END NOT ADDING CLUSTER");
-                    return;
+                    int32 totalSatellites = 0;
+                    frackingCore->GetNumOccupiedSatellites(totalSatellites);
+
+                    // If there are no satellites, the game is still loading. This can happen when loading a game with a radar tower.
+                    // Store it to be initialized later by the game world module and cancel this initialization.
+                    if (totalSatellites == 0)
+                    {
+                        gameWorldModule->LateInitializedResourceNodes.Add(frackingCore);
+                        SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END (CANCELED) %s", *self->GetName());
+                        scope.Cancel();
+                        return;
+                    }
                 }
             }
 
-            scope(self, actorRepresentation);
-            SRM_LOG("AFGActorRepresentationManager::AddRepresentation: END");
+            scope(self);
+            SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_METHOD( UFGResourceNodeRepresentation::SetupResourceNodeRepresentation,
+        [&](auto& scope, UFGResourceNodeRepresentation* self, class AFGResourceNodeBase* resourceNode)
+        {
+            SRM_LOG("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation: START");
+            EResourceRepresentationType resourceRepresentationType;
+            if (TryGetResourceRepresentationType(resourceNode, resourceRepresentationType))
+            {
+                if (!this->ResourceTypeNameByResourceRepresentationType.Contains(resourceRepresentationType))
+                {
+                    this->ResourceTypeNameByResourceRepresentationType.Add(resourceRepresentationType, resourceNode->GetResourceName());
+                }
+            }
+
+            scope(self, resourceNode);
+
+            auto gameWorldModule = this->GetGameWorldModule();
+            if (!gameWorldModule->AddingFromResourceScanner && resourceRepresentationType > EResourceRepresentationType::RRT_Default)
+            {
+                SRM_LOG("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation Scanning from radar tower");
+
+                self->mRepresentationColor = FLinearColor::White;
+                self->mShouldShowInCompass = true;
+                self->mCompassViewDistance = ECompassViewDistance::CVD_Always;
+            }
+
+            SRM_LOG("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation END");
         });
 
     SUBSCRIBE_METHOD_VIRTUAL(UFGActorRepresentation::GetRepresentationType,
@@ -126,11 +213,6 @@ void UStickyResourceMarkersRootInstance::Initialize()
                 EResourceRepresentationType resourceType;
                 if (TryGetResourceRepresentationType(nodeRep, resourceType))
                 {
-                    if (!this->ResourceTypeNameByResourceRepresentationType.Contains(resourceType))
-                    {
-                        this->ResourceTypeNameByResourceRepresentationType.Add(resourceType, nodeRep->GetResourceNode()->GetResourceName());
-                    }
-
                     scope.Override((ERepresentationType)resourceType);
                     return (ERepresentationType)resourceType;
                 }
@@ -140,72 +222,87 @@ void UStickyResourceMarkersRootInstance::Initialize()
             return representationType;
         });
 
-    SUBSCRIBE_METHOD(AFGResourceScanner::ShowResourceDescriptorSelectUI,
+    SUBSCRIBE_METHOD_VIRTUAL(AFGResourceScanner::BeginPlay,
+        GetMutableDefault<AFGResourceScanner>(),
         [](auto& scope, AFGResourceScanner* self)
         {
-            SRM_LOG("AFGResourceScanner::ShowResourceDescriptorSelectUI: START %s", *self->GetName());
+            SRM_LOG("AFGResourceScanner::BeginPlay: START %s", *self->GetName());
             self->mRepresentationLifeSpan = 0.0;
             scope(self);
-            SRM_LOG("AFGResourceScanner::ShowResourceDescriptorSelectUI: END %s", *self->GetName());
+            SRM_LOG("AFGResourceScanner::BeginPlay: END %s", *self->GetName());
         });
 
-    SUBSCRIBE_METHOD(AFGHUD::OnActorRepresentationAdded,
-        [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
+    SUBSCRIBE_METHOD(AFGResourceScanner::CreateResourceNodeRepresentations,
+        [](auto& scope, AFGResourceScanner* self, const FNodeClusterData& cluster)
         {
-            SRM_LOG("AFGHUD::OnActorRepresentationAdded: START %s", *self->GetName());
+            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: START %d nodes", cluster.Nodes.Num());
 
-            if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(actorRepresentation))
+            if (cluster.Nodes.Num() > 1)
             {
-                ERepresentationType representationType = nodeRep->GetRepresentationType();
-                if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+                for (auto node : cluster.Nodes)
                 {
-                    TArray<FCompassEntry> entriesCopy(self->GetCompassEntries());
-                    for (auto& entry : entriesCopy)
-                    {
-                        if (auto existingNodeRep = Cast<UFGResourceNodeRepresentation>(entry.RepresentingActor))
-                        {
-                            if (existingNodeRep->GetResourceNode() == nodeRep->GetResourceNode())
-                            {
-                                existingNodeRep->RemoveActorRepresentation();
-                                break;
-                            }
-                        }
-                    }
+                    self->CreateResourceNodeRepresentations(FNodeClusterData(node));
                 }
+                scope.Cancel();
+                SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END (CANCELED)");
+                return;
             }
 
-            scope(self, actorRepresentation);
+            scope(self, cluster);
 
-            SRM_LOG("AFGHUD::OnActorRepresentationAdded: END %s", *self->GetName());
+            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END");
         });
 
-    SUBSCRIBE_METHOD(AFGHUD::OnActorRepresentationFiltered,
-        [&](auto& scope, AFGHUD* self, ERepresentationType type, bool visible)
+    //SUBSCRIBE_METHOD(AFGHUD::OnActorRepresentationAdded,
+    //    [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
+    //    {
+    //        SRM_LOG("AFGHUD::OnActorRepresentationAdded: START %s", *self->GetName());
+
+    //        if (actorRepresentation->GetShouldShowInCompass())
+    //        {
+    //            if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(actorRepresentation))
+    //            {
+    //                ERepresentationType representationType = nodeRep->GetRepresentationType();
+    //                if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+    //                {
+    //                    TArray<FCompassEntry> copiedEntries(self->GetCompassEntries());
+    //                    for (auto& entry : copiedEntries)
+    //                    {
+    //                        if (auto existingNodeRep = Cast<UFGResourceNodeRepresentation>(entry.RepresentingActor))
+    //                        {
+    //                            if (existingNodeRep->GetResourceNode() == nodeRep->GetResourceNode())
+    //                            {
+    //                                existingNodeRep->RemoveActorRepresentation();
+    //                                break;
+    //                            }
+    //                        }
+    //                    }
+    //                }
+    //            }
+    //        }
+
+    //        scope(self, actorRepresentation);
+
+    //        SRM_LOG("AFGHUD::OnActorRepresentationAdded: END %s", *self->GetName());
+    //    });
+
+    SUBSCRIBE_METHOD_VIRTUAL(AFGHUD::BeginPlay,
+        GetMutableDefault<AFGHUD>(),
+        [](auto& scope, AFGHUD* self)
         {
-            SRM_LOG("AFGHUD::OnActorRepresentationFiltered: START %s, %d, %d", *self->GetName(), type, visible);
-
-            if (type > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            {
-                for (auto& entry : self->GetCompassEntries())
-                {
-                    if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(entry.RepresentingActor))
-                    {
-                        EResourceRepresentationType resRepType;
-                        if (TryGetResourceRepresentationType(nodeRep, resRepType) && (ERepresentationType)resRepType == type)
-                        {
-                            entry.bEnabled = visible;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                scope(self, type, visible);
-            }
-
-            SRM_LOG("AFGHUD::OnActorRepresentationFiltered: END %s, %d, %d", *self->GetName(), type, visible);
+            SRM_LOG("AFGHUD::BeginPlay: START");
+            scope(self);
+            SRM_LOG("AFGHUD::BeginPlay: END");
         });
 
+    SUBSCRIBE_METHOD_VIRTUAL(AFGHUD::PostInitializeComponents,
+        GetMutableDefault<AFGHUD>(),
+        [](auto& scope, AFGHUD* self)
+        {
+            SRM_LOG("AFGHUD::PostInitializeComponents: START");
+            scope(self);
+            SRM_LOG("AFGHUD::PostInitializeComponents: END");
+        });
 
     BEGIN_BLUEPRINT_HOOK_DEFINITIONS
 
@@ -226,59 +323,36 @@ void UStickyResourceMarkersRootInstance::Initialize()
     FINISH_HOOK
 
     BEGIN_HOOK_START(Widget_MapClass, GetZOrderForType)
-        ERepresentationType* repTypePtr = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("representationType"));
-        if (*repTypePtr > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("representationType"));
+        if (*representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
         {
-            // Use the default resource Z order
-            *repTypePtr = ERepresentationType::RT_Resource;
-        }
-    FINISH_HOOK
-
-    BEGIN_HOOK_RETURN(BPW_MapMenuClass, GetGenericClass)
-        TObjectPtr<UObject> classValue = *helper.GetOutVariablePtr<FObjectProperty>( TEXT("Class") );
-        if (!classValue)
-        {
-            helper.SetOutVarBool( TEXT("HasGenericClass"), false);
+            *representationType = ERepresentationType::RT_Resource;
         }
     FINISH_HOOK
 
     BEGIN_HOOK(BPW_MapMenuClass, ShouldAddToMenu, 64)
-        ERepresentationType* repTypePtr = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
-        if (*repTypePtr > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
+        if (*representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
         {
-            *repTypePtr = ERepresentationType::RT_Resource;
-        }
-    FINISH_HOOK
-
-    BEGIN_HOOK_RETURN(BPW_MapMenuClass, ShouldAddToMenu)
-        auto rep = *helper.GetLocalVarPtr<FObjectProperty>( TEXT("actorRepresentation"));
-
-        if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(rep))
-        {
-            if (nodeRep->IsCluster())
-            {
-                SRM_LOG("ShouldAddToMenu: Changing ReturnValue to false because it's a cluster");
-                helper.SetOutVarBool(TEXT("ReturnValue"), false);
-            }
+            *representationType = ERepresentationType::RT_Resource;
         }
     FINISH_HOOK
 
     BEGIN_HOOK(BPW_MapMenuClass, AddActorRepresentationToMenu, 1447)
-        auto localTypePtr = helper.GetLocalVarEnumPtr<EResourceRepresentationType>(TEXT("LocalType"));
-        if( *localTypePtr > EResourceRepresentationType::RRT_Default )
+        EResourceRepresentationType resourceRepresentationType = *helper.GetLocalVarEnumPtr<EResourceRepresentationType>(TEXT("LocalType"));
+        if( resourceRepresentationType > EResourceRepresentationType::RRT_Default )
         {
             helper.SetLocalVarBool(TEXT("K2Node_SwitchEnum_CmpSuccess"), false);
         }
     FINISH_HOOK
 
-
     BEGIN_HOOK_RETURN(BPW_MapFilterCategoriesClass, GetCategoryName)
-        EResourceRepresentationType resourceType = *helper.GetContextVarEnumPtr<EResourceRepresentationType>(TEXT("mRepresentationType"));
-        SRM_LOG("BPW_MapFilterCategories::GetCategoryName: resourceType %d", resourceType);
+        EResourceRepresentationType resourceRepresentationType = *helper.GetContextVarEnumPtr<EResourceRepresentationType>(TEXT("mRepresentationType"));
+        SRM_LOG("BPW_MapFilterCategories::GetCategoryName: resourceRepresentationType %d", resourceRepresentationType);
 
-        if (resourceType > EResourceRepresentationType::RRT_Default)
+        if (resourceRepresentationType > EResourceRepresentationType::RRT_Default)
         {
-            FText* nameText = this->ResourceTypeNameByResourceRepresentationType.Find(resourceType);
+            FText* nameText = this->ResourceTypeNameByResourceRepresentationType.Find(resourceRepresentationType);
             if (!nameText)
             {
                 return;
@@ -290,8 +364,8 @@ void UStickyResourceMarkersRootInstance::Initialize()
     FINISH_HOOK
 
     BEGIN_HOOK_RETURN(BPW_MapFilterCategoriesClass, CanBeSeenOnCompass)
-        ERepresentationType repType = *helper.GetLocalVarEnumPtr<ERepresentationType>( TEXT("Index"));
-        if( repType == ERepresentationType::RT_Resource || repType > (ERepresentationType)EResourceRepresentationType::RRT_Default )
+        ERepresentationType representationType = *helper.GetLocalVarEnumPtr<ERepresentationType>( TEXT("Index"));
+        if(representationType == ERepresentationType::RT_Resource || representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default )
         {
             helper.SetOutVarBool(TEXT("ReturnValue"), true);
         }

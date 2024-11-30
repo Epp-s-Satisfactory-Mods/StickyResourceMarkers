@@ -61,21 +61,30 @@
 #define LOG_HOOK_OBJ( VARIABLE_NAME, HELPER_FUNC ) \
         auto VARIABLE_NAME = helper.HELPER_FUNC<FObjectProperty>(TEXT(#VARIABLE_NAME));\
         auto VARIABLE_NAME##_fstring = FString::Printf( TEXT("%s::%s:\t"#VARIABLE_NAME), *contextName, *functionName ); \
-        DumpObject( VARIABLE_NAME##_fstring, VARIABLE_NAME->Get() );
+        SRMDebugging::DumpUObject( VARIABLE_NAME##_fstring, VARIABLE_NAME->Get() );
 
 #define LOG_LOCAL_OBJ( VARIABLE_NAME ) LOG_HOOK_OBJ( VARIABLE_NAME, GetLocalVarPtr )
 #define LOG_OUT_OBJ( VARIABLE_NAME ) LOG_HOOK_OBJ( VARIABLE_NAME, GetOutVariablePtr )
 #define LOG_RETURN_OBJ LOG_OUT_OBJ( ReturnValue )
 
-#define LOG_CONTEXT_PROPERTY( PROPERTY_NAME, FPROPERTY_TYPE, DUMPFUNC ) \
-        auto PROPERTY_NAME = helper.GetContextVarPtr<FPROPERTY_TYPE>(TEXT(#PROPERTY_NAME));\
-        FString PROPERTY_NAME##_fstring = FString::Printf( TEXT("%s::%s:\t"#PROPERTY_NAME), *contextName, *functionName );\
-        DUMPFUNC( PROPERTY_NAME##_fstring, PROPERTY_NAME );
+#define LOG_CONTEXT_MAP( PROPERTY_NAME ) \
+    LOG_CONTEXT_MAP_T( PROPERTY_NAME, UObject*, SRMDebugging::DumpUObjectPtr, UObject*, SRMDebugging::DumpUObjectPtr )
+
+#define LOG_CONTEXT_MAP_T( PROPERTY_NAME, TKEY, KEY_DUMPER, TVALUE, VALUE_DUMPER ) \
+        FScriptMapHelper PROPERTY_NAME##mapHelper = helper.GetContextVarMapHelper(TEXT(#PROPERTY_NAME)); \
+        FString PROPERTY_NAME##_fstring = FString::Printf( TEXT("%s::%s:\t"#PROPERTY_NAME), *contextName, *functionName ); \
+        SRMDebugging::DumpFScriptMap<TKEY, TVALUE>(PROPERTY_NAME##_fstring, PROPERTY_NAME##mapHelper, KEY_DUMPER, VALUE_DUMPER);
 
 #define LOG_CONTEXT_OBJ( PROPERTY_NAME ) \
         auto PROPERTY_NAME = helper.GetContextVarPtr<FObjectProperty>(TEXT(#PROPERTY_NAME));\
         FString PROPERTY_NAME##_fstring = FString::Printf( TEXT("%s::%s:\t"#PROPERTY_NAME), *contextName, *functionName );\
-        DumpObject( PROPERTY_NAME##_fstring, PROPERTY_NAME->Get() );
+        SRMDebugging::DumpUObject( PROPERTY_NAME##_fstring, PROPERTY_NAME->Get() );
+
+#define LOG_CONTEXT_STRUCT_T( PROPERTY_NAME, PROPERTY_TYPE, DUMP_FUNC ) \
+        PROPERTY_TYPE PROPERTY_NAME##_value; \
+        helper.GetContextVarStruct<PROPERTY_TYPE>(TEXT(#PROPERTY_NAME), &PROPERTY_NAME##_value);\
+        FString PROPERTY_NAME##_fstring = FString::Printf( TEXT("%s::%s:\t"#PROPERTY_NAME), *contextName, *functionName );\
+        DUMP_FUNC( PROPERTY_NAME##_fstring, PROPERTY_NAME##_value );
 
 #define FINISH_HOOK \
     }, CurrentOffset );
