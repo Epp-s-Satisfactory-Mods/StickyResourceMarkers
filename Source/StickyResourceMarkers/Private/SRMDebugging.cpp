@@ -2,6 +2,7 @@
 
 #include "FGActorRepresentationManager.h"
 #include "FGBuildableRadarTower.h"
+#include "FGPlayerState.h"
 #include "FGResourceNode.h"
 #include "FGResourceNodeFrackingCore.h"
 #include "FGResourceNodeFrackingSatellite.h"
@@ -26,7 +27,7 @@ void SRMDebugging::DumpWidget(FString prefix, const UWidget* widget)
     SRM_LOG("%s: Widget: %x.", *prefix, widget->GetClass());//, * widget->GetClass()->GetName());
 }
 
-void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* res)
+void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* res, bool shortDump)
 {
     if (!res)
     {
@@ -36,18 +37,24 @@ void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* r
 
     SRM_LOG("%s AFGResourceNodeBase: %s (%s) at %s", *prefix, *res->GetName(), *res->GetClass()->GetName(), *res->GetActorLocation().ToString());
     auto nestedPrefix = prefix + "\t";
-    SRM_LOG("%s IsOccupied: %d", *nestedPrefix, res->IsOccupied());
-    SRM_LOG("%s CanBecomeOccupied: %d", *nestedPrefix, res->CanBecomeOccupied());
     SRM_LOG("%s GetResourceClass: %s", *nestedPrefix, *res->GetResourceClass()->GetName());
+
+    if (!shortDump)
+    {
+        SRM_LOG("%s IsOccupied: %d", *nestedPrefix, res->IsOccupied());
+        SRM_LOG("%s CanBecomeOccupied: %d", *nestedPrefix, res->CanBecomeOccupied());
+    }
+
+    if (shortDump) return;
 
     if (auto f = Cast<AFGResourceNodeFrackingCore>(res))
     {
         SRM_LOG("%s Is FrackingCore!", *nestedPrefix);
-        SRM_LOG("%s IsAllSatellitesOccupied: %d", *nestedPrefix, f->IsAllSatellitesOccupied());
         int32 occupiedSatellites;
-        SRM_LOG("%s GetNumOccupiedSatellites Returns: %d", *nestedPrefix, f->GetNumOccupiedSatellites(occupiedSatellites));
-        SRM_LOG("%s GetNumOccupiedSatellites Output Param: %d", *nestedPrefix, occupiedSatellites);
+        SRM_LOG("%s GetNumOccupiedSatellites: %d", *nestedPrefix, f->GetNumOccupiedSatellites(occupiedSatellites));
+        SRM_LOG("%s Total Satellites: %d", *nestedPrefix, occupiedSatellites);
 
+        SRM_LOG("%s IsAllSatellitesOccupied: %d", *nestedPrefix, f->IsAllSatellitesOccupied());
         TArray<  AFGResourceNodeFrackingSatellite* > satellites;
         f->GetSatellites(satellites);
         SRM_LOG("%s Satellites: %d", *nestedPrefix, satellites.Num());
@@ -64,9 +71,8 @@ void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* r
     }
 }
 
-void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentation* rep)
+void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentation* rep, bool shortDump)
 {
-
     if (!rep)
     {
         SRM_LOG("%s UFGActorRepresentation: null", *prefix);
@@ -77,35 +83,43 @@ void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentati
 
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s Representation Text: %s", *nestedPrefix, *rep->GetRepresentationText().ToString());
-    SRM_LOG("%s GetShouldShowInCompass: %d", *nestedPrefix, rep->GetShouldShowInCompass());
-    SRM_LOG("%s mCachedShouldShowInCompass: %d", *nestedPrefix, rep->mCachedShouldShowInCompass);
-    SRM_LOG("%s GetShouldShowOnMap: %d", *nestedPrefix, rep->GetShouldShowOnMap());
-    SRM_LOG("%s mCachedShouldShowOnMap: %d", *nestedPrefix, rep->mCachedShouldShowOnMap);
-    SRM_LOG("%s GetCompassViewDistance: %d", *nestedPrefix, rep->GetCompassViewDistance());
-    SRM_LOG("%s mBackgroundIsPrimaryColor: %d", *nestedPrefix, rep->mBackgroundIsPrimaryColor);
-    //SRM_LOG("%s GetRepresentationCompassMaterial: %s", *nestedPrefix, *rep->GetRepresentationCompassMaterial()->GetName());
-    SRM_LOG("%s GetCompassHeightAlignment: %f", *nestedPrefix, rep->GetCompassHeightAlignment());
-    SRM_LOG("%s mRepresentationCompassMaterial: %s", *nestedPrefix, *(rep->mRepresentationCompassMaterial == nullptr ? TEXT("null") : rep->mRepresentationCompassMaterial->GetName()));
-    SRM_LOG("%s GetRepresentationTexture: %s", *nestedPrefix, *rep->GetRepresentationTexture()->GetName());
-    SRM_LOG("%s mRepresentationTexture: %s", *nestedPrefix, *(rep->mRepresentationTexture == nullptr ? TEXT("null") : rep->mRepresentationTexture->GetName()));
-    SRM_LOG("%s mRepresentationColor: %s", *nestedPrefix, *rep->mRepresentationColor.ToString());
-    SRM_LOG("%s IsImportantCompassRepresentation: %d", *nestedPrefix, rep->IsImportantCompassRepresentation());
-    SRM_LOG("%s NeedsDynamicCompassRepresentationText: %d", *nestedPrefix, rep->NeedsDynamicCompassRepresentationText());
-    SRM_LOG("%s NeedsDynamicCompassRepresentationScale: %d", *nestedPrefix, rep->NeedsDynamicCompassRepresentationScale());
-    SRM_LOG("%s GetRepresentationCompassEffectMaterial: %s", *nestedPrefix, *(rep->GetRepresentationCompassEffectMaterial() == nullptr ? TEXT("null") : rep->GetRepresentationCompassEffectMaterial()->GetName()));
-    SRM_LOG("%s GetRepresentationCompassEffectSize: %s", *nestedPrefix, *rep->GetRepresentationCompassEffectSize().ToString());
+    SRM_LOG("%s RepresentationType: %d", *nestedPrefix, rep->GetRepresentationType());
+
+    if (!shortDump)
+    {
+        SRM_LOG("%s GetShouldShowInCompass: %d", *nestedPrefix, rep->GetShouldShowInCompass());
+        SRM_LOG("%s mCachedShouldShowInCompass: %d", *nestedPrefix, rep->mCachedShouldShowInCompass);
+        SRM_LOG("%s GetShouldShowOnMap: %d", *nestedPrefix, rep->GetShouldShowOnMap());
+        SRM_LOG("%s mCachedShouldShowOnMap: %d", *nestedPrefix, rep->mCachedShouldShowOnMap);
+        SRM_LOG("%s GetCompassViewDistance: %d", *nestedPrefix, rep->GetCompassViewDistance());
+        SRM_LOG("%s mBackgroundIsPrimaryColor: %d", *nestedPrefix, rep->mBackgroundIsPrimaryColor);
+        //SRM_LOG("%s GetRepresentationCompassMaterial: %s", *nestedPrefix, *rep->GetRepresentationCompassMaterial()->GetName());
+        SRM_LOG("%s GetCompassHeightAlignment: %f", *nestedPrefix, rep->GetCompassHeightAlignment());
+        SRM_LOG("%s mRepresentationCompassMaterial: %s", *nestedPrefix, *(rep->mRepresentationCompassMaterial == nullptr ? TEXT("null") : rep->mRepresentationCompassMaterial->GetName()));
+        SRM_LOG("%s GetRepresentationTexture: %s", *nestedPrefix, *rep->GetRepresentationTexture()->GetName());
+        SRM_LOG("%s mRepresentationTexture: %s", *nestedPrefix, *(rep->mRepresentationTexture == nullptr ? TEXT("null") : rep->mRepresentationTexture->GetName()));
+        SRM_LOG("%s mRepresentationColor: %s", *nestedPrefix, *rep->mRepresentationColor.ToString());
+        SRM_LOG("%s IsImportantCompassRepresentation: %d", *nestedPrefix, rep->IsImportantCompassRepresentation());
+        SRM_LOG("%s NeedsDynamicCompassRepresentationText: %d", *nestedPrefix, rep->NeedsDynamicCompassRepresentationText());
+        SRM_LOG("%s NeedsDynamicCompassRepresentationScale: %d", *nestedPrefix, rep->NeedsDynamicCompassRepresentationScale());
+        SRM_LOG("%s GetRepresentationCompassEffectMaterial: %s", *nestedPrefix, *(rep->GetRepresentationCompassEffectMaterial() == nullptr ? TEXT("null") : rep->GetRepresentationCompassEffectMaterial()->GetName()));
+        SRM_LOG("%s GetRepresentationCompassEffectSize: %s", *nestedPrefix, *rep->GetRepresentationCompassEffectSize().ToString());
+    }
 
     if (auto res = Cast<UFGResourceNodeRepresentation>(rep))
     {
         SRM_LOG("%s Resource Node Representation:", *nestedPrefix);
-        SRM_LOG("%s\t IsCluster: %d", *nestedPrefix, res->IsCluster());
-        SRM_LOG("%s\t mIsCluster: %d", *nestedPrefix, res->mIsCluster);
-        SRM_LOG("%s\t IsOccupied: %d", *nestedPrefix, res->IsOccupied());
-        SRM_LOG("%s\t mIsOccupied: %d", *nestedPrefix, res->mIsOccupied);
-        SRM_LOG("%s\t mIsScannerOwned: %d", *nestedPrefix, res->mIsScannerOwned);
-        SRM_LOG("%s\t mScanCount: %d", *nestedPrefix, res->mScanCount);
-        SRM_LOG("%s\t RepresentationType: %d", *nestedPrefix, res->GetRepresentationType());
-        DumpResourceNode(nestedPrefix + "\t", res->GetResourceNode());
+
+        if (!shortDump)
+        {
+            SRM_LOG("%s\t IsCluster: %d", *nestedPrefix, res->IsCluster());
+            SRM_LOG("%s\t mIsCluster: %d", *nestedPrefix, res->mIsCluster);
+            SRM_LOG("%s\t IsOccupied: %d", *nestedPrefix, res->IsOccupied());
+            SRM_LOG("%s\t mIsOccupied: %d", *nestedPrefix, res->mIsOccupied);
+            SRM_LOG("%s\t mIsScannerOwned: %d", *nestedPrefix, res->mIsScannerOwned);
+            SRM_LOG("%s\t mScanCount: %d", *nestedPrefix, res->mScanCount);
+        }
+        DumpResourceNode(nestedPrefix + "\t", res->GetResourceNode(), shortDump );
     }
 }
 
@@ -128,6 +142,7 @@ void SRMDebugging::DumpFStruct_ActorRep(FString prefix, FStruct_ActorRep* actorR
         ++i;
     }
 }
+
 void SRMDebugging::DumpColor(FString prefix, FLinearColor color)
 {
     SRM_LOG("%s FLinearColor: %s", *prefix, *color.ToString());
@@ -148,7 +163,7 @@ void SRMDebugging::DumpUObject(FString prefix, UObject* object)
 
     if (auto rep = Cast<UFGActorRepresentation>(object))
     {
-        DumpRepresentation(prefix, rep);
+        DumpRepresentation(prefix, rep, true);
     }
     else
     {
@@ -156,21 +171,26 @@ void SRMDebugging::DumpUObject(FString prefix, UObject* object)
     }
 }
 
-void SRMDebugging::DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr )
+void SRMDebugging::DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr, bool shortDump )
 {
     FString indexStr = indexPtr == nullptr ? TEXT("") : FString::Printf(TEXT("[%d]"), *indexPtr);
 
-    SRM_LOG("%s FCompassEntry%s: %s at %x", *prefix, *indexStr, *compassEntry.Text.ToString(), &compassEntry);
+    SRM_LOG("%s FCompassEntry%s: %s at %x", *prefix, *indexStr, *compassEntry.Text.ToString(), & compassEntry);
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s bEnabled: %d", *nestedPrefix, compassEntry.bEnabled);
-    SRM_LOG("%s bCanShowName: %d", *nestedPrefix, compassEntry.bCanShowName);
-    SRM_LOG("%s bShouldShowName: %d", *nestedPrefix, compassEntry.bShouldShowName);
     SRM_LOG("%s bIsFilteredOut: %d", *nestedPrefix, compassEntry.bIsFilteredOut);
-    SRM_LOG("%s bImportantEntry: %d", *nestedPrefix, compassEntry.bImportantEntry);
-    DumpRepresentation(nestedPrefix + " RepresentingActor:", compassEntry.RepresentingActor);
+
+    if (!shortDump)
+    {
+        SRM_LOG("%s bCanShowName: %d", *nestedPrefix, compassEntry.bCanShowName);
+        SRM_LOG("%s bShouldShowName: %d", *nestedPrefix, compassEntry.bShouldShowName);
+        SRM_LOG("%s bImportantEntry: %d", *nestedPrefix, compassEntry.bImportantEntry);
+    }
+
+    DumpRepresentation(nestedPrefix + " RepresentingActor:", compassEntry.RepresentingActor, shortDump);
 }
 
-void SRMDebugging::DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries)
+void SRMDebugging::DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries, bool shortDump)
 {
     SRM_LOG("%s CompassEntries Count: %d", *prefix, compassEntries.Num());
 
@@ -178,7 +198,7 @@ void SRMDebugging::DumpCompassEntries(FString prefix, TArray<FCompassEntry>& com
     int i = 0;
     for (auto& entry : compassEntries)
     {
-        DumpCompassEntry(nestedPrefix, entry, &i);
+        DumpCompassEntry(nestedPrefix, entry, &i, shortDump);
         ++i;
     }
 }
@@ -186,6 +206,102 @@ void SRMDebugging::DumpCompassEntries(FString prefix, TArray<FCompassEntry>& com
 void SRMDebugging::RegisterNativeDebugHooks()
 {
     if (!SRM_DEBUGGING_TRACE_ALL_NATIVE_HOOKS) return;
+    
+    //SUBSCRIBE_METHOD(AFGPlayerState::SetMapFilter,
+    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+    //    {
+    //        SRM_LOG("AFGPlayerState::SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
+    //        scope(self, representationType, visible);
+    //        SRM_LOG("AFGPlayerState::SetMapFilter: END");
+    //    });
+    //
+    //SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapFilter,
+    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+    //    {
+    //        SRM_LOG("AFGPlayerState::Server_SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
+    //        scope(self, representationType, visible);
+    //        SRM_LOG("AFGPlayerState::Server_SetMapFilter: END");
+    //    });
+    
+    SUBSCRIBE_METHOD(AFGPlayerState::GetFilteredOutMapTypes,
+        [](auto& scope, AFGPlayerState* self)
+        {
+            SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: START");
+            auto values = scope(self);
+
+            int i = 0;
+            SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: END. %d types", values.Num());
+            for (auto repType : values)
+            {
+                SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: END, [%d] RepresentationType: %d", i++, repType)
+            }
+
+            return values;
+        });
+    
+    //SUBSCRIBE_METHOD(AFGPlayerState::SetCompassFilter,
+    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+    //    {
+    //        SRM_LOG("AFGPlayerState::SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
+    //        scope(self, representationType, visible);
+    //        SRM_LOG("AFGPlayerState::SetCompassFilter: END");
+    //    });
+    //
+    //SUBSCRIBE_METHOD(AFGPlayerState::Server_SetCompassFilter,
+    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+    //    {
+    //        SRM_LOG("AFGPlayerState::Server_SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
+    //        scope(self, representationType, visible);
+    //        SRM_LOG("AFGPlayerState::Server_SetCompassFilter: END");
+    //    });
+
+    SUBSCRIBE_METHOD(AFGPlayerState::GetFilteredOutCompassTypes,
+        [](auto& scope, AFGPlayerState* self)
+        {
+            SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: START");
+            auto values = scope(self);
+
+            int i = 0;
+            SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: END. %d types", values.Num());
+            for (auto repType : values)
+            {
+                SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: END, [%d] RepresentationType: %d", i++, repType)
+            }
+
+            return values;
+        });
+    
+    //SUBSCRIBE_METHOD(AFGPlayerState::SetMapCategoryCollapsed,
+    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
+    //    {
+    //        SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
+    //        scope(self, representationType, collapsed);
+    //        SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: END");
+    //    });
+    //
+    //SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapCategoryCollapsed,
+    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
+    //    {
+    //        SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
+    //        scope(self, representationType, collapsed);
+    //        SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: END");
+    //    });
+
+    SUBSCRIBE_METHOD(AFGPlayerState::GetCollapsedMapCategories,
+        [](auto& scope, const AFGPlayerState* self)
+        {
+            SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: START");
+            auto values = scope(self);
+
+            int i = 0;
+            SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: END. %d types", values.Num());
+            for (auto repType : values)
+            {
+                SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: END, [%d] RepresentationType: %d", i++, repType)
+            }
+
+            return values;
+        });
 
     SUBSCRIBE_METHOD(AFGActorRepresentationManager::CreateAndAddNewRepresentation,
         [](auto& scope, AFGActorRepresentationManager* self, AActor* realActor, const bool isLocal = false, TSubclassOf<UFGActorRepresentation> representationClass = nullptr)
@@ -401,7 +517,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
         [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
         {
             SRM_LOG("AFGHUD::OnActorRepresentationAdded: START %s", *self->GetName());
-            //DumpRepresentation("AFGHUD::OnActorRepresentationAdded:", actorRepresentation);
+            DumpRepresentation("AFGHUD::OnActorRepresentationAdded:", actorRepresentation);
             scope(self, actorRepresentation);
             SRM_LOG("AFGHUD::OnActorRepresentationAdded: END %s", *self->GetName());
         });
@@ -427,9 +543,9 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGHUD::OnActorRepresentationFiltered,
         [&](auto& scope, AFGHUD* self, ERepresentationType type, bool visible)
         {
-            DumpCompassEntries("AFGHUD::OnActorRepresentationFiltered START:", self->GetCompassEntries());
+            SRM_LOG("AFGHUD::OnActorRepresentationFiltered START: type: %d, visible: %d", type, visible);
             scope(self, type, visible);
-            DumpCompassEntries("AFGHUD::OnActorRepresentationFiltered END:", self->GetCompassEntries());
+            SRM_LOG("AFGHUD::OnActorRepresentationFiltered END");
         });
 
     SUBSCRIBE_METHOD(AFGBuildableRadarTower::ScanForResources,
@@ -447,6 +563,21 @@ void SRMDebugging::RegisterNativeDebugHooks()
             scope(self, resourceNodes);
             SRM_LOG("AFGBuildableRadarTower::AddResourceNodes: END %s", *self->GetName());
         });
+}
+
+void SRMDebugging::RegisterDebugHooks_Widget_MapContainer(UClass* Class)
+{
+    if (!SRM_DEBUGGING_TRACE_ALL_BLUEPRINT_HOOKS) return;
+
+    BEGIN_BLUEPRINT_HOOK_DEFINITIONS
+    HOOK_START_AND_RETURN(Class, SetFiltersCollapsed);
+    HOOK_START_AND_RETURN(Class, UglyFixForActorName);
+    HOOK_START_AND_RETURN(Class, UpdateMapObjectVisibility);
+    HOOK_START_AND_RETURN(Class, GetCompassRepresentation);
+    HOOK_START_AND_RETURN(Class, GetMapRepresentation);
+    HOOK_START_AND_RETURN(Class, SetCompassRepresentation);
+    HOOK_START_AND_RETURN(Class, SetMapRepresentation);
+    HOOK_START_AND_RETURN(Class, SetOpenMap);
 }
 
 void SRMDebugging::RegisterDebugHooks_Widget_MapTab(UClass* Class)
@@ -517,6 +648,7 @@ void SRMDebugging::RegisterDebugHooks_Widget_Map(UClass* Class)
     BEGIN_BLUEPRINT_HOOK_DEFINITIONS
     HOOK_START_AND_RETURN(Class, RemoveMappingContext);
     HOOK_START_AND_RETURN(Class, SetMapMode);
+    HOOK_START_AND_RETURN(Class, MarkMarkerAsOpen);
     HOOK_START_AND_RETURN(Class, OnIconClicked);
     HOOK_START_AND_RETURN(Class, OnAttentionPingPressed);
     HOOK_START_AND_RETURN(Class, GetZOrderForType);
@@ -525,8 +657,8 @@ void SRMDebugging::RegisterDebugHooks_Widget_Map(UClass* Class)
     HOOK_START_AND_RETURN(Class, SetHighilightViaRepresentation);
     HOOK_START_AND_RETURN(Class, DiscardInput);
     HOOK_START_AND_RETURN(Class, UpdateObjectOnMap);
-    BEGIN_HOOK(Class, UpdateObjectOnMap, 224)
-    FINISH_HOOK
+    //BEGIN_HOOK(Class, UpdateObjectOnMap, 224)
+    //FINISH_HOOK
     HOOK_START_AND_RETURN(Class, OnIconUnhover);
     HOOK_START_AND_RETURN(Class, OnIconHover);
 

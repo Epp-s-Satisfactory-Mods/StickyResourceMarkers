@@ -15,6 +15,7 @@ class SRMDebugging
 {
 public:
 	static void RegisterNativeDebugHooks();
+	static void RegisterDebugHooks_Widget_MapContainer(UClass* Class);
 	static void RegisterDebugHooks_Widget_MapTab(UClass* Class);
 	static void RegisterDebugHooks_Widget_Map(UClass* Class);
 	static void RegisterDebugHooks_Widget_MapObject(UClass* Class);
@@ -25,8 +26,8 @@ public:
 	static void RegisterDebugHooks_BPW_MapFilterButton(UClass* Class);
 
 	static void DumpWidget(FString prefix, const UWidget* widget);
-	static void DumpResourceNode(FString prefix, const AFGResourceNodeBase* res);
-	static void DumpRepresentation(FString prefix, const UFGActorRepresentation* rep);
+	static void DumpResourceNode(FString prefix, const AFGResourceNodeBase* res, bool shortDump = true);
+	static void DumpRepresentation(FString prefix, const UFGActorRepresentation* rep, bool shortDump = true);
 
 	template<typename TKey, typename TValue>
 	static void DumpFScriptMap(FString prefix, FScriptMapHelper& mapHelper, TFunction<void(FString,TKey*)> keyDumper, TFunction<void(FString, TValue*)> valueDumper)
@@ -50,6 +51,6 @@ public:
 	static void DumpColor(FString prefix, FLinearColor color);
 	static void DumpUObjectPtr(FString prefix, UObject** object);
 	static void DumpUObject(FString prefix, UObject* object);
-	static void DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr = nullptr);
-	static void DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries);
+	static void DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr = nullptr, bool shortDump = true);
+	static void DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries, bool shortDump = true);
 };

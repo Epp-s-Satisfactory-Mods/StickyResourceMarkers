@@ -72,6 +72,9 @@ public:
     // raw strings, plus apparently there is some forwarding mechanism and if CSS does move them, these might still work.
 
     UPROPERTY(EditAnywhere, Category = "UI Widget Types")
+    TSoftClassPtr<UFGInteractWidget> Widget_MapContainerClass;
+
+    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
     TSoftClassPtr<UFGInteractWidget> Widget_MapTabClass;
 
     UPROPERTY(EditAnywhere, Category = "UI Widget Types")
