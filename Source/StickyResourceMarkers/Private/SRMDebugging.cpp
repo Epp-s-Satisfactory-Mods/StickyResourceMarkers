@@ -50,7 +50,7 @@ void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* r
     if (auto f = Cast<AFGResourceNodeFrackingCore>(res))
     {
         SRM_LOG("%s Is FrackingCore!", *nestedPrefix);
-        int32 occupiedSatellites;
+        int32 occupiedSatellites = 0;
         SRM_LOG("%s GetNumOccupiedSatellites: %d", *nestedPrefix, f->GetNumOccupiedSatellites(occupiedSatellites));
         SRM_LOG("%s Total Satellites: %d", *nestedPrefix, occupiedSatellites);
 
@@ -84,12 +84,12 @@ void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentati
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s Representation Text: %s", *nestedPrefix, *rep->GetRepresentationText().ToString());
     SRM_LOG("%s RepresentationType: %d", *nestedPrefix, rep->GetRepresentationType());
+    SRM_LOG("%s GetShouldShowInCompass: %d", *nestedPrefix, rep->GetShouldShowInCompass());
+    SRM_LOG("%s GetShouldShowOnMap: %d", *nestedPrefix, rep->GetShouldShowOnMap());
 
     if (!shortDump)
     {
-        SRM_LOG("%s GetShouldShowInCompass: %d", *nestedPrefix, rep->GetShouldShowInCompass());
         SRM_LOG("%s mCachedShouldShowInCompass: %d", *nestedPrefix, rep->mCachedShouldShowInCompass);
-        SRM_LOG("%s GetShouldShowOnMap: %d", *nestedPrefix, rep->GetShouldShowOnMap());
         SRM_LOG("%s mCachedShouldShowOnMap: %d", *nestedPrefix, rep->mCachedShouldShowOnMap);
         SRM_LOG("%s GetCompassViewDistance: %d", *nestedPrefix, rep->GetCompassViewDistance());
         SRM_LOG("%s mBackgroundIsPrimaryColor: %d", *nestedPrefix, rep->mBackgroundIsPrimaryColor);

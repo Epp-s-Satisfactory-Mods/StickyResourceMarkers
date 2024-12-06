@@ -1,6 +1,7 @@
 #include "StickyResourceMarkersRootInstance.h"
 
 #include "FGActorRepresentation.h"
+#include "FGActorRepresentationManager.h"
 #include "FGBuildableRadarTower.h"
 #include "FGPlayerState.h"
 #include "FGResourceNodeBase.h"
@@ -12,10 +13,12 @@
 #include "Patching/BlueprintHookManager.h"
 #include "Patching/BlueprintHookHelper.h"
 #include "RootGameWorldModule_SRM.h"
+#include "SRMNodeTrackingSubsystem.h"
 
 #include "SRMDebugging.h"
 #include "SRMHookMacros.h"
 #include "SRMLogMacros.h"
+#include "SRMResourceRepresentationType.h"
 
 URootGameWorldModule_SRM* UStickyResourceMarkersRootInstance::CurrentGameWorldModule = nullptr;
 
@@ -27,6 +30,9 @@ void UStickyResourceMarkersRootInstance::DispatchLifecycleEvent(ELifecyclePhase 
     {
     case ELifecyclePhase::CONSTRUCTION:
         Initialize();
+        break;
+    case ELifecyclePhase::INITIALIZATION:
+
         break;
     }
 
@@ -43,7 +49,7 @@ bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const 
     auto resourceDescriptor = resourceNode->GetResourceClass();
     auto resourceDescriptorName = resourceDescriptor->GetName();
 
-    auto representationType = ResourceRepresentationTypeByDescriptorName.Find(resourceDescriptorName);
+    auto representationType = this->ResourceRepresentationTypeByDescriptorName.Find(resourceDescriptorName);
 
     if (representationType)
     {
@@ -75,7 +81,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
         return;
     }
 
-    // Map the resource descriptors to their (new) ResourceRepresentationTypes
+    // Map the resource descriptors to their ResourceRepresentationTypes
     ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_Coal_C"), EResourceRepresentationType::RRT_Coal);
     ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_Geyser_C"), EResourceRepresentationType::RRT_Geyser);
     ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_LiquidOil_C"), EResourceRepresentationType::RRT_LiquidOil);
@@ -106,9 +112,9 @@ void UStickyResourceMarkersRootInstance::Initialize()
         {
             SRM_LOG("AFGBuildableRadarTower::ScanForResources: START %s", *self->GetName());
             auto gameWorldModule = this->GetGameWorldModule();
-            gameWorldModule->AddingFromResourceScanner = false;
+            gameWorldModule->AddingFromOtherThanResourceScanner = true;
             scope(self);
-            gameWorldModule->AddingFromResourceScanner = true;
+            gameWorldModule->AddingFromOtherThanResourceScanner = false;
             SRM_LOG("AFGBuildableRadarTower::ScanForResources: END %s", *self->GetName());
         });
 
@@ -119,7 +125,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
     // ring around the node tells you how full it is.  Since we don't have a clear way to fix the initialization order and such an
     // obscure bug is not likely to be worked by CSS, we change the logic to avoid the issue and hopefully be more intuitive, anyway.
     SUBSCRIBE_METHOD(UFGResourceNodeRepresentation::IsOccupied,
-        [&](auto& scope, const UFGResourceNodeRepresentation* self)
+        [](auto& scope, const UFGResourceNodeRepresentation* self)
         {
             if (auto resourceNode = self->GetResourceNode())
             {
@@ -135,10 +141,19 @@ void UStickyResourceMarkersRootInstance::Initialize()
     SUBSCRIBE_METHOD(AFGResourceNodeBase::UpdateNodeRepresentation,
         [&](auto& scope, AFGResourceNodeBase* self)
         {
-            SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: START %s", *self->GetName());
+            SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: START %s, FName: %s", *self->GetName(), *self->GetFName().ToString());
 
             auto gameWorldModule = this->GetGameWorldModule();
-            if (!gameWorldModule->AddingFromResourceScanner)
+            auto nodeSubsystem = gameWorldModule->NodeTrackingSubsystem;
+
+            if (nodeSubsystem->IsNodeCurrentlyRepresented(self))
+            {
+                SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END (CANCELED - ALREADY REPRESENTED) %s", *self->GetName());
+                scope.Cancel();
+                return;
+            }
+
+            if (gameWorldModule->IsGameInitializing)
             {
                 if (auto frackingCore = Cast<AFGResourceNodeFrackingCore>(self))
                 {
@@ -158,6 +173,11 @@ void UStickyResourceMarkersRootInstance::Initialize()
             }
 
             scope(self);
+
+            // Late in testing, I discovered this might not actually be right because UpdateNodeRepresentation doesn't do anything if there
+            // is no representation yet.
+            nodeSubsystem->SetNodeRepresented(self);
+
             SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END %s", *self->GetName());
         });
 
@@ -165,6 +185,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
         [&](auto& scope, UFGResourceNodeRepresentation* self, class AFGResourceNodeBase* resourceNode)
         {
             SRM_LOG("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation: START");
+
             EResourceRepresentationType resourceRepresentationType;
             if (TryGetResourceRepresentationType(resourceNode, resourceRepresentationType))
             {
@@ -174,10 +195,8 @@ void UStickyResourceMarkersRootInstance::Initialize()
             scope(self, resourceNode);
 
             auto gameWorldModule = this->GetGameWorldModule();
-            if (!gameWorldModule->AddingFromResourceScanner && resourceRepresentationType > EResourceRepresentationType::RRT_Default)
+            if (gameWorldModule->AddingFromOtherThanResourceScanner && resourceRepresentationType > EResourceRepresentationType::RRT_Default)
             {
-                SRM_LOG("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation Scanning from radar tower");
-
                 self->mRepresentationColor = FLinearColor::White;
                 self->mShouldShowInCompass = true;
                 self->mCompassViewDistance = ECompassViewDistance::CVD_Always;
@@ -209,16 +228,21 @@ void UStickyResourceMarkersRootInstance::Initialize()
         [](auto& scope, AFGResourceScanner* self)
         {
             SRM_LOG("AFGResourceScanner::BeginPlay: START %s", *self->GetName());
-            self->mRepresentationLifeSpan = 0.0;
+            self->mRepresentationLifeSpan = 0.0; // So that resource representations never disappear
             scope(self);
             SRM_LOG("AFGResourceScanner::BeginPlay: END %s", *self->GetName());
         });
 
     SUBSCRIBE_METHOD(AFGResourceScanner::CreateResourceNodeRepresentations,
-        [](auto& scope, AFGResourceScanner* self, const FNodeClusterData& cluster)
+        [&](auto& scope, AFGResourceScanner* self, const FNodeClusterData& cluster)
         {
             SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: START %d nodes", cluster.Nodes.Num());
 
+            // Cluster representations don't have their resource descriptor readily available, so it would take
+            // workarounds to support them. Plus, because they don't have their descriptor, the map menu already
+            // has a bug where it adds empty lines to the menu on scan.  Overall, clusters icons add so little value
+            // (and, to me, they are a hindrance as they just get in the way) that they aren't worth supporting.
+            // This splits clusters into individual nodes so that we don't have to deal with them at all anywhere.
             if (cluster.Nodes.Num() > 1)
             {
                 for (auto node : cluster.Nodes)
@@ -226,215 +250,13 @@ void UStickyResourceMarkersRootInstance::Initialize()
                     self->CreateResourceNodeRepresentations(FNodeClusterData(node));
                 }
                 scope.Cancel();
-                SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END (CANCELED)");
+                SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END (CANCELED - MULTIPLE)");
                 return;
             }
 
             scope(self, cluster);
 
             SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END");
-        });
-
-    SUBSCRIBE_METHOD(AFGPlayerState::SetMapFilter,
-        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-        {
-            SRM_LOG("AFGPlayerState::SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
-            if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            {
-                if (visible)
-                {
-                    self->mFilteredOutMapTypes.Add(representationType);
-                }
-                else
-                {
-                    self->mFilteredOutMapTypes.Remove(representationType);
-                }
-                scope.Cancel();
-                SRM_LOG("AFGPlayerState::SetMapFilter: END (CANCELED)");
-                return;
-            }
-
-            scope(self, representationType, visible);
-            SRM_LOG("AFGPlayerState::SetMapFilter: END");
-        });
-
-    SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapFilter,
-        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-        {
-            SRM_LOG("AFGPlayerState::Server_SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
-            if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            {
-                if (visible)
-                {
-                    self->mFilteredOutMapTypes.Add(representationType);
-                }
-                else
-                {
-                    self->mFilteredOutMapTypes.Remove(representationType);
-                }
-                scope.Cancel();
-                SRM_LOG("AFGPlayerState::Server_SetMapFilter: END (CANCELED)");
-                return;
-            }
-
-            scope(self, representationType, visible);
-            SRM_LOG("AFGPlayerState::Server_SetMapFilter: END");
-        });
-
-    SUBSCRIBE_METHOD(AFGPlayerState::SetCompassFilter,
-        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-        {
-            SRM_LOG("AFGPlayerState::SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
-            if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            {
-                if (visible)
-                {
-                    self->mFilteredOutCompassTypes.Add(representationType);
-                }
-                else
-                {
-                    self->mFilteredOutCompassTypes.Remove(representationType);
-                }
-                scope.Cancel();
-                SRM_LOG("AFGPlayerState::SetCompassFilter: END (CANCELED)");
-                return;
-            }
-
-            scope(self, representationType, visible);
-            SRM_LOG("AFGPlayerState::SetCompassFilter: END");
-        });
-
-    SUBSCRIBE_METHOD(AFGPlayerState::Server_SetCompassFilter,
-        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-        {
-            SRM_LOG("AFGPlayerState::Server_SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
-            if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            {
-                if (visible)
-                {
-                    self->mFilteredOutCompassTypes.Add(representationType);
-                }
-                else
-                {
-                    self->mFilteredOutCompassTypes.Remove(representationType);
-                }
-                scope.Cancel();
-                SRM_LOG("AFGPlayerState::Server_SetCompassFilter: END (CANCELED)");
-                return;
-            }
-
-            scope(self, representationType, visible);
-            SRM_LOG("AFGPlayerState::Server_SetCompassFilter: END");
-        });
-
-    SUBSCRIBE_METHOD(AFGPlayerState::SetMapCategoryCollapsed,
-        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
-        {
-            SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: START: representationType: %d, visible: %d", representationType, collapsed);
-            if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            {
-                if (collapsed)
-                {
-                    self->mCollapsedMapCategories.Add(representationType);
-                }
-                else
-                {
-                    self->mCollapsedMapCategories.Remove(representationType);
-                }
-                scope.Cancel();
-                SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: END (CANCELED)");
-                return;
-            }
-
-            scope(self, representationType, collapsed);
-            SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: END");
-        });
-
-    SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapCategoryCollapsed,
-        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
-        {
-            SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: START: representationType: %d, visible: %d", representationType, collapsed);
-            if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            {
-                if (collapsed)
-                {
-                    self->mCollapsedMapCategories.Add(representationType);
-                }
-                else
-                {
-                    self->mCollapsedMapCategories.Remove(representationType);
-                }
-
-                scope.Cancel();
-                SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: END (CANCELED)");
-                return;
-            }
-
-            scope(self, representationType, collapsed);
-            SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: END");
-        });
-
-    SUBSCRIBE_METHOD(AFGHUD::OnActorRepresentationAdded,
-        [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
-        {
-            SRM_LOG("AFGHUD::OnActorRepresentationAdded: START %s", *self->GetName());
-
-            //if (actorRepresentation->GetShouldShowInCompass())
-            //{
-            //    if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(actorRepresentation))
-            //    {
-            //        ERepresentationType representationType = nodeRep->GetRepresentationType();
-
-            //        if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            //        {
-            //            TArray<FCompassEntry> copiedEntries(self->GetCompassEntries());
-            //            for (auto& entry : copiedEntries)
-            //            {
-            //                if (auto existingNodeRep = Cast<UFGResourceNodeRepresentation>(entry.RepresentingActor))
-            //                {
-            //                    if (existingNodeRep->GetResourceNode() == nodeRep->GetResourceNode())
-            //                    {
-            //                        existingNodeRep->RemoveActorRepresentation();
-            //                        break;
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
-
-            scope(self, actorRepresentation);
-
-            SRMDebugging::DumpCompassEntries("AFGHUD::OnActorRepresentationAdded", self->GetCompassEntries(), true);
-
-            SRM_LOG("AFGHUD::OnActorRepresentationAdded: END %s", *self->GetName());
-        });
-
-    SUBSCRIBE_METHOD(AFGHUD::OnActorRepresentationFiltered,
-        [&](auto& scope, AFGHUD* self, ERepresentationType type, bool visible)
-        {
-            SRM_LOG("AFGHUD::OnActorRepresentationFiltered: START %s, %d, %d", *self->GetName(), type, visible);
-
-            //if (type > (ERepresentationType)EResourceRepresentationType::RRT_Default)
-            //{
-            //    for (auto& entry : self->GetCompassEntries())
-            //    {
-            //        if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(entry.RepresentingActor))
-            //        {
-            //            EResourceRepresentationType resourceRepresentationType;
-            //            if (TryGetResourceRepresentationType(nodeRep, resourceRepresentationType) && (ERepresentationType)resourceRepresentationType == type)
-            //            {
-            //                entry.bEnabled = visible;
-            //            }
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //}
-            scope(self, type, visible);
-
-            SRM_LOG("AFGHUD::OnActorRepresentationFiltered: END %s, %d, %d", *self->GetName(), type, visible);
         });
 
     BEGIN_BLUEPRINT_HOOK_DEFINITIONS

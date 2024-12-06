@@ -8,29 +8,9 @@
 #include "FGResourceNodeRepresentation.h"
 #include "FGUserWidget.h"
 #include "Module/GameInstanceModule.h"
+#include "SRMResourceRepresentationType.h"
 
 #include "StickyResourceMarkersRootInstance.generated.h"
-
-enum class EResourceRepresentationType : uint8
-{
-    // 43 is an arbitrary addition - just jumping to 50 to leave room for the game to expand
-    RRT_Default = ((uint8)ERepresentationType::RT_Resource + 43), 
-    // Order doesn't matter here so I chose alphabetical
-    RRT_Coal,
-    RRT_Geyser,
-    RRT_LiquidOil,
-    RRT_NitrogenGas,
-    RRT_OreBauxite,
-    RRT_OreCopper,
-    RRT_OreGold,
-    RRT_OreIron,
-    RRT_OreUranium,
-    RRT_RawQuartz,
-    RRT_SAM,
-    RRT_Stone,
-    RRT_Sulfur,
-    RRT_Water,
-};
 
 class URootGameWorldModule_SRM;
 
@@ -70,6 +50,7 @@ public:
     // These are public so that the types can be set in Unreal Editor, rather than manually identifying resources by string.
     // If the types get moved, they can still fail to load but setting (and fixing) these in the UI is less error-prone than
     // raw strings, plus apparently there is some forwarding mechanism and if CSS does move them, these might still work.
+    // Not all of these are needed for the mod, but many are related and are/were helpful in analyzing and debugging
 
     UPROPERTY(EditAnywhere, Category = "UI Widget Types")
     TSoftClassPtr<UFGInteractWidget> Widget_MapContainerClass;
