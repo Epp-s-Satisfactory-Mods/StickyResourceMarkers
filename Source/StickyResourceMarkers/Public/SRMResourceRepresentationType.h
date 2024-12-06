@@ -2,7 +2,7 @@
 
 #include "FGActorRepresentation.h"
 
-enum class EResourceRepresentationType : uint8
+enum class ESRMResourceRepresentationType : uint8
 {
     // 43 is an arbitrary addition - just jumping to 50 to leave room for the game to expand
     RRT_Default = ((uint8)ERepresentationType::RT_Resource + 43),

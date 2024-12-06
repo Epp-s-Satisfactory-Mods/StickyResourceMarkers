@@ -31,15 +31,12 @@ void UStickyResourceMarkersRootInstance::DispatchLifecycleEvent(ELifecyclePhase 
     case ELifecyclePhase::CONSTRUCTION:
         Initialize();
         break;
-    case ELifecyclePhase::INITIALIZATION:
-
-        break;
     }
 
     Super::DispatchLifecycleEvent(phase);
 }
 
-bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, EResourceRepresentationType& resourceRepresentationType)
+bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, ESRMResourceRepresentationType& resourceRepresentationType)
 {
     if (!resourceNode)
     {
@@ -47,7 +44,7 @@ bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const 
     }
 
     auto resourceDescriptor = resourceNode->GetResourceClass();
-    auto resourceDescriptorName = resourceDescriptor->GetName();
+    auto resourceDescriptorName = resourceDescriptor->GetFName();
 
     auto representationType = this->ResourceRepresentationTypeByDescriptorName.Find(resourceDescriptorName);
 
@@ -60,7 +57,7 @@ bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const 
     return false;
 }
 
-bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, EResourceRepresentationType& resourceRepresentationType)
+bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, ESRMResourceRepresentationType& resourceRepresentationType)
 {
     if (nodeRep->IsCluster())
     {
@@ -81,21 +78,22 @@ void UStickyResourceMarkersRootInstance::Initialize()
         return;
     }
 
-    // Map the resource descriptors to their ResourceRepresentationTypes
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_Coal_C"), EResourceRepresentationType::RRT_Coal);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_Geyser_C"), EResourceRepresentationType::RRT_Geyser);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_LiquidOil_C"), EResourceRepresentationType::RRT_LiquidOil);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_NitrogenGas_C"), EResourceRepresentationType::RRT_NitrogenGas);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_OreBauxite_C"), EResourceRepresentationType::RRT_OreBauxite);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_OreCopper_C"), EResourceRepresentationType::RRT_OreCopper);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_OreGold_C"), EResourceRepresentationType::RRT_OreGold);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_OreIron_C"), EResourceRepresentationType::RRT_OreIron);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_OreUranium_C"), EResourceRepresentationType::RRT_OreUranium);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_RawQuartz_C"), EResourceRepresentationType::RRT_RawQuartz);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_SAM_C"), EResourceRepresentationType::RRT_SAM);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_Stone_C"), EResourceRepresentationType::RRT_Stone);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_Sulfur_C"), EResourceRepresentationType::RRT_Sulfur);
-    ResourceRepresentationTypeByDescriptorName.Add(TEXT("Desc_Water_C"), EResourceRepresentationType::RRT_Water);
+    // Map the resource descriptor names to their ResourceRepresentationTypes. We use FNames because they are interned and so
+    // lookups shouldn't need to compare the whole string
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_Coal_C"), ESRMResourceRepresentationType::RRT_Coal);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_Geyser_C"), ESRMResourceRepresentationType::RRT_Geyser);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_LiquidOil_C"), ESRMResourceRepresentationType::RRT_LiquidOil);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_NitrogenGas_C"), ESRMResourceRepresentationType::RRT_NitrogenGas);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_OreBauxite_C"), ESRMResourceRepresentationType::RRT_OreBauxite);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_OreCopper_C"), ESRMResourceRepresentationType::RRT_OreCopper);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_OreGold_C"), ESRMResourceRepresentationType::RRT_OreGold);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_OreIron_C"), ESRMResourceRepresentationType::RRT_OreIron);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_OreUranium_C"), ESRMResourceRepresentationType::RRT_OreUranium);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_RawQuartz_C"), ESRMResourceRepresentationType::RRT_RawQuartz);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_SAM_C"), ESRMResourceRepresentationType::RRT_SAM);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_Stone_C"), ESRMResourceRepresentationType::RRT_Stone);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_Sulfur_C"), ESRMResourceRepresentationType::RRT_Sulfur);
+    ResourceRepresentationTypeByDescriptorName.Add(FName("Desc_Water_C"), ESRMResourceRepresentationType::RRT_Water);
 
     SRM_LOG("Registering hooks...");
 
@@ -186,16 +184,24 @@ void UStickyResourceMarkersRootInstance::Initialize()
         {
             SRM_LOG("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation: START");
 
-            EResourceRepresentationType resourceRepresentationType;
+            // Here, we make sure we have the resource type name cached for this resource type. I tried multiple different methods of
+            // constructing this map on game initialization but the available methods of getting all item descriptors all crash when
+            // you attempt to access their item names at any point in initialization.
+            ESRMResourceRepresentationType resourceRepresentationType;
             if (TryGetResourceRepresentationType(resourceNode, resourceRepresentationType))
             {
-                this->ResourceTypeNameByResourceRepresentationType.FindOrAdd(resourceRepresentationType, resourceNode->GetResourceName());
+                if (!this->ResourceTypeNameByResourceRepresentationType.Contains(resourceRepresentationType))
+                {
+                    this->ResourceTypeNameByResourceRepresentationType.Add(resourceRepresentationType, resourceNode->GetResourceName());
+                }
             }
 
             scope(self, resourceNode);
 
+            // If this is not being added from the resource scanner, then it's being added with the assumption that it's only going on the map.
+            // Because we make all resource markers available to the compass, we need to finish setting it up for the compass.
             auto gameWorldModule = this->GetGameWorldModule();
-            if (gameWorldModule->AddingFromOtherThanResourceScanner && resourceRepresentationType > EResourceRepresentationType::RRT_Default)
+            if (gameWorldModule->AddingFromOtherThanResourceScanner && resourceRepresentationType > ESRMResourceRepresentationType::RRT_Default)
             {
                 self->mRepresentationColor = FLinearColor::White;
                 self->mShouldShowInCompass = true;
@@ -211,7 +217,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
         {
             if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(self))
             {
-                EResourceRepresentationType resourceType;
+                ESRMResourceRepresentationType resourceType;
                 if (TryGetResourceRepresentationType(nodeRep, resourceType))
                 {
                     scope.Override((ERepresentationType)resourceType);
@@ -238,10 +244,10 @@ void UStickyResourceMarkersRootInstance::Initialize()
         {
             SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: START %d nodes", cluster.Nodes.Num());
 
-            // Cluster representations don't have their resource descriptor readily available, so it would take
+            // Cluster representations don't have a resource descriptor readily available, so it would take
             // workarounds to support them. Plus, because they don't have their descriptor, the map menu already
             // has a bug where it adds empty lines to the menu on scan.  Overall, clusters icons add so little value
-            // (and, to me, they are a hindrance as they just get in the way) that they aren't worth supporting.
+            // (and, to me, negative value) that they aren't worth supporting.
             // This splits clusters into individual nodes so that we don't have to deal with them at all anywhere.
             if (cluster.Nodes.Num() > 1)
             {
@@ -259,11 +265,16 @@ void UStickyResourceMarkersRootInstance::Initialize()
             SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END");
         });
 
+    // These blueprint hooks all hook very specific locations in their blueprint functions to trick the map and compass UIs into treating them like
+    // they have RepresentationType RT_Resource and/or to add the bits of custom behavior (like putting them in different categories and making them
+    // filterable on the compass). If an underlying blueprint function changes even a little, there's a good chance these will have to be updated.
+    // Look in the HookSnapshots folder in the root of the repo for a README that explains how to find the differences.
+
     BEGIN_BLUEPRINT_HOOK_DEFINITIONS
 
     BEGIN_HOOK(Widget_MapCompass_IconClass, UpdateActor, 108)
         ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
-        if (*representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
         }
@@ -271,7 +282,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
 
     BEGIN_HOOK(Widget_MapObjectClass, mShowActorDetails, 59)
         ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
-        if (*representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
         }
@@ -279,7 +290,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
 
     BEGIN_HOOK_START(Widget_MapClass, GetZOrderForType)
         ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("representationType"));
-        if (*representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
         }
@@ -287,25 +298,24 @@ void UStickyResourceMarkersRootInstance::Initialize()
 
     BEGIN_HOOK(BPW_MapMenuClass, ShouldAddToMenu, 64)
         ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
-        if (*representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
         }
     FINISH_HOOK
 
     BEGIN_HOOK(BPW_MapMenuClass, AddActorRepresentationToMenu, 1447)
-        EResourceRepresentationType resourceRepresentationType = *helper.GetLocalVarEnumPtr<EResourceRepresentationType>(TEXT("LocalType"));
-        if( resourceRepresentationType > EResourceRepresentationType::RRT_Default )
+        ESRMResourceRepresentationType resourceRepresentationType = *helper.GetLocalVarEnumPtr<ESRMResourceRepresentationType>(TEXT("LocalType"));
+        if( resourceRepresentationType > ESRMResourceRepresentationType::RRT_Default )
         {
             helper.SetLocalVarBool(TEXT("K2Node_SwitchEnum_CmpSuccess"), false);
         }
     FINISH_HOOK
 
     BEGIN_HOOK_RETURN(BPW_MapFilterCategoriesClass, GetCategoryName)
-        EResourceRepresentationType resourceRepresentationType = *helper.GetContextVarEnumPtr<EResourceRepresentationType>(TEXT("mRepresentationType"));
-        SRM_LOG("BPW_MapFilterCategories::GetCategoryName: resourceRepresentationType %d", resourceRepresentationType);
+        ESRMResourceRepresentationType resourceRepresentationType = *helper.GetContextVarEnumPtr<ESRMResourceRepresentationType>(TEXT("mRepresentationType"));
 
-        if (resourceRepresentationType > EResourceRepresentationType::RRT_Default)
+        if (resourceRepresentationType > ESRMResourceRepresentationType::RRT_Default)
         {
             FText* nameText = this->ResourceTypeNameByResourceRepresentationType.Find(resourceRepresentationType);
             if (!nameText)
@@ -320,7 +330,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
 
     BEGIN_HOOK_RETURN(BPW_MapFilterCategoriesClass, CanBeSeenOnCompass)
         ERepresentationType representationType = *helper.GetLocalVarEnumPtr<ERepresentationType>( TEXT("Index"));
-        if(representationType == ERepresentationType::RT_Resource || representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default )
+        if(representationType == ERepresentationType::RT_Resource || representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default )
         {
             helper.SetOutVarBool(TEXT("ReturnValue"), true);
         }
@@ -328,7 +338,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
 
     BEGIN_HOOK(BPW_MapFilterButtonClass, SetActorRepresentation, 378)
         ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("Temp_byte_Variable"));
-        if (*representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
         }

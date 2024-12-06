@@ -14,7 +14,7 @@ void USRMPlayerStateComponent::PreSaveGame_Implementation(int32 saveVersion, int
     this->FilteredCompassResourceRepresentationTypes.Empty();
     for (auto representationType : ownerPlayerState->GetFilteredOutCompassTypes())
     {
-        if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             this->FilteredCompassResourceRepresentationTypes.Add((uint8)representationType);
         }
@@ -23,7 +23,7 @@ void USRMPlayerStateComponent::PreSaveGame_Implementation(int32 saveVersion, int
     this->FilteredMapResourceRepresentationTypes.Empty();
     for (auto representationType : ownerPlayerState->GetFilteredOutMapTypes())
     {
-        if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             this->FilteredMapResourceRepresentationTypes.Add((uint8)representationType);
         }
@@ -32,7 +32,7 @@ void USRMPlayerStateComponent::PreSaveGame_Implementation(int32 saveVersion, int
     this->CollapsedResourceRepresentationTypes.Empty();
     for (auto representationType : ownerPlayerState->GetCollapsedMapCategories())
     {
-        if (representationType > (ERepresentationType)EResourceRepresentationType::RRT_Default)
+        if (representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             this->CollapsedResourceRepresentationTypes.Add((uint8)representationType);
         }
