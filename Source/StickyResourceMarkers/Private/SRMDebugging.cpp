@@ -309,7 +309,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
             SRM_LOG("AFGActorRepresentationManager::CreateAndAddNewRepresentation: START Actor: %s, isLocal: %d, RepresentaionClass: %s",
                 *realActor->GetName(),
                 isLocal,
-                representationClass == nullptr ? L"null" : *representationClass.Get()->GetName());
+                representationClass == nullptr ? *FString("null") : *representationClass.Get()->GetName());
 
             scope(self, realActor, isLocal, representationClass);
 
@@ -354,7 +354,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
         {
             SRM_LOG("AFGActorRepresentationManager::FindResourceNodeRepresentation: Resource node actor: %s", *resourceNode->GetName());
             auto rep = scope(self, resourceNode);
-            SRM_LOG("AFGActorRepresentationManager::FindResourceNodeRepresentation: Representation: %s", rep == nullptr ? L"null" : *rep->GetName());
+            SRM_LOG("AFGActorRepresentationManager::FindResourceNodeRepresentation: Representation: %s", rep == nullptr ? *FString("null") : *rep->GetName());
             return rep;
         });
 
@@ -708,11 +708,9 @@ void SRMDebugging::RegisterDebugHooks_Widget_MapCompass_Icon(UClass* Class)
     HOOK_START_AND_RETURN(Class, SetupResourceWell);
 
     BEGIN_HOOK_START(Class, SetupResourceIcon)
-        LOG_CONTEXT_STRUCT_T(mColor, FLinearColor, DumpColor)
         LOG_CONTEXT_OBJ(mActorRepresentation)
     FINISH_HOOK
     BEGIN_HOOK_RETURN(Class, SetupResourceIcon)
-        LOG_CONTEXT_STRUCT_T(mColor, FLinearColor, DumpColor)
         LOG_CONTEXT_OBJ(mActorRepresentation)
     FINISH_HOOK
 
@@ -770,20 +768,15 @@ void SRMDebugging::RegisterDebugHooks_BPW_MapMenu(UClass* Class)
         LOG_LOCAL_OBJ( actorRepresentation )
     FINISH_HOOK
     BEGIN_HOOK_RETURN(Class, AddGenericActor)
-        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep)
     FINISH_HOOK
 
     BEGIN_HOOK_START(Class, UnfocusGenericClass)
         LOG_LOCAL_OBJ( Class )
-        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep)
-        LOG_CONTEXT_MAP(mAllAddedObjects)
     FINISH_HOOK
     HOOK_RETURN(Class, UnfocusGenericClass);
 
     BEGIN_HOOK_START(Class, FocusGenericClass)
         LOG_LOCAL_OBJ( Class )
-        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep )
-        LOG_CONTEXT_MAP(mAllAddedObjects)
     FINISH_HOOK
     HOOK_RETURN(Class, FocusGenericClass);
 
@@ -791,7 +784,6 @@ void SRMDebugging::RegisterDebugHooks_BPW_MapMenu(UClass* Class)
         LOG_LOCAL_OBJ(actorRepresentation)
     FINISH_HOOK
     BEGIN_HOOK_RETURN(Class, ShouldAddToMenu)
-        LOG_CONTEXT_MAP_T(mGenericClasses, UObject*, DumpUObjectPtr, FStruct_ActorRep, DumpFStruct_ActorRep)
         LOG_RETURN_BOOL
     FINISH_HOOK
 

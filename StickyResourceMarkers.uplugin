@@ -3,7 +3,7 @@
 	"Version": 0,
 	"VersionName": "0.1.0",
 	"FriendlyName": "Sticky Resource Markers",
-	"Description": "Scanned resource node compass and map markers stick around until you load a save or leave the game.",
+	"Description": "Resource node compass and map markers are permanent and filterable via the map UI.",
 	"Category": "Modding",
 	"CreatedBy": "Epp",
 	"CreatedByURL": "",
@@ -29,5 +29,5 @@
 		}
 	],
 	"SemVersion": "0.1.0",
-	"GameVersion": ">=377620"
+	"GameVersion": ">=383729"
 }

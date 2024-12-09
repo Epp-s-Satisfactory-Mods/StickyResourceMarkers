@@ -136,6 +136,22 @@ void UStickyResourceMarkersRootInstance::Initialize()
             return self->mIsOccupied;
         });
 
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNodeScan_Server,
+        [](auto& scope, AFGResourceNodeBase* self)
+        {
+            SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: START");
+
+            SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END");
+        });
+
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNode_Local,
+        [](auto& scope, AFGResourceNodeBase* self, float lifeSpan)
+        {
+            SRM_LOG("AFGResourceNodeBase::ScanResourceNode_Local: START, %d", lifeSpan);
+
+            SRM_LOG("AFGResourceNodeBase::ScanResourceNode_Local: END");
+        });
+
     SUBSCRIBE_METHOD(AFGResourceNodeBase::UpdateNodeRepresentation,
         [&](auto& scope, AFGResourceNodeBase* self)
         {
@@ -273,7 +289,8 @@ void UStickyResourceMarkersRootInstance::Initialize()
     BEGIN_BLUEPRINT_HOOK_DEFINITIONS
 
     BEGIN_HOOK(Widget_MapCompass_IconClass, UpdateActor, 108)
-        ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
+        auto localHelper = helper.GetLocalVariableHelper();
+        ERepresentationType* representationType = localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
         if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
@@ -281,7 +298,8 @@ void UStickyResourceMarkersRootInstance::Initialize()
     FINISH_HOOK
 
     BEGIN_HOOK(Widget_MapObjectClass, mShowActorDetails, 59)
-        ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
+        auto localHelper = helper.GetLocalVariableHelper();
+        ERepresentationType* representationType = localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
         if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
@@ -289,7 +307,8 @@ void UStickyResourceMarkersRootInstance::Initialize()
     FINISH_HOOK
 
     BEGIN_HOOK_START(Widget_MapClass, GetZOrderForType)
-        ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("representationType"));
+        auto localHelper = helper.GetLocalVariableHelper();
+        ERepresentationType* representationType = localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("representationType"));
         if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
@@ -297,7 +316,8 @@ void UStickyResourceMarkersRootInstance::Initialize()
     FINISH_HOOK
 
     BEGIN_HOOK(BPW_MapMenuClass, ShouldAddToMenu, 64)
-        ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
+        auto localHelper = helper.GetLocalVariableHelper();
+        ERepresentationType* representationType = localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("CallFunc_GetRepresentationType_ReturnValue"));
         if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
@@ -305,17 +325,19 @@ void UStickyResourceMarkersRootInstance::Initialize()
     FINISH_HOOK
 
     BEGIN_HOOK(BPW_MapMenuClass, AddActorRepresentationToMenu, 1447)
-        ESRMResourceRepresentationType resourceRepresentationType = *helper.GetLocalVarEnumPtr<ESRMResourceRepresentationType>(TEXT("LocalType"));
-        if( resourceRepresentationType > ESRMResourceRepresentationType::RRT_Default )
+        auto localHelper = helper.GetLocalVariableHelper();
+        ERepresentationType* representationType = localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("LocalType"));
+        if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
-            helper.SetLocalVarBool(TEXT("K2Node_SwitchEnum_CmpSuccess"), false);
+            localHelper->SetBoolVariable(TEXT("K2Node_SwitchEnum_CmpSuccess"), false);
         }
     FINISH_HOOK
 
     BEGIN_HOOK_RETURN(BPW_MapFilterCategoriesClass, GetCategoryName)
-        ESRMResourceRepresentationType resourceRepresentationType = *helper.GetContextVarEnumPtr<ESRMResourceRepresentationType>(TEXT("mRepresentationType"));
-
-        if (resourceRepresentationType > ESRMResourceRepresentationType::RRT_Default)
+        auto contextHelper = helper.GetContextVariableHelper();
+        ERepresentationType* representationType = contextHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("mRepresentationType"));
+        ESRMResourceRepresentationType resourceRepresentationType = (ESRMResourceRepresentationType)(*representationType);
+        if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             FText* nameText = this->ResourceTypeNameByResourceRepresentationType.Find(resourceRepresentationType);
             if (!nameText)
@@ -323,21 +345,25 @@ void UStickyResourceMarkersRootInstance::Initialize()
                 return;
             }
 
-            FText* ReturnValuePointer = helper.GetOutVariablePtr<FTextProperty>(TEXT("ReturnValue"));
-            *ReturnValuePointer = *nameText;
+            auto outHelper = helper.GetOutVariableHelper();
+            FText* returnValuePointer = outHelper->GetVariablePtr<FTextProperty>(TEXT("ReturnValue"));
+            *returnValuePointer = *nameText;
         }
     FINISH_HOOK
 
     BEGIN_HOOK_RETURN(BPW_MapFilterCategoriesClass, CanBeSeenOnCompass)
-        ERepresentationType representationType = *helper.GetLocalVarEnumPtr<ERepresentationType>( TEXT("Index"));
+        auto localHelper = helper.GetLocalVariableHelper();
+        ERepresentationType representationType = *localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("Index"));
         if(representationType == ERepresentationType::RT_Resource || representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default )
         {
-            helper.SetOutVarBool(TEXT("ReturnValue"), true);
+            auto outHelper = helper.GetOutVariableHelper();
+            outHelper->SetBoolVariable(TEXT("ReturnValue"), true);
         }
     FINISH_HOOK
 
     BEGIN_HOOK(BPW_MapFilterButtonClass, SetActorRepresentation, 378)
-        ERepresentationType* representationType = helper.GetLocalVarEnumPtr<ERepresentationType>(TEXT("Temp_byte_Variable"));
+        auto localHelper = helper.GetLocalVariableHelper();
+        ERepresentationType* representationType = localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("Temp_byte_Variable"));
         if (*representationType > (ERepresentationType)ESRMResourceRepresentationType::RRT_Default)
         {
             *representationType = ERepresentationType::RT_Resource;
