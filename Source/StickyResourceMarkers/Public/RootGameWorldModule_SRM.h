@@ -5,7 +5,6 @@
 #include "Module/GameWorldModule.h"
 #include "SRMClientNodeSubsystem.h"
 #include "SRMNodeTrackingSubsystem.h"
-#include "SRMResourceRepresentationType.h"
 #include "SRMRequestRepresentNodeRCO.h"
 
 #include "RootGameWorldModule_SRM.generated.h"
@@ -23,7 +22,6 @@ public:
 
     bool IsGameInitializing{ false };
     TSet<AFGResourceNodeBase*> LateInitializedResourceNodes;
-    bool AddingFromOtherThanResourceScanner{ false }; // Assume it's from the resource scanner unless we know otherwise
 
     virtual void DispatchLifecycleEvent(ELifecyclePhase phase) override;
 

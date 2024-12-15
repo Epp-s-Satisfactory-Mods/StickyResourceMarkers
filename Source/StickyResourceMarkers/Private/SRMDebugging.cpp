@@ -12,7 +12,6 @@
 #include "GameFramework/PlayerState.h"
 #include "SRMHookMacros.h"
 #include "SRMLogMacros.h"
-#include "SRMPlayerStateComponent.h"
 #include "Patching/NativeHookManager.h"
 #include "Widget.h"
 #include "Struct_ActorRep.h"
@@ -184,7 +183,6 @@ void SRMDebugging::DumpPlayerState(FString prefix, APlayerState* state)
     SRM_LOG("%s APlayerState: %s (%s), %p", *prefix, *state->GetName(), *state->GetClass()->GetName(), state);
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s GetPlayerName: %s", *nestedPrefix, *state->GetPlayerName());
-    SRM_LOG("%s USRMPlayerStateComponent: %p", *nestedPrefix, state->GetComponentByClass<USRMPlayerStateComponent>());
 }
 
 void SRMDebugging::DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr, bool shortDump )

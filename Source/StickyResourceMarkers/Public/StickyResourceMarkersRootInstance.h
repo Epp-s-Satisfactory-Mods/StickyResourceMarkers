@@ -8,7 +8,6 @@
 #include "FGResourceNodeRepresentation.h"
 #include "FGUserWidget.h"
 #include "Module/GameInstanceModule.h"
-#include "SRMResourceRepresentationType.h"
 
 #include "StickyResourceMarkersRootInstance.generated.h"
 

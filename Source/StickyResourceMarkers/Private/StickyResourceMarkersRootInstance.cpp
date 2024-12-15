@@ -18,9 +18,7 @@
 #include "SRMDebugging.h"
 #include "SRMHookMacros.h"
 #include "SRMLogMacros.h"
-#include "SRMPlayerStateComponent.h"
 #include "SRMRequestRepresentNodeRCO.h"
-#include "SRMResourceRepresentationType.h"
 
 URootGameWorldModule_SRM* UStickyResourceMarkersRootInstance::CurrentGameWorldModule = nullptr;
 
@@ -83,7 +81,6 @@ void UStickyResourceMarkersRootInstance::Initialize()
     SRM_LOG("Expanding ERepresentationType enum...");
 
     // We need to expand the ERepresentationType enum to contain our values or they will not be serialized properly by UE
-
     UEnum* repTypeEnum = StaticEnum<ERepresentationType>();
     int numEnums = repTypeEnum->NumEnums();
     bool hasExistingMax = repTypeEnum->ContainsExistingMax();
@@ -142,17 +139,6 @@ void UStickyResourceMarkersRootInstance::Initialize()
         return;
     }
 
-    SUBSCRIBE_METHOD(AFGBuildableRadarTower::ScanForResources,
-        [&](auto& scope, AFGBuildableRadarTower* self)
-        {
-            SRM_LOG("AFGBuildableRadarTower::ScanForResources: START %s", *self->GetName());
-            auto gameWorldModule = this->GetGameWorldModule();
-            gameWorldModule->AddingFromOtherThanResourceScanner = true;
-            scope(self);
-            gameWorldModule->AddingFromOtherThanResourceScanner = false;
-            SRM_LOG("AFGBuildableRadarTower::ScanForResources: END %s", *self->GetName());
-        });
-
     // By default, UFGResourceNodeRepresentation::IsOccupied returns IsAllSatellitesOccupied if the resource node is a fracking core.
     // And when a save is being loaded, the radar tower scan runs before all the satellites get added to the fracking core and it
     // seems that, since it has 0 nodes, it returns that all are occupied.  But... why would it return occupied only if ALL Satellites
@@ -173,23 +159,6 @@ void UStickyResourceMarkersRootInstance::Initialize()
             return self->mIsOccupied;
         });
 
-    SUBSCRIBE_METHOD_VIRTUAL(AFGPlayerState::CopyProperties,
-        GetMutableDefault<AFGPlayerState>(),
-        [](auto& scope, AFGPlayerState* self, APlayerState* playerState)
-        {
-            SRMDebugging::DumpPlayerState(TEXT("AFGPlayerState::CopyProperties START"), self);
-            SRMDebugging::DumpPlayerState(TEXT("AFGPlayerState::CopyProperties START OTHER"), playerState);
-            scope(self, playerState);
-
-            auto destComponent = self->GetComponentByClass<USRMPlayerStateComponent>();
-            auto sourceComponent = playerState->GetComponentByClass<USRMPlayerStateComponent>();
-
-            destComponent->CopyProperties(sourceComponent);
-
-            SRMDebugging::DumpPlayerState(TEXT("AFGPlayerState::CopyProperties END OTHER"), playerState);
-            SRMDebugging::DumpPlayerState(TEXT("AFGPlayerState::CopyProperties END"), self);
-        });
-
     //SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNodeScan_Server,
     //    [](auto& scope, AFGResourceNodeBase* self)
     //    {
@@ -202,9 +171,9 @@ void UStickyResourceMarkersRootInstance::Initialize()
         [&](auto& scope, AFGResourceNodeBase* self, float lifeSpan)
         {
             SRM_LOG("AFGResourceNodeBase::ScanResourceNode_Local: START, %d", lifeSpan);
+            // Turn all local scan node hits to server node hits
             this->GetGameWorldModule()->Local_CreateRepresentation_Server(self);
-            scope.Cancel(); // TBD?
-            //scope(self, lifeSpan);
+            scope.Cancel();
             SRM_LOG("AFGResourceNodeBase::ScanResourceNode_Local: END");
         });
 
@@ -272,10 +241,9 @@ void UStickyResourceMarkersRootInstance::Initialize()
 
             scope(self, resourceNode);
 
-            // If this is not being added from the resource scanner, then it's being added with the assumption that it's only going on the map.
+            // Since we only add server-side and that's never from the "resource scanner", then it's being added with the assumption that it's only going on the map.
             // Because we make all resource markers available to the compass, we need to finish setting it up for the compass.
-            auto gameWorldModule = this->GetGameWorldModule();
-            if (/*gameWorldModule->AddingFromOtherThanResourceScanner &&*/ isResourceRepresentation)
+            if (isResourceRepresentation)
             {
                 self->mRepresentationColor = FLinearColor::White;
                 self->mShouldShowInCompass = true;

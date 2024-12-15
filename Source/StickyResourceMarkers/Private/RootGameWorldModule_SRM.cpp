@@ -12,7 +12,6 @@
 #include "SRMDebugging.h"
 #include "SRMNodeTrackingSubsystem.h"
 #include "SRMRequestRepresentNodeRCO.h"
-#include "SRMResourceRepresentationType.h"
 
 
 void URootGameWorldModule_SRM::Local_CreateRepresentation_Server(AFGResourceNodeBase* node)
@@ -91,9 +90,7 @@ void URootGameWorldModule_SRM::Server_InitializeLateResourceNodes()
     SRM_LOG("Server_InitializeLateResourceNodes: START. There are %d nodes to late initialize", this->LateInitializedResourceNodes.Num())
     for (auto node : this->LateInitializedResourceNodes)
     {
-        this->AddingFromOtherThanResourceScanner = true;
         node->UpdateNodeRepresentation();
-        this->AddingFromOtherThanResourceScanner = false;
     }
 
     // Totally done with this for this instance of the game world - might as well free up the memory
@@ -113,7 +110,6 @@ void URootGameWorldModule_SRM::Server_RestoreResourceMarkers()
         return;
     }
 
-    this->AddingFromOtherThanResourceScanner = true;
     for (TActorIterator<AFGResourceNodeBase> It(world); It; ++It)
     {
         auto node = *It;
@@ -130,6 +126,6 @@ void URootGameWorldModule_SRM::Server_RestoreResourceMarkers()
             break;
         }
     }
-    this->AddingFromOtherThanResourceScanner = false;
+
     SRM_LOG("Server_RestoreResourceMarkers: END")
 }
