@@ -1,4 +1,4 @@
-#include "StickyResourceMarkersRootInstance.h"
+#include "SRMRootInstanceModule.h"
 
 #include "FGActorRepresentation.h"
 #include "FGActorRepresentationManager.h"
@@ -12,19 +12,17 @@
 #include "Patching/NativeHookManager.h"
 #include "Patching/BlueprintHookManager.h"
 #include "Patching/BlueprintHookHelper.h"
-#include "RootGameWorldModule_SRM.h"
-#include "SRMNodeTrackingSubsystem.h"
 
 #include "SRMDebugging.h"
 #include "SRMHookMacros.h"
 #include "SRMLogMacros.h"
-#include "SRMRequestRepresentNodeRCO.h"
+#include "SRMRootGameWorldModule.h"
 
-URootGameWorldModule_SRM* UStickyResourceMarkersRootInstance::CurrentGameWorldModule = nullptr;
+USRMRootGameWorldModule* USRMRootInstanceModule::CurrentGameWorldModule = nullptr;
 
-void UStickyResourceMarkersRootInstance::DispatchLifecycleEvent(ELifecyclePhase phase)
+void USRMRootInstanceModule::DispatchLifecycleEvent(ELifecyclePhase phase)
 {
-    SRM_LOG("UStickyResourceMarkersRootInstance::DispatchLifecycleEvent: Phase %d", phase);
+    SRM_LOG("USRMRootInstanceModule::DispatchLifecycleEvent: Phase %d", phase);
 
     switch (phase)
     {
@@ -36,7 +34,7 @@ void UStickyResourceMarkersRootInstance::DispatchLifecycleEvent(ELifecyclePhase 
     Super::DispatchLifecycleEvent(phase);
 }
 
-bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, ERepresentationType& resourceRepresentationType)
+bool USRMRootInstanceModule::TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, ERepresentationType& resourceRepresentationType)
 {
     if (!resourceNode)
     {
@@ -57,7 +55,7 @@ bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const 
     return false;
 }
 
-bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, ERepresentationType& resourceRepresentationType)
+bool USRMRootInstanceModule::TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, ERepresentationType& resourceRepresentationType)
 {
     if (nodeRep->IsCluster())
     {
@@ -68,13 +66,13 @@ bool UStickyResourceMarkersRootInstance::TryGetResourceRepresentationType(const 
     return TryGetResourceRepresentationType(nodeRep->GetResourceNode(), resourceRepresentationType);
 }
 
-void UStickyResourceMarkersRootInstance::Initialize()
+void USRMRootInstanceModule::Initialize()
 {
-    SRM_LOG("UStickyResourceMarkersRootInstance::Initialize");
+    SRM_LOG("USRMRootInstanceModule::Initialize");
 
     if (WITH_EDITOR)
     {
-        SRM_LOG("UStickyResourceMarkersRootInstance::Initialize: Not initializing anything because WITH_EDITOR is true!");
+        SRM_LOG("USRMRootInstanceModule::Initialize: Not initializing anything because WITH_EDITOR is true!");
         return;
     }
 
@@ -135,7 +133,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
 
     if (SRM_DEBUGGING_ENABLED && !SRM_DEBUGGING_REGISTER_MOD_HOOKS)
     {
-        SRM_LOG("UStickyResourceMarkersRootInstance::Initialize: Not registering mod hooks because SRM_DEBUGGING_ENABLED is 1 and SRM_DEBUGGING_REGISTER_MOD_HOOKS is 0!");
+        SRM_LOG("USRMRootInstanceModule::Initialize: Not registering mod hooks because SRM_DEBUGGING_ENABLED is 1 and SRM_DEBUGGING_REGISTER_MOD_HOOKS is 0!");
         return;
     }
 
@@ -406,7 +404,7 @@ void UStickyResourceMarkersRootInstance::Initialize()
     SRM_LOG("Blueprint hooks registered...");
 }
 
-void UStickyResourceMarkersRootInstance::RegisterDebugHooks()
+void USRMRootInstanceModule::RegisterDebugHooks()
 {
     if (!SRM_DEBUGGING_ENABLED) return;
 

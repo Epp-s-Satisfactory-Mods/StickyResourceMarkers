@@ -9,12 +9,12 @@
 #include "FGUserWidget.h"
 #include "Module/GameInstanceModule.h"
 
-#include "StickyResourceMarkersRootInstance.generated.h"
+#include "SRMRootInstanceModule.generated.h"
 
-class URootGameWorldModule_SRM;
+class USRMRootGameWorldModule;
 
 UCLASS()
-class STICKYRESOURCEMARKERS_API UStickyResourceMarkersRootInstance : public UGameInstanceModule
+class STICKYRESOURCEMARKERS_API USRMRootInstanceModule : public UGameInstanceModule
 {
     GENERATED_BODY()
 
@@ -41,15 +41,15 @@ protected:
     // The current game world module needs to manage state that is only relevant to the currently-loaded world but this module
     // installs all the hooks before any game world module is created. The hooks that need to store world-specific state will
     // get this pointer at runtime (after the currently-loaded game world module has registered itself) to manage that state.
-    static URootGameWorldModule_SRM* CurrentGameWorldModule;
+    static USRMRootGameWorldModule* CurrentGameWorldModule;
 
 public:
-    static URootGameWorldModule_SRM* GetGameWorldModule()
+    static USRMRootGameWorldModule* GetGameWorldModule()
     {
         return CurrentGameWorldModule;
     }
 
-    static void SetGameWorldModule(URootGameWorldModule_SRM* module)
+    static void SetGameWorldModule(USRMRootGameWorldModule* module)
     {
         CurrentGameWorldModule = module;
     }

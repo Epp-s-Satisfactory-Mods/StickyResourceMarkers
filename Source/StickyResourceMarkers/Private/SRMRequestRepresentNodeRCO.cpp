@@ -14,8 +14,6 @@ void USRMRequestRepresentNodeRCO::CreateRepresentation_Server_Implementation(AFG
 {
     SRM_LOG("USRMRequestRepresentNodeRCO::CreateRepresentation_Server: START");
     check(node);
-    SRMDebugging::DumpResourceNode(TEXT("USRMRequestRepresentNodeRCO::CreateRepresentation_Server"), node);
     node->ScanResourceNodeScan_Server();
-    SRMDebugging::DumpResourceNode(TEXT("USRMRequestRepresentNodeRCO::CreateRepresentation_Server"), node);
     SRM_LOG("USRMRequestRepresentNodeRCO::CreateRepresentation_Server: END");
 }

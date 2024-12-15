@@ -3,14 +3,15 @@
 #include "CoreMinimal.h"
 #include "FGResourceNode.h"
 #include "Module/GameWorldModule.h"
-#include "SRMClientNodeSubsystem.h"
-#include "SRMNodeTrackingSubsystem.h"
-#include "SRMRequestRepresentNodeRCO.h"
 
-#include "RootGameWorldModule_SRM.generated.h"
+#include "SRMClientNodeSubsystem.h"
+#include "SRMRequestRepresentNodeRCO.h"
+#include "SRMServerNodeSubsystem.h"
+
+#include "SRMRootGameWorldModule.generated.h"
 
 UCLASS()
-class STICKYRESOURCEMARKERS_API URootGameWorldModule_SRM : public UGameWorldModule
+class STICKYRESOURCEMARKERS_API USRMRootGameWorldModule : public UGameWorldModule
 {
     GENERATED_BODY()
 
@@ -30,7 +31,7 @@ protected:
     ASRMClientNodeSubsystem* ClientNodeSubsystem;
 
     UPROPERTY()
-    ASRMNodeTrackingSubsystem* NodeTrackingSubsystem;
+    ASRMServerNodeSubsystem* ServerNodeSubsystem;
 
     UPROPERTY()
     USRMRequestRepresentNodeRCO* NodeRequestRCO;
