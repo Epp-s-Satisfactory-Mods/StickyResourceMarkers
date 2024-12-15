@@ -6,6 +6,7 @@
 #include "FGResourceNode.h"
 #include "FGResourceNodeRepresentation.h"
 #include "FGHUD.h"
+#include "GameFramework/PlayerState.h"
 #include "Struct_ActorRep.h"
 #include "Widget.h"
 
@@ -48,9 +49,32 @@ public:
 	}
 
 	static void DumpFStruct_ActorRep(FString prefix, FStruct_ActorRep* actorRep);
+
+	template<typename TEnum>
+	static void DumpEnum(FString prefix, TEnum* testValue = nullptr)
+	{
+		auto e = StaticEnum<TEnum>();
+
+		SRM_LOG("%s %s", *prefix, *e->GetName());
+		auto nestedPrefix = prefix + "\t";
+		for (int i = 0; i < 256; ++i)
+		{
+			if (e->IsValidEnumValue(i))
+			{
+				SRM_LOG("%s %d: %s", *nestedPrefix, i, *e->GetNameStringByValue(i))
+			}
+		}
+
+		if (testValue)
+		{
+			SRM_LOG("%s Test Value %d IsValidEnumValue: %d", *nestedPrefix, *testValue, e->IsValidEnumValue((int64)*testValue));
+		}
+	}
+
 	static void DumpColor(FString prefix, FLinearColor color);
 	static void DumpUObjectPtr(FString prefix, UObject** object);
 	static void DumpUObject(FString prefix, UObject* object);
+	static void DumpPlayerState(FString prefix, APlayerState* state);
 	static void DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr = nullptr, bool shortDump = true);
 	static void DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries, bool shortDump = true);
 };

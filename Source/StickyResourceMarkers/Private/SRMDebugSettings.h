@@ -8,7 +8,7 @@
 #define SRM_DEBUGGING_REGISTER_MOD_HOOKS 1
 
 // If debugging is enabled, this must be 1 to trace calls to blueprint functions that are not necessary for the mod but helpful for understanding.
-#define SRM_DEBUGGING_TRACE_ALL_BLUEPRINT_HOOKS 1
+#define SRM_DEBUGGING_TRACE_ALL_BLUEPRINT_HOOKS 0
 
 // If debugging is enabled, this must be 1 to trace calls to native functions that are not necessary for the mod but helpful for understanding.
 #define SRM_DEBUGGING_TRACE_ALL_NATIVE_HOOKS 1

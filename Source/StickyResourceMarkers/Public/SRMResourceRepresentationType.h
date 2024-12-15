@@ -2,6 +2,9 @@
 
 #include "FGActorRepresentation.h"
 
+#include "SRMResourceRepresentationType.generated.h"
+
+UENUM()
 enum class ESRMResourceRepresentationType : uint8
 {
     // 43 is an arbitrary addition - just jumping to 50 to leave room for the game to expand

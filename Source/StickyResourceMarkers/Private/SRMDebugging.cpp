@@ -2,15 +2,17 @@
 
 #include "FGActorRepresentationManager.h"
 #include "FGBuildableRadarTower.h"
-#include "FGPlayerState.h"
+#include "FGPlayerController.h"
 #include "FGResourceNode.h"
 #include "FGResourceNodeFrackingCore.h"
 #include "FGResourceNodeFrackingSatellite.h"
 #include "FGResourceNodeRepresentation.h"
 #include "FGResourceScanner.h"
 #include "FGHUD.h"
+#include "GameFramework/PlayerState.h"
 #include "SRMHookMacros.h"
 #include "SRMLogMacros.h"
+#include "SRMPlayerStateComponent.h"
 #include "Patching/NativeHookManager.h"
 #include "Widget.h"
 #include "Struct_ActorRep.h"
@@ -35,7 +37,7 @@ void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* r
         return;
     }
 
-    SRM_LOG("%s AFGResourceNodeBase: %s (%s) at %s", *prefix, *res->GetName(), *res->GetClass()->GetName(), *res->GetActorLocation().ToString());
+    SRM_LOG("%s AFGResourceNodeBase: %s (%s) at %s. HasAuthority: %d. mResourceNodeRepresentation: %p", *prefix, *res->GetName(), *res->GetClass()->GetName(), *res->GetActorLocation().ToString(), res->HasAuthority(), res->mResourceNodeRepresentation);
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s GetResourceClass: %s", *nestedPrefix, *res->GetResourceClass()->GetName());
 
@@ -171,6 +173,20 @@ void SRMDebugging::DumpUObject(FString prefix, UObject* object)
     }
 }
 
+void SRMDebugging::DumpPlayerState(FString prefix, APlayerState* state)
+{
+    if (!state)
+    {
+        SRM_LOG("%s APlayerState: null", *prefix);
+        return;
+    }
+
+    SRM_LOG("%s APlayerState: %s (%s), %p", *prefix, *state->GetName(), *state->GetClass()->GetName(), state);
+    auto nestedPrefix = prefix + "\t";
+    SRM_LOG("%s GetPlayerName: %s", *nestedPrefix, *state->GetPlayerName());
+    SRM_LOG("%s USRMPlayerStateComponent: %p", *nestedPrefix, state->GetComponentByClass<USRMPlayerStateComponent>());
+}
+
 void SRMDebugging::DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr, bool shortDump )
 {
     FString indexStr = indexPtr == nullptr ? TEXT("") : FString::Printf(TEXT("[%d]"), *indexPtr);
@@ -207,21 +223,23 @@ void SRMDebugging::RegisterNativeDebugHooks()
 {
     if (!SRM_DEBUGGING_TRACE_ALL_NATIVE_HOOKS) return;
     
-    //SUBSCRIBE_METHOD(AFGPlayerState::SetMapFilter,
-    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-    //    {
-    //        SRM_LOG("AFGPlayerState::SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
-    //        scope(self, representationType, visible);
-    //        SRM_LOG("AFGPlayerState::SetMapFilter: END");
-    //    });
-    //
-    //SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapFilter,
-    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-    //    {
-    //        SRM_LOG("AFGPlayerState::Server_SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
-    //        scope(self, representationType, visible);
-    //        SRM_LOG("AFGPlayerState::Server_SetMapFilter: END");
-    //    });
+    SUBSCRIBE_METHOD(AFGPlayerState::SetMapFilter,
+        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+        {
+            SRM_LOG("AFGPlayerState::SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
+            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::SetMapFilter", &representationType);
+            scope(self, representationType, visible);
+            SRM_LOG("AFGPlayerState::SetMapFilter: END");
+        });
+    
+    SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapFilter,
+        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+        {
+            SRM_LOG("AFGPlayerState::Server_SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
+            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::Server_SetMapFilter", &representationType);
+            scope(self, representationType, visible);
+            SRM_LOG("AFGPlayerState::Server_SetMapFilter: END");
+        });
     
     SUBSCRIBE_METHOD(AFGPlayerState::GetFilteredOutMapTypes,
         [](auto& scope, AFGPlayerState* self)
@@ -239,21 +257,23 @@ void SRMDebugging::RegisterNativeDebugHooks()
             return values;
         });
     
-    //SUBSCRIBE_METHOD(AFGPlayerState::SetCompassFilter,
-    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-    //    {
-    //        SRM_LOG("AFGPlayerState::SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
-    //        scope(self, representationType, visible);
-    //        SRM_LOG("AFGPlayerState::SetCompassFilter: END");
-    //    });
-    //
-    //SUBSCRIBE_METHOD(AFGPlayerState::Server_SetCompassFilter,
-    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
-    //    {
-    //        SRM_LOG("AFGPlayerState::Server_SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
-    //        scope(self, representationType, visible);
-    //        SRM_LOG("AFGPlayerState::Server_SetCompassFilter: END");
-    //    });
+    SUBSCRIBE_METHOD(AFGPlayerState::SetCompassFilter,
+        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+        {
+            SRM_LOG("AFGPlayerState::SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
+            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::SetCompassFilter", &representationType);
+            scope(self, representationType, visible);
+            SRM_LOG("AFGPlayerState::SetCompassFilter: END");
+        });
+    
+    SUBSCRIBE_METHOD(AFGPlayerState::Server_SetCompassFilter,
+        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
+        {
+            SRM_LOG("AFGPlayerState::Server_SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
+            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::Server_SetCompassFilter", &representationType);
+            scope(self, representationType, visible);
+            SRM_LOG("AFGPlayerState::Server_SetCompassFilter: END");
+        });
 
     SUBSCRIBE_METHOD(AFGPlayerState::GetFilteredOutCompassTypes,
         [](auto& scope, AFGPlayerState* self)
@@ -270,22 +290,42 @@ void SRMDebugging::RegisterNativeDebugHooks()
 
             return values;
         });
+
+    SUBSCRIBE_METHOD(AFGPlayerState::SetMapCategoryCollapsed,
+        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
+        {
+            SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
+            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::SetMapCategoryCollapsed", &representationType);
+            scope(self, representationType, collapsed);
+            SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: END");
+        });
     
-    //SUBSCRIBE_METHOD(AFGPlayerState::SetMapCategoryCollapsed,
-    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
-    //    {
-    //        SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
-    //        scope(self, representationType, collapsed);
-    //        SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: END");
-    //    });
-    //
-    //SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapCategoryCollapsed,
-    //    [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
-    //    {
-    //        SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
-    //        scope(self, representationType, collapsed);
-    //        SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: END");
-    //    });
+    SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapCategoryCollapsed,
+        [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
+        {
+            SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
+            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::Server_SetMapCategoryCollapsed", &representationType);
+            scope(self, representationType, collapsed);
+            SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: END");
+        });
+
+    SUBSCRIBE_METHOD_VIRTUAL(AFGPlayerController::BeginPlay,
+        GetMutableDefault<AFGPlayerController>(),
+        [](auto& scope, AFGPlayerController* self)
+        {
+            SRM_LOG("AFGPlayerController::BeginPlay: START. %s, %s", *self->GetName(), *self->GetClass()->GetName());
+            scope(self);
+            SRM_LOG("AFGPlayerController::BeginPlay: END");
+        });
+
+    SUBSCRIBE_METHOD_VIRTUAL(AFGPlayerController::OnRep_PlayerState,
+        GetMutableDefault<AFGPlayerController>(),
+        [](auto& scope, AFGPlayerController* self)
+        {
+            SRM_LOG("AFGPlayerController::OnRep_PlayerState: START");
+            scope(self);
+            SRM_LOG("AFGPlayerController::OnRep_PlayerState: END");
+        });
 
     SUBSCRIBE_METHOD(AFGPlayerState::GetCollapsedMapCategories,
         [](auto& scope, const AFGPlayerState* self)

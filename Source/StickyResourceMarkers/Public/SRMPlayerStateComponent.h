@@ -12,6 +12,8 @@ class STICKYRESOURCEMARKERS_API USRMPlayerStateComponent : public UActorComponen
     GENERATED_BODY()
 
 public:
+    void CopyProperties(USRMPlayerStateComponent* source);
+
     // Begin IFGSaveInterface
     virtual void PreSaveGame_Implementation(int32 saveVersion, int32 gameVersion) override;
     virtual void PostLoadGame_Implementation(int32 saveVersion, int32 gameVersion) override;

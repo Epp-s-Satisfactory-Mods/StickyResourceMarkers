@@ -22,12 +22,20 @@ class STICKYRESOURCEMARKERS_API UStickyResourceMarkersRootInstance : public UGam
 protected:
     void Initialize();
     void RegisterDebugHooks();
-    bool TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, ESRMResourceRepresentationType& resourceRepresentationType);
-    bool TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, ESRMResourceRepresentationType& resourceRepresentationType);
+    bool TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, ERepresentationType& resourceRepresentationType);
+    bool TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, ERepresentationType& resourceRepresentationType);
+
+    bool IsResourceRepresentationType(ERepresentationType representationType) const
+    {
+        return representationType >= this->FirstResourceRepresentationType && representationType <= this->LastResourceRepresentationType;
+    }
 
     // These maps live here because they only need to be populated once per game instance - they don't need to be refreshed on each load
-    TMap<FName, ESRMResourceRepresentationType> ResourceRepresentationTypeByDescriptorName;
-    TMap<ESRMResourceRepresentationType, FText> ResourceTypeNameByResourceRepresentationType;
+    ERepresentationType FirstResourceRepresentationType;
+    ERepresentationType LastResourceRepresentationType;
+
+    TMap<FName, ERepresentationType> ResourceRepresentationTypeByDescriptorName;
+    TMap<ERepresentationType, FText> ResourceTypeNameByResourceRepresentationType;
 
     virtual void DispatchLifecycleEvent(ELifecyclePhase phase) override;
 
