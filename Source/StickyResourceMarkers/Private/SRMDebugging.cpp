@@ -39,10 +39,10 @@ void SRMDebugging::DumpResourceNode(FString prefix, const AFGResourceNodeBase* r
     SRM_LOG("%s AFGResourceNodeBase: %s (%s) at %s. HasAuthority: %d. mResourceNodeRepresentation: %p", *prefix, *res->GetName(), *res->GetClass()->GetName(), *res->GetActorLocation().ToString(), res->HasAuthority(), res->mResourceNodeRepresentation);
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s GetResourceClass: %s", *nestedPrefix, *res->GetResourceClass()->GetName());
+    SRM_LOG("%s IsOccupied: %d", *nestedPrefix, res->IsOccupied());
 
     if (!shortDump)
     {
-        SRM_LOG("%s IsOccupied: %d", *nestedPrefix, res->IsOccupied());
         SRM_LOG("%s CanBecomeOccupied: %d", *nestedPrefix, res->CanBecomeOccupied());
     }
 
@@ -110,12 +110,12 @@ void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentati
     if (auto res = Cast<UFGResourceNodeRepresentation>(rep))
     {
         SRM_LOG("%s Resource Node Representation:", *nestedPrefix);
+        SRM_LOG("%s\t IsOccupied: %d", *nestedPrefix, res->IsOccupied());
 
         if (!shortDump)
         {
             SRM_LOG("%s\t IsCluster: %d", *nestedPrefix, res->IsCluster());
             SRM_LOG("%s\t mIsCluster: %d", *nestedPrefix, res->mIsCluster);
-            SRM_LOG("%s\t IsOccupied: %d", *nestedPrefix, res->IsOccupied());
             SRM_LOG("%s\t mIsOccupied: %d", *nestedPrefix, res->mIsOccupied);
             SRM_LOG("%s\t mIsScannerOwned: %d", *nestedPrefix, res->mIsScannerOwned);
             SRM_LOG("%s\t mScanCount: %d", *nestedPrefix, res->mScanCount);
@@ -202,6 +202,25 @@ void SRMDebugging::DumpCompassEntry(FString prefix, FCompassEntry& compassEntry,
     }
 
     DumpRepresentation(nestedPrefix + " RepresentingActor:", compassEntry.RepresentingActor, shortDump);
+}
+
+void SRMDebugging::DumpMatchingCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries, UFGResourceNodeRepresentation* rep, bool shortDump)
+{
+    SRM_LOG("%s Looking for matching CompassEntries Total: Count: %d", *prefix, compassEntries.Num());
+
+    int i = 0;
+    for (auto& entry : compassEntries)
+    {
+        if (auto entryRep = Cast<UFGResourceNodeRepresentation>(entry.RepresentingActor))
+        {
+            if (rep->GetResourceNode() == entryRep->GetResourceNode())
+            {
+                DumpCompassEntry(prefix, entry, &i, shortDump);
+            }
+        }
+
+        ++i;
+    }
 }
 
 void SRMDebugging::DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries, bool shortDump)
@@ -354,6 +373,38 @@ void SRMDebugging::RegisterNativeDebugHooks()
             SRM_LOG("AFGActorRepresentationManager::CreateAndAddNewRepresentation: END");
         });
 
+    SUBSCRIBE_METHOD(AFGActorRepresentationManager::CreateAndAddNewRepresentationNoActor,
+        [](auto& scope, AFGActorRepresentationManager* self, FVector location, class UTexture2D* compassTexture, FLinearColor compassColor, float lifeSpan, bool shouldShowInCompass, bool shouldShowOnMap, ERepresentationType representationType = ERepresentationType::RT_Default, TSubclassOf<UFGActorRepresentation> representationClass = nullptr )
+        {
+            SRM_LOG("AFGActorRepresentationManager::CreateAndAddNewRepresentationNoActor: START");
+            SRM_LOG("    location: %s", *location.ToString());
+            SRM_LOG("    location: %f", lifeSpan);
+            SRM_LOG("    shouldShowInCompass: %d", shouldShowInCompass);
+            SRM_LOG("    shouldShowOnMap: %d", shouldShowOnMap);
+            SRM_LOG("    representationType: %d", representationType);
+            SRM_LOG("    representationClass: %s", representationClass == nullptr ? *FString("null") : *representationClass.Get()->GetName());
+
+            scope(self, location, compassTexture, compassColor, lifeSpan, shouldShowInCompass, shouldShowOnMap, representationType, representationClass);
+
+            SRM_LOG("AFGActorRepresentationManager::CreateAndAddNewRepresentationNoActor: END");
+        });
+
+    SUBSCRIBE_METHOD(AFGActorRepresentationManager::AddRepresentation,
+        [](auto& scope, AFGActorRepresentationManager* self, UFGActorRepresentation* actorRepresentation)
+        {
+            DumpRepresentation("AFGActorRepresentationManager::AddRepresentation: START", actorRepresentation);
+            scope(self, actorRepresentation);
+            SRM_LOG("AFGActorRepresentationManager::AddRepresentation: END");
+        });
+
+    SUBSCRIBE_METHOD(AFGActorRepresentationManager::AddRepresentation,
+        [](auto& scope, AFGActorRepresentationManager* self, UFGActorRepresentation* actorRepresentation)
+        {
+            DumpRepresentation("AFGActorRepresentationManager::AddRepresentation: START", actorRepresentation);
+            scope(self, actorRepresentation);
+            SRM_LOG("AFGActorRepresentationManager::AddRepresentation: END");
+        });
+
     SUBSCRIBE_METHOD(AFGActorRepresentationManager::UpdateRepresentationOfActor,
         [](auto& scope, AFGActorRepresentationManager* self, AActor* realActor)
         {
@@ -463,6 +514,34 @@ void SRMDebugging::RegisterNativeDebugHooks()
             DumpRepresentation("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation: END", self);
         });
 
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::OnIsOccupiedChanged,
+        [](auto& scope, AFGResourceNodeBase* self, bool newIsOccupied)
+        {
+            SRM_LOG("AFGResourceNodeBase::OnIsOccupiedChanged: START %s. newIsOccupied: %d", *self->GetName(), newIsOccupied);
+            DumpResourceNode("AFGResourceNodeBase::OnIsOccupiedChanged", self);
+            scope(self, newIsOccupied);
+            DumpResourceNode("AFGResourceNodeBase::OnIsOccupiedChanged: END", self);
+        });
+
+    //SUBSCRIBE_METHOD(AFGResourceNodeBase::OnIsOccupiedChanged_Implementation,
+    //    [](auto& scope, AFGResourceNodeBase* self, bool newIsOccupied)
+    //    {
+    //        SRM_LOG("AFGResourceNodeBase::OnIsOccupiedChanged_Implementation: START %s. newIsOccupied: %d", *self->GetName(), newIsOccupied);
+    //        DumpResourceNode("AFGResourceNodeBase::OnIsOccupiedChanged_Implementation", self);
+    //        scope(self, newIsOccupied);
+    //        DumpResourceNode("AFGResourceNodeBase::OnIsOccupiedChanged_Implementation: END", self);
+    //    });
+
+    SUBSCRIBE_METHOD_VIRTUAL(AFGResourceNodeBase::OnRep_IsOccupied,
+        GetMutableDefault<AFGResourceNodeBase>(),
+        [](auto& scope, AFGResourceNodeBase* self)
+        {
+            SRM_LOG("AFGResourceNodeBase::OnRep_IsOccupied: START %s", *self->GetName());
+            DumpResourceNode("AFGResourceNodeBase::OnRep_IsOccupied", self);
+            scope(self);
+            DumpResourceNode("AFGResourceNodeBase::OnRep_IsOccupied: END", self);
+        });
+
     SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNode_Local,
         [](auto& scope, AFGResourceNodeBase* self, float lifeSpan)
         {
@@ -496,13 +575,13 @@ void SRMDebugging::RegisterNativeDebugHooks()
             DumpResourceNode("AFGResourceNodeBase::RemoveResourceNodeScan_Server: END", self);
         });
 
-    SUBSCRIBE_METHOD(AFGResourceNodeBase::UpdateNodeRepresentation,
-        [](auto& scope, AFGResourceNodeBase* self)
-        {
-            DumpResourceNode("AFGResourceNodeBase::UpdateNodeRepresentation: START", self);
-            scope(self);
-            DumpResourceNode("AFGResourceNodeBase::UpdateNodeRepresentation: END", self);
-        });
+    //SUBSCRIBE_METHOD(AFGResourceNodeBase::UpdateNodeRepresentation,
+    //    [](auto& scope, AFGResourceNodeBase* self)
+    //    {
+    //        DumpResourceNode("AFGResourceNodeBase::UpdateNodeRepresentation: START", self);
+    //        scope(self);
+    //        DumpResourceNode("AFGResourceNodeBase::UpdateNodeRepresentation: END", self);
+    //    });
 
     SUBSCRIBE_METHOD_VIRTUAL(AFGResourceNodeFrackingCore::BeginPlay,
         GetMutableDefault<AFGResourceNodeFrackingCore>(),
@@ -556,7 +635,20 @@ void SRMDebugging::RegisterNativeDebugHooks()
         {
             SRM_LOG("AFGHUD::OnActorRepresentationAdded: START %s", *self->GetName());
             DumpRepresentation("AFGHUD::OnActorRepresentationAdded:", actorRepresentation);
+
+            UFGResourceNodeRepresentation* nodeRep = Cast<UFGResourceNodeRepresentation>(actorRepresentation);
+            if (nodeRep)
+            {
+                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationAdded: PRESENT BEFORE", self->GetCompassEntries(), nodeRep);
+            }
+
             scope(self, actorRepresentation);
+
+            if (nodeRep)
+            {
+                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationAdded: PRESENT AFTER", self->GetCompassEntries(), nodeRep);
+            }
+
             SRM_LOG("AFGHUD::OnActorRepresentationAdded: END %s", *self->GetName());
         });
 
@@ -573,8 +665,21 @@ void SRMDebugging::RegisterNativeDebugHooks()
         [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation)
         {
             SRM_LOG("AFGHUD::OnActorRepresentationUpdated: START %s", *self->GetName());
-            //DumpRepresentation("AFGHUD::OnActorRepresentationUpdated:", actorRepresentation);
+            DumpRepresentation("AFGHUD::OnActorRepresentationUpdated:", actorRepresentation);
+
+            UFGResourceNodeRepresentation* nodeRep = Cast<UFGResourceNodeRepresentation>(actorRepresentation);
+            if (nodeRep)
+            {
+                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationUpdated: PRESENT BEFORE", self->GetCompassEntries(), nodeRep);
+            }
+
             scope(self, actorRepresentation);
+
+            if (nodeRep)
+            {
+                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationUpdated: PRESENT AFTER", self->GetCompassEntries(), nodeRep);
+            }
+
             SRM_LOG("AFGHUD::OnActorRepresentationUpdated: END %s", *self->GetName());
         });
 

@@ -76,5 +76,6 @@ public:
 	static void DumpUObject(FString prefix, UObject* object);
 	static void DumpPlayerState(FString prefix, APlayerState* state);
 	static void DumpCompassEntry(FString prefix, FCompassEntry& compassEntry, int* indexPtr = nullptr, bool shortDump = true);
+	static void DumpMatchingCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries, UFGResourceNodeRepresentation* rep, bool shortDump = true);
 	static void DumpCompassEntries(FString prefix, TArray<FCompassEntry>& compassEntries, bool shortDump = true);
 };

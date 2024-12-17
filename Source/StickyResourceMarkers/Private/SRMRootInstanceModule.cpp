@@ -125,7 +125,7 @@ void USRMRootInstanceModule::Initialize()
     // Set all the values in ERepresentationType
     repTypeEnum->SetEnums(allEnums, repTypeEnum->GetCppForm(), EEnumFlags::None, hasExistingMax);
 
-    this->LastResourceRepresentationType = (ERepresentationType)(nextValue - 1); // Undo once since the macro always increments
+    this->LastResourceRepresentationType = (ERepresentationType)(nextValue - 1); // Subtract one since the macro always increments
 
     SRM_LOG("Registering hooks...");
 
@@ -157,22 +157,49 @@ void USRMRootInstanceModule::Initialize()
             return self->mIsOccupied;
         });
 
-    //SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNodeScan_Server,
-    //    [](auto& scope, AFGResourceNodeBase* self)
-    //    {
-    //        SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: START");
-    //        scope(self);
-    //        SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END");
-    //    });
-
-    SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNode_Local,
-        [&](auto& scope, AFGResourceNodeBase* self, float lifeSpan)
+    SUBSCRIBE_METHOD(AFGResourceNodeBase::ScanResourceNodeScan_Server,
+        [&](auto& scope, AFGResourceNodeBase* self)
         {
-            SRM_LOG("AFGResourceNodeBase::ScanResourceNode_Local: START, %d", lifeSpan);
-            // Turn all local scan node hits to server node hits
-            this->GetGameWorldModule()->Local_CreateRepresentation_Server(self);
+            SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: START");
+
+            auto gameWorldModule = this->GetGameWorldModule();
+            if (gameWorldModule->IsNodeCurrentlyRepresented(self))
+            {
+                scope.Cancel();
+                SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END (CANCELED - NODE %s ALREADY REPRESENTED)", *self->GetName());
+                return;
+            }
+
+            scope(self);
+            gameWorldModule->SetNodeRepresented(self);
+            SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END");
+        });
+
+    SUBSCRIBE_METHOD(AFGResourceScanner::CreateResourceNodeRepresentations,
+        [&](auto& scope, AFGResourceScanner* self, const FNodeClusterData& cluster)
+        {
+            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: START %d nodes", cluster.Nodes.Num());
+
+            auto gameWorldModule = this->GetGameWorldModule();
+
+            // Cluster representations don't have a resource descriptor readily available, so it would take
+            // workarounds to support them correctly. Plus, because they don't have a descriptor, the map menu already
+            // has a bug where it adds empty lines to the menu on scan.  Overall, clusters icons add so little value
+            // (and, to me, negative value) that they aren't worth supporting.
+            // This splits clusters into individual nodes so that we don't have to deal with clusters at all anywhere.
+            for (auto node : cluster.Nodes)
+            {
+                if (gameWorldModule->IsNodeCurrentlyRepresented(node))
+                {
+                    continue;
+                }
+
+                gameWorldModule->Local_CreateRepresentation_Server(node);
+                gameWorldModule->SetNodeRepresented(node);
+            }
+
             scope.Cancel();
-            SRM_LOG("AFGResourceNodeBase::ScanResourceNode_Local: END");
+            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END (CANCELED!)");
         });
 
     SUBSCRIBE_METHOD(AFGResourceNodeBase::UpdateNodeRepresentation,
@@ -181,14 +208,6 @@ void USRMRootInstanceModule::Initialize()
             SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: START %s, FName: %s", *self->GetName(), *self->GetFName().ToString());
 
             auto gameWorldModule = this->GetGameWorldModule();
-
-            if (gameWorldModule->IsNodeCurrentlyRepresented(self))
-            {
-                SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END (CANCELED - ALREADY REPRESENTED) %s", *self->GetName());
-                scope.Cancel();
-                return;
-            }
-
             if (gameWorldModule->IsGameInitializing)
             {
                 if (auto frackingCore = Cast<AFGResourceNodeFrackingCore>(self))
@@ -209,13 +228,6 @@ void USRMRootInstanceModule::Initialize()
             }
 
             scope(self);
-
-            // Sometimes this gets called and doesn't actually create the representation to first time, particularly when connecting to a server
-            if (self->mResourceNodeRepresentation != nullptr)
-            {
-                gameWorldModule->SetNodeRepresented(self);
-            }
-
             SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END %s", *self->GetName());
         });
 
@@ -239,7 +251,7 @@ void USRMRootInstanceModule::Initialize()
 
             scope(self, resourceNode);
 
-            // Since we only add server-side and that's never from the "resource scanner", then it's being added with the assumption that it's only going on the map.
+            // Since we only add server-side and that's never from the resource scanner, then it's being added with the assumption that it's only going on the map.
             // Because we make all resource markers available to the compass, we need to finish setting it up for the compass.
             if (isResourceRepresentation)
             {
@@ -267,42 +279,6 @@ void USRMRootInstanceModule::Initialize()
 
             auto representationType = scope(self);
             return representationType;
-        });
-
-    SUBSCRIBE_METHOD_VIRTUAL(AFGResourceScanner::BeginPlay,
-        GetMutableDefault<AFGResourceScanner>(),
-        [](auto& scope, AFGResourceScanner* self)
-        {
-            SRM_LOG("AFGResourceScanner::BeginPlay: START %s", *self->GetName());
-            self->mRepresentationLifeSpan = 0.0; // So that resource representations never disappear
-            scope(self);
-            SRM_LOG("AFGResourceScanner::BeginPlay: END %s", *self->GetName());
-        });
-
-    SUBSCRIBE_METHOD(AFGResourceScanner::CreateResourceNodeRepresentations,
-        [&](auto& scope, AFGResourceScanner* self, const FNodeClusterData& cluster)
-        {
-            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: START %d nodes", cluster.Nodes.Num());
-
-            // Cluster representations don't have a resource descriptor readily available, so it would take
-            // workarounds to support them. Plus, because they don't have their descriptor, the map menu already
-            // has a bug where it adds empty lines to the menu on scan.  Overall, clusters icons add so little value
-            // (and, to me, negative value) that they aren't worth supporting.
-            // This splits clusters into individual nodes so that we don't have to deal with them at all anywhere.
-            if (cluster.Nodes.Num() > 1)
-            {
-                for (auto node : cluster.Nodes)
-                {
-                    self->CreateResourceNodeRepresentations(FNodeClusterData(node));
-                }
-                scope.Cancel();
-                SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END (CANCELED - MULTIPLE)");
-                return;
-            }
-
-            scope(self, cluster);
-
-            SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END");
         });
 
     SRM_LOG("Native hooks registered...");
