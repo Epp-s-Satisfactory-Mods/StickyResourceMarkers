@@ -5,6 +5,7 @@
 #include "FGInteractWidget.h"
 #include "FGMapObjectWidget.h"
 #include "FGMapWidget.h"
+#include "FGResourceDescriptor.h"
 #include "FGResourceNodeRepresentation.h"
 #include "FGUserWidget.h"
 #include "Module/GameInstanceModule.h"
@@ -21,6 +22,7 @@ class STICKYRESOURCEMARKERS_API USRMRootInstanceModule : public UGameInstanceMod
 protected:
     void Initialize();
     void RegisterDebugHooks();
+    bool TryGetResourceRepresentationType(TSubclassOf<UFGResourceDescriptor> resourceDescriptor, ERepresentationType& resourceRepresentationType);
     bool TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, ERepresentationType& resourceRepresentationType);
     bool TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, ERepresentationType& resourceRepresentationType);
 
@@ -37,6 +39,7 @@ protected:
     TMap<ERepresentationType, FText> ResourceTypeNameByResourceRepresentationType;
 
     virtual void DispatchLifecycleEvent(ELifecyclePhase phase) override;
+
 
     // The current game world module needs to manage state that is only relevant to the currently-loaded world but this module
     // installs all the hooks before any game world module is created. The hooks that need to store world-specific state will
