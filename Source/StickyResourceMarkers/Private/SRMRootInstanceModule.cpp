@@ -167,15 +167,26 @@ void USRMRootInstanceModule::Initialize()
             SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: START");
 
             auto gameWorldModule = this->GetGameWorldModule();
-            if (gameWorldModule->IsNodeCurrentlyRepresented(self))
+
+            // Make sure we don't operate on modded/unknown resource types
+            ERepresentationType representationType;
+            bool isKnownResourceType = TryGetResourceRepresentationType(self, representationType);
+            if (isKnownResourceType)
             {
-                scope.Cancel();
-                SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END (CANCELED - NODE %s ALREADY REPRESENTED)", *self->GetName());
-                return;
+                if (gameWorldModule->IsNodeCurrentlyRepresented(self))
+                {
+                    scope.Cancel();
+                    SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END (CANCELED - NODE %s ALREADY REPRESENTED)", *self->GetName());
+                    return;
+                }
             }
 
             scope(self);
-            gameWorldModule->SetNodeRepresented(self);
+
+            if (isKnownResourceType)
+            {
+                gameWorldModule->SetNodeRepresented(self);
+            }
             SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END");
         });
 
@@ -207,6 +218,14 @@ void USRMRootInstanceModule::Initialize()
 
             auto gameWorldModule = this->GetGameWorldModule();
 
+            // Make sure we don't operate on modded/unknown resource types
+            ERepresentationType representationType;
+            if (!TryGetResourceRepresentationType(cluster.ResourceDescriptor, representationType))
+            {
+                scope(self, cluster);
+                SRM_LOG("AFGResourceScanner::CreateResourceNodeRepresentations: END (DEFAULT - Was not a known resource representation type)");
+            }
+
             // Cluster representations don't have a resource descriptor readily available, so it would take
             // workarounds to support them correctly. Plus, because they don't have a descriptor, the map menu already
             // has a bug where it adds empty lines to the menu on scan.  Overall, clusters icons add so little value
@@ -235,19 +254,24 @@ void USRMRootInstanceModule::Initialize()
             auto gameWorldModule = this->GetGameWorldModule();
             if (gameWorldModule->IsGameInitializing)
             {
-                if (auto frackingCore = Cast<AFGResourceNodeFrackingCore>(self))
+                // Make sure we don't operate on modded/unknown resource types
+                ERepresentationType representationType;
+                if (TryGetResourceRepresentationType(self, representationType))
                 {
-                    int32 totalSatellites = 0;
-                    frackingCore->GetNumOccupiedSatellites(totalSatellites);
-
-                    // If there are no satellites, the game is still loading. This can happen when loading a game with a radar tower.
-                    // Store it to be initialized later by the game world module and cancel this initialization.
-                    if (totalSatellites == 0)
+                    if (auto frackingCore = Cast<AFGResourceNodeFrackingCore>(self))
                     {
-                        gameWorldModule->LateInitializedResourceNodes.Add(frackingCore);
-                        SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END (CANCELED) %s", *self->GetName());
-                        scope.Cancel();
-                        return;
+                        int32 totalSatellites = 0;
+                        frackingCore->GetNumOccupiedSatellites(totalSatellites);
+
+                        // If there are no satellites, the game is still loading. This can happen when loading a game with a radar tower.
+                        // Store it to be initialized later by the game world module and cancel this initialization.
+                        if (totalSatellites == 0)
+                        {
+                            gameWorldModule->LateInitializedResourceNodes.Add(frackingCore);
+                            SRM_LOG("AFGResourceNodeBase::UpdateNodeRepresentation: END (CANCELED) %s", *self->GetName());
+                            scope.Cancel();
+                            return;
+                        }
                     }
                 }
             }
@@ -265,8 +289,8 @@ void USRMRootInstanceModule::Initialize()
             // constructing this map on game initialization but the available methods of getting all item descriptors all crash when
             // you attempt to access their item names at any point in initialization.
             ERepresentationType representationType;
-            bool isResourceRepresentation = TryGetResourceRepresentationType(resourceNode, representationType);
-            if (isResourceRepresentation)
+            bool isKnownResourceType = TryGetResourceRepresentationType(resourceNode, representationType);
+            if (isKnownResourceType)
             {
                 if (!this->ResourceTypeNameByResourceRepresentationType.Contains(representationType))
                 {
@@ -278,7 +302,7 @@ void USRMRootInstanceModule::Initialize()
 
             // Since we only add server-side and that's never from the resource scanner, then it's being added with the assumption that it's only going on the map.
             // Because we make all resource markers available to the compass, we need to finish setting it up for the compass.
-            if (isResourceRepresentation)
+            if (isKnownResourceType)
             {
                 self->mRepresentationColor = FLinearColor::White;
                 self->mShouldShowInCompass = true;
@@ -386,7 +410,7 @@ void USRMRootInstanceModule::Initialize()
     BEGIN_HOOK_RETURN(BPW_MapFilterCategoriesClass, CanBeSeenOnCompass)
         auto localHelper = helper.GetLocalVariableHelper();
         ERepresentationType representationType = *localHelper->GetEnumVariablePtr<ERepresentationType>(TEXT("Index"));
-        if(representationType == ERepresentationType::RT_Resource || this->IsResourceRepresentationType(representationType))
+        if(this->IsResourceRepresentationType(representationType))
         {
             auto outHelper = helper.GetOutVariableHelper();
             outHelper->SetBoolVariable(TEXT("ReturnValue"), true);
