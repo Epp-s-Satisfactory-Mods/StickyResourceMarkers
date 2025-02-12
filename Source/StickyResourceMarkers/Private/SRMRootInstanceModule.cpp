@@ -190,15 +190,17 @@ void USRMRootInstanceModule::Initialize()
             SRM_LOG("AFGResourceNodeBase::ScanResourceNodeScan_Server: END");
         });
 
-    SUBSCRIBE_METHOD(AFGResourceScanner::SetResourceDescriptorToScanFor,
-        [&](auto& scope, AFGResourceScanner* self, TSubclassOf< UFGResourceDescriptor > inClass)
+    SUBSCRIBE_UOBJECT_METHOD(AFGResourceScanner, ScanReleased,
+        [&](auto& scope, AFGResourceScanner* self)
         {
-            SRM_LOG("AFGResourceScanner::SetResourceDescriptorToScanFor: START (%s)", *inClass->GetName());
+            SRM_LOG("AFGResourceScanner::ScanReleased: START (%s)", *inClass->GetName());
+
+            auto scanningFor = self->mResourceDescriptorToScanFor;
 
             // When we scan for a resource, set it to visible on the compass, because it feels weird to scan and hear pings
             // but not see anything on the compass. The assumption is that if you're scanning, you will want to see them.
             ERepresentationType resourceRepresentationType;
-            if (TryGetResourceRepresentationType(inClass, resourceRepresentationType))
+            if (TryGetResourceRepresentationType(scanningFor, resourceRepresentationType))
             {
                 auto player = Cast<AFGCharacterPlayer>(self->GetOwner());
                 auto gameWorldModule = this->GetGameWorldModule();
@@ -214,9 +216,9 @@ void USRMRootInstanceModule::Initialize()
                 }
             }
 
-            scope(self, inClass);
+            scope(self);
 
-            SRM_LOG("AFGResourceScanner::SetResourceDescriptorToScanFor: END");
+            SRM_LOG("AFGResourceScanner::ScanReleased: END");
         });
 
     SUBSCRIBE_METHOD(AFGResourceScanner::CreateResourceNodeRepresentations,
