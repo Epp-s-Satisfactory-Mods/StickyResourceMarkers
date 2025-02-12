@@ -1,7 +1,7 @@
 {
 	"FileVersion": 3,
 	"Version": 0,
-	"VersionName": "0.2.0",
+	"VersionName": "0.3.0",
 	"FriendlyName": "Sticky Resource Markers",
 	"Description": "Resource node compass and map markers are permanent and filterable via the map UI.",
 	"Category": "Modding",
@@ -28,6 +28,6 @@
 			"SemVersion": "^3.9.1"
 		}
 	],
-	"SemVersion": "0.2.0",
+	"SemVersion": "0.3.0",
 	"GameVersion": ">=383729"
 }
