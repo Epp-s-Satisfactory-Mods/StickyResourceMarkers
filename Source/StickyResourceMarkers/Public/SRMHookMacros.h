@@ -7,6 +7,13 @@
 #include "Patching/BlueprintHookHelper.h"
 #include "SRMLogMacros.h"
 
+#define LOG_NATIVE_METHOD_CALL(CLASS, METHOD) \
+    SUBSCRIBE_UOBJECT_METHOD(CLASS, METHOD, [](auto& scope, auto&&... args) { \
+        SRM_LOG( #CLASS "::" #METHOD ": START"); \
+        scope(args...); \
+        SRM_LOG( #CLASS "::" #METHOD ": END"); \
+    });
+
 #define BEGIN_BLUEPRINT_HOOK_DEFINITIONS \
     auto hookManager = GEngine->GetEngineSubsystem<UBlueprintHookManager>(); \
     int32 CurrentOffset = 0;
@@ -55,7 +62,7 @@
 #define LOG_HOOK_ENUM( VARIABLE_NAME, HELPER_ACCESSOR, ENUM_TYPE ) \
         auto VARIABLE_NAME##_helper = helper.HELPER_ACCESSOR(); \
         auto VARIABLE_NAME = VARIABLE_NAME##_helper->GetEnumVariablePtr<ENUM_TYPE>(TEXT(#VARIABLE_NAME)); \
-        SRM_LOG("%s::%s:\t"#VARIABLE_NAME" ("#ENUM_TYPE"): %d", *contextName, *functionName, *VARIABLE_NAME);
+        SRM_LOG("%s::%s:\t"#VARIABLE_NAME" ("#ENUM_TYPE"): %s", *contextName, *functionName, *StaticEnum<ENUM_TYPE>()->GetNameStringByValue((int64)*VARIABLE_NAME));
 
 #define LOG_LOCAL_ENUM( VARIABLE_NAME, ENUM_TYPE ) LOG_HOOK_ENUM( VARIABLE_NAME, GetLocalVariableHelper, ENUM_TYPE )
 #define LOG_OUT_ENUM( VARIABLE_NAME, ENUM_TYPE ) LOG_HOOK_ENUM( VARIABLE_NAME, GetOutVariableHelper, ENUM_TYPE )

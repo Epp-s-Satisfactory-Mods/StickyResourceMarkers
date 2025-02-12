@@ -84,7 +84,7 @@ void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentati
 
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s Representation Text: %s", *nestedPrefix, *rep->GetRepresentationText().ToString());
-    SRM_LOG("%s RepresentationType: %d", *nestedPrefix, rep->GetRepresentationType());
+    SRM_LOG("%s RepresentationType: %s", *nestedPrefix, *GetEnumNameString(rep->GetRepresentationType()));
     SRM_LOG("%s GetShouldShowInCompass: %d", *nestedPrefix, rep->GetShouldShowInCompass());
     SRM_LOG("%s GetShouldShowOnMap: %d", *nestedPrefix, rep->GetShouldShowOnMap());
 
@@ -92,7 +92,7 @@ void SRMDebugging::DumpRepresentation(FString prefix, const UFGActorRepresentati
     {
         SRM_LOG("%s mCachedShouldShowInCompass: %d", *nestedPrefix, rep->mCachedShouldShowInCompass);
         SRM_LOG("%s mCachedShouldShowOnMap: %d", *nestedPrefix, rep->mCachedShouldShowOnMap);
-        SRM_LOG("%s GetCompassViewDistance: %d", *nestedPrefix, rep->GetCompassViewDistance());
+        SRM_LOG("%s GetCompassViewDistance: %s", *nestedPrefix, *GetEnumNameString(rep->GetCompassViewDistance()));
         SRM_LOG("%s mBackgroundIsPrimaryColor: %d", *nestedPrefix, rep->mBackgroundIsPrimaryColor);
         //SRM_LOG("%s GetRepresentationCompassMaterial: %s", *nestedPrefix, *rep->GetRepresentationCompassMaterial()->GetName());
         SRM_LOG("%s GetCompassHeightAlignment: %f", *nestedPrefix, rep->GetCompassHeightAlignment());
@@ -193,6 +193,7 @@ void SRMDebugging::DumpCompassEntry(FString prefix, FCompassEntry& compassEntry,
     auto nestedPrefix = prefix + "\t";
     SRM_LOG("%s bEnabled: %d", *nestedPrefix, compassEntry.bEnabled);
     SRM_LOG("%s bIsFilteredOut: %d", *nestedPrefix, compassEntry.bIsFilteredOut);
+    SRM_LOG("%s MaxDrawRange: %f", *nestedPrefix, compassEntry.MaxDrawRange);
 
     if (!shortDump)
     {
@@ -360,6 +361,10 @@ void SRMDebugging::RegisterNativeDebugHooks()
             return values;
         });
 
+    //
+    // AFGActorRepresentationManager
+    //
+
     SUBSCRIBE_METHOD(AFGActorRepresentationManager::CreateAndAddNewRepresentation,
         [](auto& scope, AFGActorRepresentationManager* self, AActor* realActor, const bool isLocal = false, TSubclassOf<UFGActorRepresentation> representationClass = nullptr)
         {
@@ -463,6 +468,21 @@ void SRMDebugging::RegisterNativeDebugHooks()
             SRM_LOG("AFGActorRepresentationManager::SetCompassRepresentationTypeFilter: END");
         });
 
+    SUBSCRIBE_METHOD(AFGActorRepresentationManager::GetDistanceValueFromCompassViewDistance,
+        [](auto& scope, AFGActorRepresentationManager* self, ECompassViewDistance viewDistance)
+        {
+            SRM_LOG("AFGActorRepresentationManager::GetDistanceValueFromCompassViewDistance: START ECompassViewDistance: %d", viewDistance);
+            auto ret = scope(self, viewDistance);
+            SRM_LOG("AFGActorRepresentationManager::GetDistanceValueFromCompassViewDistance: END. Returning: %f", ret);
+        });
+
+    LOG_NATIVE_METHOD_CALL(AFGActorRepresentationManager, GetAllActorRepresentations);
+    LOG_NATIVE_METHOD_CALL(AFGActorRepresentationManager, SetCompassViewDistanceForActorRepresentation);
+
+    //
+    // UFGResourceNodeRepresentation
+    //
+
     SUBSCRIBE_METHOD_VIRTUAL(UFGResourceNodeRepresentation::SetupActorRepresentation,
         GetMutableDefault<UFGResourceNodeRepresentation>(),
         [](auto& scope, UFGResourceNodeRepresentation* self, AActor* realActor, bool isLocal, float lifeSpan)
@@ -478,6 +498,10 @@ void SRMDebugging::RegisterNativeDebugHooks()
     //    {
     //        DumpRepresentation("UFGResourceNodeRepresentation::GetRepresentationCompassMaterial: AFTER", self);
     //    });
+
+    //
+    // UFGActorRepresentation
+    //
 
     SUBSCRIBE_METHOD_VIRTUAL(UFGActorRepresentation::RemoveActorRepresentation,
         GetMutableDefault<UFGActorRepresentation>(),
@@ -506,6 +530,10 @@ void SRMDebugging::RegisterNativeDebugHooks()
             DumpRepresentation("UFGActorRepresentation::TrySetupDestroyTimer: END", self);
         });
 
+    //
+    // UFGResourceNodeRepresentation
+    //
+
     SUBSCRIBE_METHOD(UFGResourceNodeRepresentation::SetupResourceNodeRepresentation,
         [](auto& scope, UFGResourceNodeRepresentation* self, class AFGResourceNodeBase* resourceNode)
         {
@@ -513,6 +541,10 @@ void SRMDebugging::RegisterNativeDebugHooks()
             scope(self, resourceNode);
             DumpRepresentation("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation: END", self);
         });
+
+    //
+    // AFGResourceNodeBase
+    //
 
     SUBSCRIBE_METHOD(AFGResourceNodeBase::OnIsOccupiedChanged,
         [](auto& scope, AFGResourceNodeBase* self, bool newIsOccupied)
@@ -583,6 +615,10 @@ void SRMDebugging::RegisterNativeDebugHooks()
     //        DumpResourceNode("AFGResourceNodeBase::UpdateNodeRepresentation: END", self);
     //    });
 
+    //
+    // AFGResourceNodeFrackingCore
+    //
+
     SUBSCRIBE_METHOD_VIRTUAL(AFGResourceNodeFrackingCore::BeginPlay,
         GetMutableDefault<AFGResourceNodeFrackingCore>(),
         [&](auto& scope, AFGResourceNodeFrackingCore* self)
@@ -622,6 +658,10 @@ void SRMDebugging::RegisterNativeDebugHooks()
             SRM_LOG("AFGResourceNodeFrackingSatellite::BeginPlay: END %s. Core ptr: %s. Num satellites: %d", *self->GetName(), *self->GetCore()->GetName(), totalSatellites);
         });
 
+    //
+    // AFGHUD
+    //
+
     SUBSCRIBE_METHOD(AFGHUD::SetCompassEntryVisibility,
         [](auto& scope, AFGHUD* self, UFGActorRepresentation* actorRepresentation, bool visible)
         {
@@ -639,14 +679,14 @@ void SRMDebugging::RegisterNativeDebugHooks()
             UFGResourceNodeRepresentation* nodeRep = Cast<UFGResourceNodeRepresentation>(actorRepresentation);
             if (nodeRep)
             {
-                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationAdded: PRESENT BEFORE", self->GetCompassEntries(), nodeRep);
+                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationAdded: PRESENT BEFORE", self->GetCompassEntries(), nodeRep, false);
             }
 
             scope(self, actorRepresentation);
 
             if (nodeRep)
             {
-                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationAdded: PRESENT AFTER", self->GetCompassEntries(), nodeRep);
+                DumpMatchingCompassEntries("AFGHUD::OnActorRepresentationAdded: PRESENT AFTER", self->GetCompassEntries(), nodeRep, false);
             }
 
             SRM_LOG("AFGHUD::OnActorRepresentationAdded: END %s", *self->GetName());
@@ -690,6 +730,10 @@ void SRMDebugging::RegisterNativeDebugHooks()
             scope(self, type, visible);
             SRM_LOG("AFGHUD::OnActorRepresentationFiltered END");
         });
+
+    //
+    // AFGBuildableRadarTower
+    //
 
     SUBSCRIBE_METHOD(AFGBuildableRadarTower::ScanForResources,
         [](auto& scope, AFGBuildableRadarTower* self)
@@ -1033,7 +1077,6 @@ void SRMDebugging::RegisterDebugHooks_BPW_MapFilterCategories(UClass* Class)
         LOG_LOCAL_OBJ(Content)
     FINISH_HOOK
     HOOK_RETURN(Class, AddChild)
-
 
     HOOK_START_AND_RETURN(Class, ToggleShowOnCompass);
     HOOK_START_AND_RETURN(Class, ToggleShowOnMap);

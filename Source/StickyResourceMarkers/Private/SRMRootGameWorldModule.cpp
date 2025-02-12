@@ -1,6 +1,8 @@
 #include "SRMRootGameWorldModule.h"
 
+#include "Configuration/ConfigManager.h"
 #include "EngineUtils.h"
+#include "FGActorRepresentationManager.h"
 #include "FGBlueprintFunctionLibrary.h"
 #include "FGItemDescriptor.h"
 #include "FGPlayerController.h"
@@ -8,6 +10,7 @@
 #include "FGResourceNode.h"
 
 #include "SRMClientNodeSubsystem.h"
+#include "SRMConfigurationStruct.h"
 #include "SRMDebugging.h"
 #include "SRMLogMacros.h"
 #include "SRMRequestRepresentNodeRCO.h"
@@ -65,11 +68,19 @@ void USRMRootGameWorldModule::DispatchLifecycleEvent(ELifecyclePhase phase)
             this->ServerNodeSubsystem = ASRMServerNodeSubsystem::Get(this->GetWorld());
             SRM_LOG("USRMRootGameWorldModule::DispatchLifecycleEvent. ServerNodeSubsystem: %p", this->ServerNodeSubsystem);
             USRMRootInstanceModule::SetGameWorldModule(this);
+            if (!IsRunningDedicatedServer())
+            {
+                Local_SubscribeConfigUpdates();
+                // Don't do a full config update as the actor representation manager is not set up yet when connecting to a server.
+                // When it comes up, it will use the correct values.
+                this->UpdateConfigValues();
+            }
+
             break;
         case ELifecyclePhase::POST_INITIALIZATION:
             auto netMode = this->GetWorld()->GetNetMode();
             SRM_LOG("USRMRootGameWorldModule::DispatchLifecycleEvent. netMode: %d", netMode);
-            if (netMode == ENetMode::NM_DedicatedServer || netMode == ENetMode::NM_ListenServer || netMode == ENetMode::NM_Standalone)
+            if (netMode < ENetMode::NM_Client)
             {
                 Server_InitializeLateResourceNodes();
                 Server_RestoreResourceMarkers();
@@ -128,4 +139,104 @@ void USRMRootGameWorldModule::Server_RestoreResourceMarkers()
     }
 
     SRM_LOG("Server_RestoreResourceMarkers: END")
+}
+
+void USRMRootGameWorldModule::Local_SubscribeConfigUpdates()
+{
+    SRM_LOG("USRMRootGameWorldModule::Local_SubscribeConfigUpdates: START");
+    auto gameInstance = this->GetWorld()->GetGameInstance();
+    auto configManager = gameInstance->GetSubsystem<UConfigManager>();
+    auto modConfigRoot = configManager->GetConfigurationRootSection(ConfigId);
+
+    for (auto& sectionProperty : modConfigRoot->SectionProperties)
+    {
+        auto& propertyName = sectionProperty.Key;
+        auto configProperty = sectionProperty.Value;
+
+        SRM_LOG("USRMRootGameWorldModule::Local_SubscribeConfigUpdates: Examining config property %s", *propertyName);
+
+        if (propertyName.Equals(TEXT("ScanningUnhidesOnCompass")) ||
+            propertyName.Equals(TEXT("ScanningUnhidesOnMap")) ||
+            propertyName.Equals(TEXT("ResourceCompassViewDistance")) )
+        {
+            SRM_LOG("USRMRootGameWorldModule::Local_SubscribeConfigUpdates: \tSubscribing UpdateConfig to changes on %s, property at %p!", *propertyName, configProperty);
+            configProperty->OnPropertyValueChanged.AddDynamic(this, &USRMRootGameWorldModule::UpdateConfig);
+        }
+    }
+
+    SRM_LOG("USRMRootGameWorldModule::Local_SubscribeConfigUpdates: END");
+}
+
+void USRMRootGameWorldModule::UpdateConfig()
+{
+    SRM_LOG("USRMRootGameWorldModule::UpdateConfig: START");
+    auto config = FSRMConfigurationStruct::GetActiveConfig(this->GetWorld());
+
+    auto oldViewDistance = this->ResourceCompassViewDistance;
+
+    this->UpdateConfigValues();
+
+    if (oldViewDistance != this->ResourceCompassViewDistance)
+    {
+        SRM_LOG("USRMRootGameWorldModule::UpdateConfig: Old view distance: %s. New view distance: %s",
+            *SRMDebugging::GetEnumNameString(oldViewDistance),
+            *SRMDebugging::GetEnumNameString(this->ResourceCompassViewDistance));
+
+        this->UpdateHUDRepresentations();
+    }
+
+    SRM_LOG("USRMRootGameWorldModule::UpdateConfig: END");
+}
+
+void USRMRootGameWorldModule::UpdateConfigValues()
+{
+    SRM_LOG("USRMRootGameWorldModule::UpdateConfigValues: START");
+    auto config = FSRMConfigurationStruct::GetActiveConfig(this->GetWorld());
+
+    this->ScanningUnhidesOnCompass = config.ScanningUnhidesOnCompass;
+    this->ScanningUnhidesOnMap = config.ScanningUnhidesOnMap;
+
+    ECompassViewDistance newViewDistance;
+    switch (config.ResourceCompassViewDistance)
+    {
+        // These magic numbers correspond to the blueprint-defined SRMCompassViewDistance enum values, since ModConfig
+        // doesn't seem to provide a way to bind C++-defined macros to config values.
+    case 0:
+        newViewDistance = ECompassViewDistance::CVD_Near;
+        break;
+    case 1:
+        newViewDistance = ECompassViewDistance::CVD_Mid;
+        break;
+    case 2:
+        newViewDistance = ECompassViewDistance::CVD_Far;
+        break;
+    case 3:
+        newViewDistance = ECompassViewDistance::CVD_Always;
+        break;
+    default:
+        SRM_LOG("USRMRootGameWorldModule::UpdateConfigValues: Unknown ResourceCompassViewDistance config value: %d", config.ResourceCompassViewDistance);
+        newViewDistance = ECompassViewDistance::CVD_Always;
+    }
+
+    this->ResourceCompassViewDistance = newViewDistance;
+    SRM_LOG("USRMRootGameWorldModule::UpdateConfigValues: START");
+}
+
+void USRMRootGameWorldModule::UpdateHUDRepresentations()
+{
+    SRM_LOG("USRMRootGameWorldModule::UpdateHUDRepresentations: START");
+
+    // The representations need to be explicitly updated for the HUD to update view ranges
+    auto actorRepresentationManager = AFGActorRepresentationManager::Get(this->GetWorld());
+    TArray<UFGActorRepresentation*> actorRepresentations;
+    actorRepresentationManager->GetAllActorRepresentations(actorRepresentations);
+    for (auto rep : actorRepresentations)
+    {
+        if (rep->IsA(UFGResourceNodeRepresentation::StaticClass()))
+        {
+            actorRepresentationManager->UpdateRepresentation(rep);
+        }
+    }
+
+    SRM_LOG("USRMRootGameWorldModule::UpdateHUDRepresentations: END");
 }

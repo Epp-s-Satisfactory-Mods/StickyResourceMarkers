@@ -203,7 +203,15 @@ void USRMRootInstanceModule::Initialize()
                 auto player = Cast<AFGCharacterPlayer>(self->GetOwner());
                 auto gameWorldModule = this->GetGameWorldModule();
                 auto manager = AFGActorRepresentationManager::Get(gameWorldModule->GetWorld());
-                manager->SetCompassRepresentationTypeFilter(player, resourceRepresentationType, true);
+                if (gameWorldModule->GetScanningUnhidesOnCompass())
+                {
+                    manager->SetCompassRepresentationTypeFilter(player, resourceRepresentationType, true);
+                }
+
+                if (gameWorldModule->GetScanningUnhidesOnMap())
+                {
+                    manager->SetMapRepresentationTypeFilter(player, resourceRepresentationType, true);
+                }
             }
 
             scope(self, inClass);
@@ -306,10 +314,32 @@ void USRMRootInstanceModule::Initialize()
             {
                 self->mRepresentationColor = FLinearColor::White;
                 self->mShouldShowInCompass = true;
-                self->mCompassViewDistance = ECompassViewDistance::CVD_Always;
+                //self->mCompassViewDistance = ECompassViewDistance::CVD_Always;
             }
 
             SRM_LOG("UFGResourceNodeRepresentation::SetupResourceNodeRepresentation END");
+        });
+
+    SUBSCRIBE_METHOD_VIRTUAL(UFGActorRepresentation::GetCompassViewDistance,
+        GetMutableDefault<UFGActorRepresentation>(),
+        [&](auto& scope, const UFGActorRepresentation* self)
+        {
+            SRMDebugging::DumpRepresentation("UFGActorRepresentation::GetCompassViewDistance START", self);
+
+            if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(self))
+            {
+                ERepresentationType representationType;
+                if (TryGetResourceRepresentationType(nodeRep, representationType))
+                {
+                    auto viewDistance = this->GetGameWorldModule()->GetResourceCompassViewDistance();
+                    scope.Override(viewDistance);
+                    SRM_LOG("UFGActorRepresentation::GetCompassViewDistance END (OVERRIDE WITH %s)", *StaticEnum<ECompassViewDistance>()->GetNameStringByValue((int64)viewDistance));
+                    return viewDistance;
+                }
+            }
+
+            return scope(self);
+            SRM_LOG("UFGActorRepresentation::GetCompassViewDistance END");
         });
 
     SUBSCRIBE_METHOD_VIRTUAL(UFGActorRepresentation::GetRepresentationType,
@@ -326,8 +356,7 @@ void USRMRootInstanceModule::Initialize()
                 }
             }
 
-            auto representationType = scope(self);
-            return representationType;
+            return scope(self);
         });
 
     SRM_LOG("Native hooks registered...");

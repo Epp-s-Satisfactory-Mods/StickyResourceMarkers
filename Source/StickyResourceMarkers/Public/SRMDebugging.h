@@ -51,6 +51,12 @@ public:
     static void DumpFStruct_ActorRep(FString prefix, FStruct_ActorRep* actorRep);
 
     template<typename TEnum>
+    static FString GetEnumNameString(TEnum value)
+    {
+        return StaticEnum<TEnum>()->GetNameStringByValue((int64)value);
+    }
+
+    template<typename TEnum>
     static void DumpEnum(FString prefix, TEnum* testValue = nullptr)
     {
         auto e = StaticEnum<TEnum>();
