@@ -3,6 +3,7 @@
 #include "FGActorRepresentation.h"
 #include "FGActorRepresentationManager.h"
 #include "FGBuildableRadarTower.h"
+#include "FGPlayerController.h"
 #include "FGPlayerState.h"
 #include "FGResourceNodeBase.h"
 #include "FGResourceNodeFrackingCore.h"
@@ -193,12 +194,22 @@ void USRMRootInstanceModule::Initialize()
     SUBSCRIBE_UOBJECT_METHOD(AFGResourceScanner, ScanReleased,
         [&](auto& scope, AFGResourceScanner* self)
         {
-            SRM_LOG("AFGResourceScanner::ScanReleased: START (%s)", *inClass->GetName());
-
             auto scanningFor = self->mResourceDescriptorToScanFor;
+            SRM_LOG("AFGResourceScanner::ScanReleased: START mResourceDescriptorToScanFor: %s", *(scanningFor.Get() ? scanningFor->GetName() : TEXT("null")));
+            SRM_LOG("AFGResourceScanner::ScanReleased: AFGResourceScanner: %s. Owner: %s", *self->GetName(), *self->GetOwner()->GetName());
+            SRM_LOG("AFGResourceScanner::ScanReleased: PlayerController %s",
+                *((Cast<AFGCharacterPlayer>(self->GetOwner())->GetFGPlayerController() == nullptr) ?
+                TEXT("null") :
+                Cast<AFGCharacterPlayer>(self->GetOwner())->GetFGPlayerController()->GetName()));
 
-            // When we scan for a resource, set it to visible on the compass, because it feels weird to scan and hear pings
-            // but not see anything on the compass. The assumption is that if you're scanning, you will want to see them.
+            if (scanningFor == nullptr)
+            {
+                SRM_LOG("AFGResourceScanner::ScanReleased: mResourceDescriptorToScanFor is null. Calling scope and returning.");
+                scope(self);
+                return;
+            }
+
+            // When we scan for a resource, we may need to set it to visible on the compass and/or map depending on user settings.
             ERepresentationType resourceRepresentationType;
             if (TryGetResourceRepresentationType(scanningFor, resourceRepresentationType))
             {
@@ -326,7 +337,8 @@ void USRMRootInstanceModule::Initialize()
         GetMutableDefault<UFGActorRepresentation>(),
         [&](auto& scope, const UFGActorRepresentation* self)
         {
-            SRMDebugging::DumpRepresentation("UFGActorRepresentation::GetCompassViewDistance START", self);
+            SRM_LOG("UFGActorRepresentation::GetCompassViewDistance START %s", *self->GetName());
+            //SRMDebugging::DumpRepresentation("UFGActorRepresentation::GetCompassViewDistance START", self);
 
             if (auto nodeRep = Cast<UFGResourceNodeRepresentation>(self))
             {

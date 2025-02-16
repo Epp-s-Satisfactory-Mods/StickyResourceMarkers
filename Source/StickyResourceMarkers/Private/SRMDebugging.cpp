@@ -244,8 +244,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::SetMapFilter,
         [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
         {
-            SRM_LOG("AFGPlayerState::SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
-            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::SetMapFilter", &representationType);
+            SRM_LOG("AFGPlayerState::SetMapFilter: START: %s, representationType: %s, visible: %d", *self->GetName(), *GetEnumNameString(representationType), visible);
             scope(self, representationType, visible);
             SRM_LOG("AFGPlayerState::SetMapFilter: END");
         });
@@ -253,8 +252,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapFilter,
         [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
         {
-            SRM_LOG("AFGPlayerState::Server_SetMapFilter: START: representationType: %d, visible: %d", representationType, visible);
-            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::Server_SetMapFilter", &representationType);
+            SRM_LOG("AFGPlayerState::Server_SetMapFilter: START: %s, representationType: %s, visible: %d", *self->GetName(), *GetEnumNameString(representationType), visible);
             scope(self, representationType, visible);
             SRM_LOG("AFGPlayerState::Server_SetMapFilter: END");
         });
@@ -262,24 +260,23 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::GetFilteredOutMapTypes,
         [](auto& scope, AFGPlayerState* self)
         {
-            SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: START");
+            SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: START %s", *self->GetName());
             auto values = scope(self);
 
             int i = 0;
             SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: END. %d types", values.Num());
             for (auto repType : values)
             {
-                SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: END, [%d] RepresentationType: %d", i++, repType)
+                SRM_LOG("AFGPlayerState::GetFilteredOutMapTypes: END, [%d] RepresentationType: %s", i++, *GetEnumNameString(repType))
             }
 
             return values;
         });
-    
+
     SUBSCRIBE_METHOD(AFGPlayerState::SetCompassFilter,
         [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
         {
-            SRM_LOG("AFGPlayerState::SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
-            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::SetCompassFilter", &representationType);
+            SRM_LOG("AFGPlayerState::SetCompassFilter: START: %s, representationType: %s, visible: %d", *self->GetName(), *GetEnumNameString(representationType), visible);
             scope(self, representationType, visible);
             SRM_LOG("AFGPlayerState::SetCompassFilter: END");
         });
@@ -287,8 +284,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::Server_SetCompassFilter,
         [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool visible)
         {
-            SRM_LOG("AFGPlayerState::Server_SetCompassFilter: START: representationType: %d, visible: %d", representationType, visible);
-            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::Server_SetCompassFilter", &representationType);
+            SRM_LOG("AFGPlayerState::Server_SetCompassFilter: START: %s, representationType: %s, visible: %d", *self->GetName(), *GetEnumNameString(representationType), visible);
             scope(self, representationType, visible);
             SRM_LOG("AFGPlayerState::Server_SetCompassFilter: END");
         });
@@ -296,14 +292,14 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::GetFilteredOutCompassTypes,
         [](auto& scope, AFGPlayerState* self)
         {
-            SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: START");
+            SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: START %s", *self->GetName());
             auto values = scope(self);
 
             int i = 0;
             SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: END. %d types", values.Num());
             for (auto repType : values)
             {
-                SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: END, [%d] RepresentationType: %d", i++, repType)
+                SRM_LOG("AFGPlayerState::GetFilteredOutCompassTypes: END, [%d] RepresentationType: %s", i++, *GetEnumNameString(repType))
             }
 
             return values;
@@ -312,8 +308,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::SetMapCategoryCollapsed,
         [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
         {
-            SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
-            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::SetMapCategoryCollapsed", &representationType);
+            SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: START: %s, representationType: %s, collapsed: %d", *self->GetName(), *GetEnumNameString(representationType), collapsed);
             scope(self, representationType, collapsed);
             SRM_LOG("AFGPlayerState::SetMapCategoryCollapsed: END");
         });
@@ -321,8 +316,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::Server_SetMapCategoryCollapsed,
         [](auto& scope, AFGPlayerState* self, ERepresentationType representationType, bool collapsed)
         {
-            SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: START: representationType: %d, collapsed: %d", representationType, collapsed);
-            SRMDebugging::DumpEnum<ERepresentationType>("AFGPlayerState::Server_SetMapCategoryCollapsed", &representationType);
+            SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: START: %s, representationType: %s, collapsed: %d", *self->GetName(), *GetEnumNameString(representationType), collapsed);
             scope(self, representationType, collapsed);
             SRM_LOG("AFGPlayerState::Server_SetMapCategoryCollapsed: END");
         });
@@ -340,7 +334,7 @@ void SRMDebugging::RegisterNativeDebugHooks()
         GetMutableDefault<AFGPlayerController>(),
         [](auto& scope, AFGPlayerController* self)
         {
-            SRM_LOG("AFGPlayerController::OnRep_PlayerState: START");
+            SRM_LOG("AFGPlayerController::OnRep_PlayerState: START %s", *self->GetName());
             scope(self);
             SRM_LOG("AFGPlayerController::OnRep_PlayerState: END");
         });
@@ -348,14 +342,14 @@ void SRMDebugging::RegisterNativeDebugHooks()
     SUBSCRIBE_METHOD(AFGPlayerState::GetCollapsedMapCategories,
         [](auto& scope, const AFGPlayerState* self)
         {
-            SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: START");
+            SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: START %s", *self->GetName());
             auto values = scope(self);
 
             int i = 0;
             SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: END. %d types", values.Num());
             for (auto repType : values)
             {
-                SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: END, [%d] RepresentationType: %d", i++, repType)
+                SRM_LOG("AFGPlayerState::GetCollapsedMapCategories: END, [%d] RepresentationType: %s", i++, *GetEnumNameString(repType))
             }
 
             return values;
@@ -729,6 +723,56 @@ void SRMDebugging::RegisterNativeDebugHooks()
             SRM_LOG("AFGHUD::OnActorRepresentationFiltered START: type: %d, visible: %d", type, visible);
             scope(self, type, visible);
             SRM_LOG("AFGHUD::OnActorRepresentationFiltered END");
+        });
+
+    // AFGResourceScanner
+
+    SUBSCRIBE_METHOD(AFGResourceScanner::SetResourceDescriptorToScanFor,
+        [](auto& scope, AFGResourceScanner* self, TSubclassOf< UFGResourceDescriptor > inClass)
+        {
+            SRM_LOG("AFGResourceScanner::SetResourceDescriptorToScanFor: START %s", *inClass->GetName());
+            scope(self, inClass);
+            SRM_LOG("AFGResourceScanner::SetResourceDescriptorToScanFor: END %s", *inClass->GetName());
+        });
+
+    SUBSCRIBE_UOBJECT_METHOD(AFGResourceScanner, Server_ScanReleased_Implementation,
+        [](auto& scope, AFGResourceScanner* self)
+        {
+            SRM_LOG("AFGResourceScanner::Server_ScanReleased_Implementation: START %s", *self->GetName());
+            scope(self);
+            SRM_LOG("AFGResourceScanner::Server_ScanReleased_Implementation: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_UOBJECT_METHOD(AFGResourceScanner, Multicast_ScanReleased_Implementation,
+        [](auto& scope, AFGResourceScanner* self)
+        {
+            SRM_LOG("AFGResourceScanner::Multicast_ScanReleased_Implementation: START %s", *self->GetName());
+            scope(self);
+            SRM_LOG("AFGResourceScanner::Multicast_ScanReleased_Implementation: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_UOBJECT_METHOD(AFGResourceScanner, OnScanPressed,
+        [](auto& scope, AFGResourceScanner* self)
+        {
+            SRM_LOG("AFGResourceScanner::OnScanPressed: START %s", *self->GetName());
+            scope(self);
+            SRM_LOG("AFGResourceScanner::OnScanPressed: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_UOBJECT_METHOD(AFGResourceScanner, OnScanReleased,
+        [](auto& scope, AFGResourceScanner* self)
+        {
+            SRM_LOG("AFGResourceScanner::OnScanReleased: START %s", *self->GetName());
+            scope(self);
+            SRM_LOG("AFGResourceScanner::OnScanReleased: END %s", *self->GetName());
+        });
+
+    SUBSCRIBE_UOBJECT_METHOD(AFGResourceScanner, Input_Scan,
+        [](auto& scope, AFGResourceScanner* self, const FInputActionValue& actionValue)
+        {
+            SRM_LOG("AFGResourceScanner::Input_Scan: START %s", *self->GetName());
+            scope(self, actionValue);
+            SRM_LOG("AFGResourceScanner::Input_Scan: END %s", *self->GetName());
         });
 
     //
