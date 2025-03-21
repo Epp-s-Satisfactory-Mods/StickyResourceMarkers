@@ -14,10 +14,24 @@
 #include "Patching/BlueprintHookManager.h"
 #include "Patching/BlueprintHookHelper.h"
 
+#include "AssetRegistryModule.h"
+#include "CanvasItem.h"
+#include "CanvasPanelSlot.h"
+#include "Engine/Canvas.h"
+#include "Engine/CanvasRenderTarget2D.h"
+#include "FindLast.h"
+#include "HorizontalBox.h"
+#include "HorizontalBoxSlot.h"
+#include "OutputDeviceNull.h"
+#include "WidgetBlueprintGeneratedClass.h"
+
 #include "SRMDebugging.h"
 #include "SRMHookMacros.h"
 #include "SRMLogMacros.h"
 #include "SRMRootGameWorldModule.h"
+
+#define LOCTEXT_NAMESPACE "StickyResourceMarkers"
+
 
 USRMRootGameWorldModule* USRMRootInstanceModule::CurrentGameWorldModule = nullptr;
 
@@ -33,6 +47,53 @@ void USRMRootInstanceModule::DispatchLifecycleEvent(ELifecyclePhase phase)
     }
 
     Super::DispatchLifecycleEvent(phase);
+}
+
+void USRMRootInstanceModule::SetAllResourcesVisibility(AFGCharacterPlayer* player, EResourceVisibilityLocation location, bool visible)
+{
+    auto gameWorldModule = this->GetGameWorldModule();
+    auto manager = AFGActorRepresentationManager::Get(gameWorldModule->GetWorld());
+
+    SRM_LOG("SetAllResourcesVisibility: Location: %d, Visibile: %d", location, visible);
+
+    for (uint8 representationTypeId = (uint8)this->FirstResourceRepresentationType; representationTypeId <= (uint8)this->LastResourceRepresentationType; ++representationTypeId)
+    {
+        switch (location)
+        {
+        case EResourceVisibilityLocation::Compass:
+            manager->SetCompassRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
+            break;
+        case EResourceVisibilityLocation::Map:
+            manager->SetMapRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
+            break;
+        }
+    }
+}
+
+void USRMRootInstanceModule::SetAllResourcesCompassVisibility(AFGCharacterPlayer* player, bool visible)
+{
+    auto gameWorldModule = this->GetGameWorldModule();
+    auto manager = AFGActorRepresentationManager::Get(gameWorldModule->GetWorld());
+
+    SRM_LOG("SetAllResourcesCompassVisibility: Visibile: %d", visible);
+
+    for (uint8 representationTypeId = (uint8)this->FirstResourceRepresentationType; representationTypeId <= (uint8)this->LastResourceRepresentationType; ++representationTypeId)
+    {
+        manager->SetCompassRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
+    }
+}
+
+void USRMRootInstanceModule::SetAllResourcesMapVisibility(AFGCharacterPlayer* player, bool visible)
+{
+    auto gameWorldModule = this->GetGameWorldModule();
+    auto manager = AFGActorRepresentationManager::Get(gameWorldModule->GetWorld());
+
+    SRM_LOG("SetAllResourcesMapVisibility: Visibile: %d", visible);
+
+    for (uint8 representationTypeId = (uint8)this->FirstResourceRepresentationType; representationTypeId <= (uint8)this->LastResourceRepresentationType; ++representationTypeId)
+    {
+        manager->SetMapRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
+    }
 }
 
 bool USRMRootInstanceModule::TryGetResourceRepresentationType(TSubclassOf<UFGResourceDescriptor> resourceDescriptor, ERepresentationType& resourceRepresentationType)
@@ -381,6 +442,19 @@ void USRMRootInstanceModule::Initialize()
         return;
     }
 
+    // Make sure the blueprint types we're going to modify are loaded
+    SRMResourceVisibilityButtonClass.LoadSynchronous();
+
+    Widget_MapContainerClass.LoadSynchronous();
+    Widget_MapObjectClass.LoadSynchronous();
+    Widget_MapClass.LoadSynchronous();
+    BPW_MapFilterCategoriesClass.LoadSynchronous();
+    BPW_MapFilterButtonClass.LoadSynchronous();
+    Widget_MapCompass_IconClass.LoadSynchronous();
+
+
+    AddButtonsToMapScreen();
+
     // These blueprint hooks all hook very specific locations in their blueprint functions to trick the map and compass UIs into treating them like
     // they have RepresentationType RT_Resource and/or to add the bits of custom behavior (like putting them in different categories and making them
     // filterable on the compass). If an underlying blueprint function changes even a little, there's a good chance these will have to be updated.
@@ -472,6 +546,108 @@ void USRMRootInstanceModule::Initialize()
     SRM_LOG("Blueprint hooks registered...");
 }
 
+void USRMRootInstanceModule::AddButtonsToMapScreen()
+{
+    class UPanelWidgetAccessor : UPanelWidget
+    {
+    public:
+        static UClass* GetPanelSlotClass(const UPanelWidget* PanelWidget) {
+            return static_cast<const UPanelWidgetAccessor*>(PanelWidget)->GetSlotClass();
+        }
+
+        static TArray<UPanelSlot*>& GetPanelSlots(UPanelWidget* PanelWidget) {
+            return static_cast<UPanelWidgetAccessor*>(PanelWidget)->Slots;
+        }
+        UPanelWidgetAccessor() = delete;
+    };
+
+    const auto* mapContainerClass = Cast<UWidgetBlueprintGeneratedClass>(Widget_MapContainerClass.Get());
+    UWidgetTree* mapContainerWidgetTree = mapContainerClass->GetWidgetTreeArchetype();
+    UWidget* showHideMapMenuButton = mapContainerWidgetTree->FindWidget("ShowHideButton");
+    checkf(showHideMapMenuButton, TEXT("Could not find button that shows/hides the map menu!"));
+
+    int32 childIndex;
+    UPanelWidget* showHideMapMenuContainingPanel = UWidgetTree::FindWidgetParent(showHideMapMenuButton, childIndex);
+
+    UHorizontalBox* newHBox = NewObject<UHorizontalBox>(mapContainerWidgetTree, UHorizontalBox::StaticClass(), "ShowHideResourcesHBox", RF_Transient);
+
+    auto* hBoxPanelSlot = NewObject<UCanvasPanelSlot>(showHideMapMenuContainingPanel, UCanvasPanelSlot::StaticClass(), NAME_None, RF_Transient);
+    hBoxPanelSlot->Content = newHBox;
+    hBoxPanelSlot->Parent = showHideMapMenuContainingPanel;
+    hBoxPanelSlot->SetPosition({ 6, 6 });
+    hBoxPanelSlot->SetAutoSize(true);
+
+    newHBox->Slot = hBoxPanelSlot;
+
+    // Move the show/hide map menu button to the new hbox
+    newHBox->AddChild(showHideMapMenuButton);
+
+    UWidget* hideAllResourcesOnCompassButton = CreateResourceVisibilityButton(newHBox,
+        TEXT("SRMHideAllOnCompass"),
+        LOCTEXT("SRMHideAllOnCompass", "Hide All Resources On Compass"),
+        EResourceVisibilityLocation::Compass,
+        false,
+        showHideMapMenuButton);
+    Cast<UHorizontalBoxSlot>(newHBox->AddChild(hideAllResourcesOnCompassButton))->SetPadding({ 10, 0, 0, 0 });
+
+    UWidget* showAllResourcesOnCompassButton = CreateResourceVisibilityButton(newHBox,
+        TEXT("SRMShowAllOnCompass"),
+        LOCTEXT("SRMShowAllOnCompass", "Show All Resources On Compass"),
+        EResourceVisibilityLocation::Compass,
+        true,
+        showHideMapMenuButton);
+    Cast<UHorizontalBoxSlot>(newHBox->AddChild(showAllResourcesOnCompassButton))->SetPadding({ 10, 0, 0, 0 });
+
+    UWidget* hideAllResourcesOnMapButton = CreateResourceVisibilityButton(newHBox,
+        TEXT("SRMHideAllOnMap"),
+        LOCTEXT("SRMHideAllOnMap", "Hide All Resources On Map"),
+        EResourceVisibilityLocation::Map,
+        false,
+        showHideMapMenuButton);
+    Cast<UHorizontalBoxSlot>(newHBox->AddChild(hideAllResourcesOnMapButton))->SetPadding({ 10, 0, 0, 0 });
+
+    UWidget* showAllResourcesOnMapButton = CreateResourceVisibilityButton(newHBox,
+        TEXT("SRMShowAllOnMap"),
+        LOCTEXT("SRMShowAllOnMap", "Show All Resources On Map"),
+        EResourceVisibilityLocation::Map,
+        true,
+        showHideMapMenuButton);
+    Cast<UHorizontalBoxSlot>(newHBox->AddChild(showAllResourcesOnMapButton))->SetPadding({ 10, 0, 0, 0 });
+
+    TArray<UPanelSlot*>& MutablePanelSlots = UPanelWidgetAccessor::GetPanelSlots(showHideMapMenuContainingPanel);
+    MutablePanelSlots.Insert(hBoxPanelSlot, childIndex);
+}
+
+UWidget* USRMRootInstanceModule::CreateResourceVisibilityButton(
+    UObject* outer,
+    FName name,
+    FText label,
+    EResourceVisibilityLocation visibilityLocation,
+    bool visible,
+    UWidget* templateWidget)
+{
+    auto buttonClass = SRMResourceVisibilityButtonClass.Get();
+
+    UWidget* button = NewObject<UWidget>(outer, buttonClass, name, RF_Transient, templateWidget);
+
+    FProperty* mTextProperty = button->GetClass()->FindPropertyByName("mText");
+    checkf(mTextProperty, TEXT("Did not find mText property"));
+    FText* mTextPtr = mTextProperty->ContainerPtrToValuePtr<FText>(button);
+    *mTextPtr = label;
+
+    FProperty* mVisibilityLocationProperty = button->GetClass()->FindPropertyByName("mVisibilityLocation");
+    checkf(mVisibilityLocationProperty, TEXT("Did not find mVisibilityLocation property"));
+    EResourceVisibilityLocation* mVisibilityLocationPtr = mVisibilityLocationProperty->ContainerPtrToValuePtr<EResourceVisibilityLocation>(button);
+    *mVisibilityLocationPtr = visibilityLocation;
+
+    FBoolProperty* mVisibilityToSetProperty = CastField<FBoolProperty>(button->GetClass()->FindPropertyByName("mVisibilityToSet"));
+    checkf(mVisibilityToSetProperty, TEXT("Did not find mVisibilityToSet property"));
+    void* mVisibilityToSetPtr = mVisibilityToSetProperty->ContainerPtrToValuePtr<void>(button);
+    mVisibilityToSetProperty->SetPropertyValue(mVisibilityToSetPtr, visible);
+
+    return button;
+}
+
 void USRMRootInstanceModule::RegisterDebugHooks()
 {
     if (!SRM_DEBUGGING_ENABLED) return;
@@ -485,13 +661,14 @@ void USRMRootInstanceModule::RegisterDebugHooks()
     }
 
     SRMDebugging::RegisterDebugHooks_Widget_MapContainer(Widget_MapContainerClass.Get());
-    SRMDebugging::RegisterDebugHooks_Widget_MapTab(Widget_MapTabClass.Get());
-    SRMDebugging::RegisterDebugHooks_Widget_Map(Widget_MapClass.Get());
     SRMDebugging::RegisterDebugHooks_Widget_MapObject(Widget_MapObjectClass.Get());
+    SRMDebugging::RegisterDebugHooks_Widget_Map(Widget_MapClass.Get());
+    SRMDebugging::RegisterDebugHooks_BPW_MapFilterCategories(BPW_MapFilterCategoriesClass.Get());
+    SRMDebugging::RegisterDebugHooks_BPW_MapFilterButton(BPW_MapFilterButtonClass.Get());
     SRMDebugging::RegisterDebugHooks_Widget_MapCompass_Icon(Widget_MapCompass_IconClass.Get());
 
+    SRMDebugging::RegisterDebugHooks_Widget_MapTab(Widget_MapTabClass.Get());
     SRMDebugging::RegisterDebugHooks_BPW_MapMenu(BPW_MapMenuClass.Get());
-    SRMDebugging::RegisterDebugHooks_BPW_MapFilterCategories(BPW_MapFilterCategoriesClass.Get());
-    //SRMDebugging::RegisterDebugHooks_BPW_MapFiltersSubCategory(BPW_MapFiltersSubCategoryClass.Get());
-    SRMDebugging::RegisterDebugHooks_BPW_MapFilterButton(BPW_MapFilterButtonClass.Get());
 }
+
+#undef LOCTEXT_NAMESPACE

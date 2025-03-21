@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "FGActorRepresentation.h"
+#include "FGCharacterPlayer.h"
 #include "FGInteractWidget.h"
 #include "FGMapObjectWidget.h"
 #include "FGMapWidget.h"
@@ -14,6 +15,13 @@
 
 class USRMRootGameWorldModule;
 
+UENUM(BlueprintType)
+enum EResourceVisibilityLocation : uint8
+{
+    Compass UMETA(DisplayName = "Compass"),
+    Map UMETA(DisplayName = "Map")
+};
+
 UCLASS()
 class STICKYRESOURCEMARKERS_API USRMRootInstanceModule : public UGameInstanceModule
 {
@@ -21,7 +29,17 @@ class STICKYRESOURCEMARKERS_API USRMRootInstanceModule : public UGameInstanceMod
 
 protected:
     void Initialize();
+    void AddButtonsToMapScreen();
+    UWidget* CreateResourceVisibilityButton(
+        UObject* outer,
+        FName name,
+        FText label,
+        EResourceVisibilityLocation visibilityLocation,
+        bool visible,
+        UWidget* templateWidget);
+
     void RegisterDebugHooks();
+
     bool TryGetResourceRepresentationType(TSubclassOf<UFGResourceDescriptor> resourceDescriptor, ERepresentationType& resourceRepresentationType);
     bool TryGetResourceRepresentationType(const AFGResourceNodeBase* resourceNode, ERepresentationType& resourceRepresentationType);
     bool TryGetResourceRepresentationType(const UFGResourceNodeRepresentation* nodeRep, ERepresentationType& resourceRepresentationType);
@@ -40,7 +58,6 @@ protected:
 
     virtual void DispatchLifecycleEvent(ELifecyclePhase phase) override;
 
-
     // The current game world module needs to manage state that is only relevant to the currently-loaded world but this module
     // installs all the hooks before any game world module is created. The hooks that need to store world-specific state will
     // get this pointer at runtime (after the currently-loaded game world module has registered itself) to manage that state.
@@ -57,36 +74,51 @@ public:
         CurrentGameWorldModule = module;
     }
 
-    // These are public so that the types can be set in Unreal Editor, rather than manually identifying resources by string.
-    // If the types get moved, they can still fail to load but setting (and fixing) these in the UI is less error-prone than
-    // raw strings, plus apparently there is some forwarding mechanism and if CSS does move them, these might still work.
-    // Not all of these are needed for the mod, but many are related and are/were helpful in analyzing and debugging
+    UFUNCTION(BlueprintCallable)
+    void SetAllResourcesVisibility(AFGCharacterPlayer* player, EResourceVisibilityLocation location, bool visible);
 
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
+    UFUNCTION(BlueprintCallable)
+    void SetAllResourcesCompassVisibility(AFGCharacterPlayer* player, bool visible);
+
+    UFUNCTION(BlueprintCallable)
+    void SetAllResourcesMapVisibility(AFGCharacterPlayer* player, bool visible);
+
+    // These are public so that the types can be set in Unreal Editor, rather than manually identifying resources by string.
+    // If the types get moved, they can still fail to load but setting these in the UI is less error-prone than raw strings,
+    // plus apparently there is some forwarding mechanism and if CSS does move game blueprints, those might still work.
+
+    UPROPERTY(EditDefaultsOnly, Category = "SRM UI Types")
+    TSoftClassPtr<UUserWidget> SRMResourceVisibilityButtonClass;
+
+    //UPROPERTY(EditDefaultsOnly, Category = "SRM Mod UI Types")
+    //TSoftClassPtr<UUserWidget> SRMHideAllOnMapButtonClass;
+
+    // These are vanilla game UI types that need to be modified for the mod
+
+    UPROPERTY(EditAnywhere, Category = "UI Types")
     TSoftClassPtr<UFGInteractWidget> Widget_MapContainerClass;
 
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
-    TSoftClassPtr<UFGInteractWidget> Widget_MapTabClass;
-
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
-    TSoftClassPtr<UFGMapWidget> Widget_MapClass;
-
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
+    UPROPERTY(EditAnywhere, Category = "UI Types")
     TSoftClassPtr<UFGMapObjectWidget> Widget_MapObjectClass;
 
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
-    TSoftClassPtr<UUserWidget> Widget_MapCompass_IconClass;
+    UPROPERTY(EditAnywhere, Category = "UI Types")
+    TSoftClassPtr<UFGMapWidget> Widget_MapClass;
 
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
-    TSoftClassPtr<UFGUserWidget> BPW_MapMenuClass;
-
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
+    UPROPERTY(EditAnywhere, Category = "UI Types")
     TSoftClassPtr<UUserWidget> BPW_MapFilterCategoriesClass;
 
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
-    TSoftClassPtr<UUserWidget> BPW_MapFiltersSubCategoryClass;
-
-    UPROPERTY(EditAnywhere, Category = "UI Widget Types")
+    UPROPERTY(EditAnywhere, Category = "UI Types")
     TSoftClassPtr<UUserWidget> BPW_MapFilterButtonClass;
+
+    UPROPERTY(EditAnywhere, Category = "UI Types")
+    TSoftClassPtr<UUserWidget> Widget_MapCompass_IconClass;
+
+    // These are only used when debugging/analyzing game behavior.
+
+    UPROPERTY(EditAnywhere, Category = "Debug UI Types")
+    TSoftClassPtr<UFGInteractWidget> Widget_MapTabClass;
+
+    UPROPERTY(EditAnywhere, Category = "Debug UI Types")
+    TSoftClassPtr<UFGUserWidget> BPW_MapMenuClass;
 };
 

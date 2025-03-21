@@ -2,4 +2,4 @@
 
 #include "CoreMinimal.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(LogSRM, Verbose, All);
+DECLARE_LOG_CATEGORY_EXTERN(LogStickyResourceMarkers, Verbose, All);
