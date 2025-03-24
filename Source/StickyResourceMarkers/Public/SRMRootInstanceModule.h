@@ -90,9 +90,6 @@ public:
     UPROPERTY(EditDefaultsOnly, Category = "SRM UI Types")
     TSoftClassPtr<UUserWidget> SRMResourceVisibilityButtonClass;
 
-    //UPROPERTY(EditDefaultsOnly, Category = "SRM Mod UI Types")
-    //TSoftClassPtr<UUserWidget> SRMHideAllOnMapButtonClass;
-
     // These are vanilla game UI types that need to be modified for the mod
 
     UPROPERTY(EditAnywhere, Category = "UI Types")

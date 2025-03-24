@@ -23,6 +23,13 @@
 #include "HorizontalBox.h"
 #include "HorizontalBoxSlot.h"
 #include "OutputDeviceNull.h"
+#include "Overlay.h"
+#include "OverlaySlot.h"
+#include "ScaleBox.h"
+#include "SizeBox.h"
+#include "TextBlock.h"
+#include "VerticalBox.h"
+#include "VerticalBoxSlot.h"
 #include "WidgetBlueprintGeneratedClass.h"
 
 #include "SRMDebugging.h"
@@ -31,7 +38,6 @@
 #include "SRMRootGameWorldModule.h"
 
 #define LOCTEXT_NAMESPACE "StickyResourceMarkers"
-
 
 USRMRootGameWorldModule* USRMRootInstanceModule::CurrentGameWorldModule = nullptr;
 
@@ -561,61 +567,115 @@ void USRMRootInstanceModule::AddButtonsToMapScreen()
         UPanelWidgetAccessor() = delete;
     };
 
-    const auto* mapContainerClass = Cast<UWidgetBlueprintGeneratedClass>(Widget_MapContainerClass.Get());
-    UWidgetTree* mapContainerWidgetTree = mapContainerClass->GetWidgetTreeArchetype();
-    UWidget* showHideMapMenuButton = mapContainerWidgetTree->FindWidget("ShowHideButton");
-    checkf(showHideMapMenuButton, TEXT("Could not find button that shows/hides the map menu!"));
+    UWidget* buttonTemplateWidget = nullptr;
+    //const auto* mapContainerClass = Cast<UWidgetBlueprintGeneratedClass>(Widget_MapContainerClass.Get());
+    //UWidget* showHideButton = mapContainerClass->GetWidgetTreeArchetype()->FindWidget("ShowHideButton");
+    //UWidget* buttonTemplateWidget = showHideButton;
 
-    int32 childIndex;
-    UPanelWidget* showHideMapMenuContainingPanel = UWidgetTree::FindWidgetParent(showHideMapMenuButton, childIndex);
+    const auto* mapMenuClass = Cast<UWidgetBlueprintGeneratedClass>(BPW_MapMenuClass.Get());
+    UWidgetTree* mapMenuWidgetTree = mapMenuClass->GetWidgetTreeArchetype();
+    UWidget* showStampsButton = mapMenuWidgetTree->FindWidget("mShowStampsButton");
+    checkf(showStampsButton, TEXT("Couldn't find show stamps button!"));
+    auto showStampsTextBlock = Cast<UTextBlock>(mapMenuWidgetTree->FindWidget("TextBlock_166"));
+    checkf(showStampsTextBlock, TEXT("Couldn't find show stamps text block!"));
 
-    UHorizontalBox* newHBox = NewObject<UHorizontalBox>(mapContainerWidgetTree, UHorizontalBox::StaticClass(), "ShowHideResourcesHBox", RF_Transient);
+    int32 showstampsButtonChildIndex;
+    UPanelWidget* overlayWidget = UWidgetTree::FindWidgetParent(showStampsButton, showstampsButtonChildIndex);
 
-    auto* hBoxPanelSlot = NewObject<UCanvasPanelSlot>(showHideMapMenuContainingPanel, UCanvasPanelSlot::StaticClass(), NAME_None, RF_Transient);
-    hBoxPanelSlot->Content = newHBox;
-    hBoxPanelSlot->Parent = showHideMapMenuContainingPanel;
-    hBoxPanelSlot->SetPosition({ 6, 6 });
-    hBoxPanelSlot->SetAutoSize(true);
+    auto overlayCPSlot = Cast<UCanvasPanelSlot>(overlayWidget->Slot);
+    overlayCPSlot->SetAutoSize(true);
 
-    newHBox->Slot = hBoxPanelSlot;
+    UWidget* categoryScrollBox = mapMenuWidgetTree->FindWidget("Widget_Scrollbox");
+    auto categoryScrollBoxCPSlot = Cast<UCanvasPanelSlot>(categoryScrollBox->Slot);
+    auto categoryScrollBoxSlotOffsets = categoryScrollBoxCPSlot->GetOffsets();
+    categoryScrollBoxSlotOffsets.Bottom = 96;
+    categoryScrollBoxCPSlot->SetOffsets(categoryScrollBoxSlotOffsets);
 
-    // Move the show/hide map menu button to the new hbox
-    newHBox->AddChild(showHideMapMenuButton);
+    UCanvasPanelSlot* dividerImageCPSlot = Cast<UCanvasPanelSlot>(mapMenuWidgetTree->FindWidget("Image_195")->Slot);
+    auto dividerImageSlotOffsets = dividerImageCPSlot->GetOffsets();
+    dividerImageSlotOffsets.Top = -96;
+    dividerImageCPSlot->SetOffsets(dividerImageSlotOffsets);
 
-    UWidget* hideAllResourcesOnCompassButton = CreateResourceVisibilityButton(newHBox,
+    UVerticalBox* vbox = NewObject<UVerticalBox>(overlayWidget, UVerticalBox::StaticClass(), "BelowScrollBoxVerticalBox", RF_Transient);
+    auto vboxOverlaySlot = Cast<UOverlaySlot>(overlayWidget->AddChild(vbox));
+
+    USizeBox* compassHBoxSizeBox = NewObject<USizeBox>(vbox, UHorizontalBox::StaticClass(), "CompassHBoxSizeBox", RF_Transient);
+    auto compassHBoxSizeBoxVBoxSlot = vbox->AddChildToVerticalBox(compassHBoxSizeBox);
+    compassHBoxSizeBoxVBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Center);
+
+    UHorizontalBox* compassHBox = NewObject<UHorizontalBox>(compassHBoxSizeBox, UHorizontalBox::StaticClass(), "ShowHideOnCompassHBox", RF_Transient);
+    compassHBoxSizeBox->AddChild(compassHBox);
+    compassHBoxSizeBox->SetHeightOverride(32.0);
+
+    UTextBlock* showHideOnCompassTextBlock = NewObject<UTextBlock>(compassHBox, UTextBlock::StaticClass(), "ShowHideOnCompassMessage", RF_Transient);
+    showHideOnCompassTextBlock->Text = LOCTEXT("SRMResourcesOnCompass", "Resources on Compass:");
+    showHideOnCompassTextBlock->SetFont(showStampsTextBlock->GetFont());
+    auto showHideOnCompassMessageHBoxSlot = compassHBox->AddChildToHorizontalBox(showHideOnCompassTextBlock);
+    showHideOnCompassMessageHBoxSlot->SetPadding({ 5.0, 0.0 });
+    showHideOnCompassMessageHBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Center);
+
+    UWidget* hideAllResourcesOnCompassButton = CreateResourceVisibilityButton(
+        compassHBox,
         TEXT("SRMHideAllOnCompass"),
-        LOCTEXT("SRMHideAllOnCompass", "Hide All Resources On Compass"),
+        LOCTEXT("SRMHideAllOnCompass", "Hide All"),
         EResourceVisibilityLocation::Compass,
         false,
-        showHideMapMenuButton);
-    Cast<UHorizontalBoxSlot>(newHBox->AddChild(hideAllResourcesOnCompassButton))->SetPadding({ 10, 0, 0, 0 });
+        buttonTemplateWidget);
+    auto hideAllCompassHBoxSlot = compassHBox->AddChildToHorizontalBox(hideAllResourcesOnCompassButton);
 
-    UWidget* showAllResourcesOnCompassButton = CreateResourceVisibilityButton(newHBox,
+    UWidget* showAllResourcesOnCompassButton = CreateResourceVisibilityButton(
+        compassHBox,
         TEXT("SRMShowAllOnCompass"),
-        LOCTEXT("SRMShowAllOnCompass", "Show All Resources On Compass"),
+        LOCTEXT("SRMShowAllOnCompass", "Show All"),
         EResourceVisibilityLocation::Compass,
         true,
-        showHideMapMenuButton);
-    Cast<UHorizontalBoxSlot>(newHBox->AddChild(showAllResourcesOnCompassButton))->SetPadding({ 10, 0, 0, 0 });
+        buttonTemplateWidget);
+    auto showAllCompassHBoxSlot = compassHBox->AddChildToHorizontalBox(showAllResourcesOnCompassButton);
+    //showAllCompassHBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
 
-    UWidget* hideAllResourcesOnMapButton = CreateResourceVisibilityButton(newHBox,
+    USizeBox* mapHBoxSizeBox = NewObject<USizeBox>(vbox, UHorizontalBox::StaticClass(), "MapHBoxSizeBox", RF_Transient);
+    vbox->AddChildToVerticalBox(mapHBoxSizeBox);
+    auto mapHBoxSizeBoxVBoxSlot = vbox->AddChildToVerticalBox(mapHBoxSizeBox);
+    mapHBoxSizeBoxVBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Center);
+
+    UHorizontalBox* mapHBox = NewObject<UHorizontalBox>(mapHBoxSizeBox, UHorizontalBox::StaticClass(), "ShowHideOnMapHBox", RF_Transient);
+    mapHBoxSizeBox->AddChild(mapHBox);
+
+    UTextBlock* showHideOnMapTextBlock = NewObject<UTextBlock>(mapHBox, UTextBlock::StaticClass(), "ShowHideOnMapMessage", RF_Transient);
+    showHideOnMapTextBlock->Text = LOCTEXT("SRMResourcesOnMap", "Resources on Map:");
+    showHideOnMapTextBlock->SetFont(showStampsTextBlock->GetFont());
+    auto showHideOnMapMessageHBoxSlot = mapHBox->AddChildToHorizontalBox(showHideOnMapTextBlock);
+    showHideOnMapMessageHBoxSlot->SetPadding({ 5.0, 0.0 });
+    showHideOnMapMessageHBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Center);
+
+    //UHorizontalBox* mapHBoxButtonsHBox = NewObject<UHorizontalBox>(mapHBox, UHorizontalBox::StaticClass(), "ShowHideOnMapButtonsHBox", RF_Transient);
+    //auto mapHBoxButtonsHBoxSlot = mapHBox->AddChildToHorizontalBox(mapHBoxButtonsHBox);
+    //mapHBoxButtonsHBoxSlot->SetHorizontalAlignment(EHorizontalAlignment::HAlign_Right);
+    //mapHBoxButtonsHBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
+
+    UWidget* hideAllResourcesOnMapButton = CreateResourceVisibilityButton(
+        mapHBox,
         TEXT("SRMHideAllOnMap"),
-        LOCTEXT("SRMHideAllOnMap", "Hide All Resources On Map"),
+        LOCTEXT("SRMHideAllOnMap", "Hide All"),
         EResourceVisibilityLocation::Map,
         false,
-        showHideMapMenuButton);
-    Cast<UHorizontalBoxSlot>(newHBox->AddChild(hideAllResourcesOnMapButton))->SetPadding({ 10, 0, 0, 0 });
+        buttonTemplateWidget);
+    auto hideAllMapHBoxSlot = mapHBox->AddChildToHorizontalBox(hideAllResourcesOnMapButton);
+    //hideAllMapHBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
 
-    UWidget* showAllResourcesOnMapButton = CreateResourceVisibilityButton(newHBox,
+    UWidget* showAllResourcesOnMapButton = CreateResourceVisibilityButton(
+        mapHBox,
         TEXT("SRMShowAllOnMap"),
-        LOCTEXT("SRMShowAllOnMap", "Show All Resources On Map"),
+        LOCTEXT("SRMShowAllOnMap", "Show All"),
         EResourceVisibilityLocation::Map,
         true,
-        showHideMapMenuButton);
-    Cast<UHorizontalBoxSlot>(newHBox->AddChild(showAllResourcesOnMapButton))->SetPadding({ 10, 0, 0, 0 });
+        buttonTemplateWidget);
+    auto showAllMapHBoxSlot = mapHBox->AddChildToHorizontalBox(showAllResourcesOnMapButton);
+    //showAllMapHBoxSlot->SetVerticalAlignment(EVerticalAlignment::VAlign_Fill);
 
-    TArray<UPanelSlot*>& MutablePanelSlots = UPanelWidgetAccessor::GetPanelSlots(showHideMapMenuContainingPanel);
-    MutablePanelSlots.Insert(hBoxPanelSlot, childIndex);
+    mapHBoxSizeBox->SetHeightOverride(32.0);
+
+    auto showStampsVBoxSlot = vbox->AddChildToVerticalBox(showStampsButton);
 }
 
 UWidget* USRMRootInstanceModule::CreateResourceVisibilityButton(
@@ -630,17 +690,17 @@ UWidget* USRMRootInstanceModule::CreateResourceVisibilityButton(
 
     UWidget* button = NewObject<UWidget>(outer, buttonClass, name, RF_Transient, templateWidget);
 
-    FProperty* mTextProperty = button->GetClass()->FindPropertyByName("mText");
+    FProperty* mTextProperty = buttonClass->FindPropertyByName("mText");
     checkf(mTextProperty, TEXT("Did not find mText property"));
     FText* mTextPtr = mTextProperty->ContainerPtrToValuePtr<FText>(button);
     *mTextPtr = label;
 
-    FProperty* mVisibilityLocationProperty = button->GetClass()->FindPropertyByName("mVisibilityLocation");
+    FProperty* mVisibilityLocationProperty = buttonClass->FindPropertyByName("mVisibilityLocation");
     checkf(mVisibilityLocationProperty, TEXT("Did not find mVisibilityLocation property"));
     EResourceVisibilityLocation* mVisibilityLocationPtr = mVisibilityLocationProperty->ContainerPtrToValuePtr<EResourceVisibilityLocation>(button);
     *mVisibilityLocationPtr = visibilityLocation;
 
-    FBoolProperty* mVisibilityToSetProperty = CastField<FBoolProperty>(button->GetClass()->FindPropertyByName("mVisibilityToSet"));
+    FBoolProperty* mVisibilityToSetProperty = CastField<FBoolProperty>(buttonClass->FindPropertyByName("mVisibilityToSet"));
     checkf(mVisibilityToSetProperty, TEXT("Did not find mVisibilityToSet property"));
     void* mVisibilityToSetPtr = mVisibilityToSetProperty->ContainerPtrToValuePtr<void>(button);
     mVisibilityToSetProperty->SetPropertyValue(mVisibilityToSetPtr, visible);
