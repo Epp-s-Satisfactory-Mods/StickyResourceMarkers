@@ -29,15 +29,6 @@ class STICKYRESOURCEMARKERS_API USRMRootInstanceModule : public UGameInstanceMod
 
 protected:
     void Initialize();
-    void AddButtonsToMapScreen();
-    UWidget* CreateResourceVisibilityButton(
-        UObject* outer,
-        FName name,
-        FText label,
-        EResourceVisibilityLocation visibilityLocation,
-        bool visible,
-        UWidget* templateWidget);
-
     void RegisterDebugHooks();
 
     bool TryGetResourceRepresentationType(TSubclassOf<UFGResourceDescriptor> resourceDescriptor, ERepresentationType& resourceRepresentationType);
@@ -86,9 +77,6 @@ public:
     // These are public so that the types can be set in Unreal Editor, rather than manually identifying resources by string.
     // If the types get moved, they can still fail to load but setting these in the UI is less error-prone than raw strings,
     // plus apparently there is some forwarding mechanism and if CSS does move game blueprints, those might still work.
-
-    UPROPERTY(EditDefaultsOnly, Category = "SRM UI Types")
-    TSoftClassPtr<UUserWidget> SRMResourceVisibilityButtonClass;
 
     // These are vanilla game UI types that need to be modified for the mod
 
