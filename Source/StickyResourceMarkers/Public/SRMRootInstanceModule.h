@@ -66,13 +66,7 @@ public:
     }
 
     UFUNCTION(BlueprintCallable)
-    void SetAllResourcesVisibility(AFGCharacterPlayer* player, EResourceVisibilityLocation location, bool visible);
-
-    UFUNCTION(BlueprintCallable)
-    void SetAllResourcesCompassVisibility(AFGCharacterPlayer* player, bool visible);
-
-    UFUNCTION(BlueprintCallable)
-    void SetAllResourcesMapVisibility(AFGCharacterPlayer* player, bool visible);
+    TArray<ERepresentationType> GetAllResourcesToToggle(AFGCharacterPlayer* player, EResourceVisibilityLocation location, bool desiredVisibility);
 
     // These are public so that the types can be set in Unreal Editor, rather than manually identifying resources by string.
     // If the types get moved, they can still fail to load but setting these in the UI is less error-prone than raw strings,

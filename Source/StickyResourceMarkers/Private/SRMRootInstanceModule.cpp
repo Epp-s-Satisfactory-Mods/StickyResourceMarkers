@@ -55,51 +55,35 @@ void USRMRootInstanceModule::DispatchLifecycleEvent(ELifecyclePhase phase)
     Super::DispatchLifecycleEvent(phase);
 }
 
-void USRMRootInstanceModule::SetAllResourcesVisibility(AFGCharacterPlayer* player, EResourceVisibilityLocation location, bool visible)
+TArray<ERepresentationType> USRMRootInstanceModule::GetAllResourcesToToggle(AFGCharacterPlayer* player, EResourceVisibilityLocation location, bool desiredVisibility)
 {
     auto gameWorldModule = this->GetGameWorldModule();
     auto manager = AFGActorRepresentationManager::Get(gameWorldModule->GetWorld());
 
-    SRM_LOG("SetAllResourcesVisibility: Location: %d, Visibile: %d", location, visible);
-
-    for (uint8 representationTypeId = (uint8)this->FirstResourceRepresentationType; representationTypeId <= (uint8)this->LastResourceRepresentationType; ++representationTypeId)
+    TArray<ERepresentationType> resourcesToToggle;
+    for (int repTypeId = (int)this->FirstResourceRepresentationType; repTypeId <= (int)this->LastResourceRepresentationType; ++repTypeId)
     {
+        auto repType = (ERepresentationType)repTypeId;
         switch (location)
         {
-        case EResourceVisibilityLocation::Compass:
-            manager->SetCompassRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
+        case Compass:
+            if (desiredVisibility != manager->GetCompassRepresentationTypeFilter(player, repType))
+            {
+                resourcesToToggle.Add(repType);
+            }
             break;
-        case EResourceVisibilityLocation::Map:
-            manager->SetMapRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
+        case Map:
+            if (desiredVisibility != manager->GetMapRepresentationTypeFilter(player, repType))
+            {
+                resourcesToToggle.Add(repType);
+            }
+            break;
+        default:
             break;
         }
     }
-}
 
-void USRMRootInstanceModule::SetAllResourcesCompassVisibility(AFGCharacterPlayer* player, bool visible)
-{
-    auto gameWorldModule = this->GetGameWorldModule();
-    auto manager = AFGActorRepresentationManager::Get(gameWorldModule->GetWorld());
-
-    SRM_LOG("SetAllResourcesCompassVisibility: Visibile: %d", visible);
-
-    for (uint8 representationTypeId = (uint8)this->FirstResourceRepresentationType; representationTypeId <= (uint8)this->LastResourceRepresentationType; ++representationTypeId)
-    {
-        manager->SetCompassRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
-    }
-}
-
-void USRMRootInstanceModule::SetAllResourcesMapVisibility(AFGCharacterPlayer* player, bool visible)
-{
-    auto gameWorldModule = this->GetGameWorldModule();
-    auto manager = AFGActorRepresentationManager::Get(gameWorldModule->GetWorld());
-
-    SRM_LOG("SetAllResourcesMapVisibility: Visibile: %d", visible);
-
-    for (uint8 representationTypeId = (uint8)this->FirstResourceRepresentationType; representationTypeId <= (uint8)this->LastResourceRepresentationType; ++representationTypeId)
-    {
-        manager->SetMapRepresentationTypeFilter(player, (ERepresentationType)representationTypeId, visible);
-    }
+    return resourcesToToggle;
 }
 
 bool USRMRootInstanceModule::TryGetResourceRepresentationType(TSubclassOf<UFGResourceDescriptor> resourceDescriptor, ERepresentationType& resourceRepresentationType)
@@ -188,7 +172,7 @@ void USRMRootInstanceModule::Initialize()
     SETUP_RESOURCE_REPRESENTATION_TYPE(RT_OreGold, Desc_OreGold_C);
     SETUP_RESOURCE_REPRESENTATION_TYPE(RT_OreIron, Desc_OreIron_C);
     SETUP_RESOURCE_REPRESENTATION_TYPE(RT_OreUranium, Desc_OreUranium_C);
-    SETUP_RESOURCE_REPRESENTATION_TYPE(RT_RawQuart, Desc_RawQuartz_C);
+    SETUP_RESOURCE_REPRESENTATION_TYPE(RT_RawQuartz, Desc_RawQuartz_C);
     SETUP_RESOURCE_REPRESENTATION_TYPE(RT_SAM, Desc_SAM_C);
     SETUP_RESOURCE_REPRESENTATION_TYPE(RT_Stone, Desc_Stone_C);
     SETUP_RESOURCE_REPRESENTATION_TYPE(RT_Sulfur, Desc_Sulfur_C);
